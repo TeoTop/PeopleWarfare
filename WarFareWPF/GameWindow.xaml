@@ -66,7 +66,7 @@
                                             <!-- Ajouter un flag si l'unité a déjà joué (HasAlreadyPlayed) -->
                                             <Rectangle Width="20" Height="20" Fill="{Binding J1.peuple.Color, ElementName=_this}"/>
                                             <!-- Si une unité est sélectionnée -->
-                                            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="Aqua" Panel.ZIndex="999">
+                                            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="Aqua">
                                                 <Polygon.RenderTransform>
                                                     <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
                                                 </Polygon.RenderTransform>
@@ -77,6 +77,12 @@
                                         <Grid Visibility="{Binding HasUnitJ2, Converter={StaticResource BoolToVis}}">
                                             <!--Unité Joueur 2-->
                                             <Rectangle Width="20" Height="20" Fill="{Binding J2.peuple.Color, ElementName=_this}"/>
+                                            <!-- Si une unité est sélectionnée -->
+                                            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="Aqua">
+                                                <Polygon.RenderTransform>
+                                                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
                                             <!--NbUnité Joueur 2-->
                                             <Label Content="{Binding NbUniteJ2}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                                         </Grid>
@@ -99,12 +105,24 @@
                                         <Grid Visibility="{Binding HasUnitJ1, Converter={StaticResource BoolToVis}}">
                                             <!--Unité Joueur 1-->
                                             <Rectangle Width="20" Height="20" Fill="{Binding J1.peuple.Color, ElementName=_this}"/>
+                                            <!-- Si une unité est sélectionnée -->
+                                            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="Aqua">
+                                                <Polygon.RenderTransform>
+                                                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
                                             <!--NbUnité Joueur 1-->
                                             <Label Content="{Binding NbUniteJ1}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                                         </Grid>
                                         <Grid Visibility="{Binding HasUnitJ2, Converter={StaticResource BoolToVis}}">
                                             <!--Unité Joueur 2-->
                                             <Rectangle Width="20" Height="20" Fill="{Binding J2.peuple.Color, ElementName=_this}"/>
+                                            <!-- Si une unité est sélectionnée -->
+                                            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="Aqua">
+                                                <Polygon.RenderTransform>
+                                                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
                                             <!--NbUnité Joueur 2-->
                                             <Label Content="{Binding NbUniteJ2}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                                         </Grid>

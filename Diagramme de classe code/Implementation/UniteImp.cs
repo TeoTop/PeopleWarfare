@@ -45,13 +45,26 @@ namespace PeopleWar
         {
             return defense * vie / 5;
         }
-        public bool seDeplacer(int c, Double pm)
-
+        public int seDeplacer(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
         {
-            this.c = c;
-            this.pm -= pm;
-
-            return true;
+            Move move = verifierDeplacement(cInit, c, type, carte, adv);
+            if (!move.move)
+            {
+                if (!move.hasPlayed)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                //se deplacer
+                this.c = c;
+                return 2;
+            }
         }
 
         public int combattre(Unite uniteAdv)
@@ -59,16 +72,22 @@ namespace PeopleWar
             return 1;
         }
 
-        public Double verifierDeplacement(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
+        public Move verifierDeplacement(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
         {
-            if (pm <= 0) return 0;
+            // ajouter une enum MoveCbt et enlver la classe Move
+            Double pmToRemove = 0;
+            Move move = new Move();
 
-            if (type == EnumPeuple.ELF && carte.getCase(c).getType() == EnumCase.DESERT) return 0;
+            if (pm <= 0) return move;
+
+
+            if (type == EnumPeuple.ELF && carte.getCase(c).getType() == EnumCase.DESERT) return move;
 
             if (((type == EnumPeuple.ELF && carte.getCase(c).getType() != EnumCase.FORET) ||
                 (type == EnumPeuple.ORC && carte.getCase(c).getType() != EnumCase.PLAINE)) && pm > 0.5)
             {
-                return 0.5;
+                pmToRemove = 0.5;
+                move.move = true;
             }
 
             List<int> casesDispo = new List<int>();
@@ -90,19 +109,54 @@ namespace PeopleWar
                 casesDispo.Add(cInit - (taille + 1));
             }
 
+
             // move on Montagne box for a Nain.
             if (type == EnumPeuple.NAIN && carte.getCase(cInit).getType() == EnumCase.MONTAGNE &&
-                carte.getCase(c).getType() == EnumCase.MONTAGNE && !adv.verifierUnite(c).Any())
+                carte.getCase(c).getType() == EnumCase.MONTAGNE)
             {
-                return 1;
+                pmToRemove = 1;
+                move.move = true;
             }
+
 
             if (casesDispo.Contains(c))
             {
-                return 1;
+                pmToRemove = 1;
+                move.move = true;
             }
 
-            return 0;
+
+            List<Unite> uniteDef;
+
+            if ((uniteDef = adv.verifierUnite(c)).Any())
+            {
+                //cbt
+                CombatImp cbt = new CombatImp(this, uniteDef);
+                int resCbt = cbt.effectuerCombat();
+
+                if (resCbt == 1 || resCbt == 2)
+                {
+                    // destroy the other unit
+                    if (resCbt == 1)
+                    {
+                        // do not move
+                        move.move = false;
+                    }
+                }
+                else if (resCbt == 0)
+                {
+                    move.move = false;
+                }
+                else if (resCbt == -1)
+                {
+                    // destroy unit
+                    move.move = false;
+                }
+                move.hasPlayed = true;
+            }
+
+            this.pm -= pmToRemove;
+            return move;
         }
 
         public void destroy()

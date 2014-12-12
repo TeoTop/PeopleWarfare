@@ -32,7 +32,8 @@ namespace PeopleWar
          * @param Double pm
          * @return bool
          */
-        bool seDeplacer(int c, Double pm);
+        int seDeplacer(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv);
+
 
         /**
          * Lets fighting unity against enemy unit.
@@ -51,7 +52,7 @@ namespace PeopleWar
          * @param Peuple adv
          * @return Double
          */
-        Double verifierDeplacement(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv);
+        Move verifierDeplacement(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv);
 
         /**
          * Reset caracteristics of an unit

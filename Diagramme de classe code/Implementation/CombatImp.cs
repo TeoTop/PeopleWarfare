@@ -25,6 +25,8 @@ namespace PeopleWar
             set;
         }
 
+        public bool move { get; set; }
+
         /**
          * Constructor
          * @param Unite uniteAtt
@@ -33,6 +35,7 @@ namespace PeopleWar
         public CombatImp(UniteImp uniteAtt, List<Unite> unitesDef)
         {
             this.uniteAtt = uniteAtt;
+            this.move = unitesDef.Count - 1 == 0;
             this.uniteDef = (UniteImp) choisirUniteDef(unitesDef);
         }
 
@@ -62,7 +65,7 @@ namespace PeopleWar
 
         /**
          * Launch a battle
-         * Return 0 if it's a draw, 1 if it's a victory, -1 a loss
+         * Return 0 if it's a draw, 1 if it's a victory, 2 if it's a victory and the units can move, -1 a loss
          * @return int
          */
         public int effectuerCombat()
@@ -76,6 +79,10 @@ namespace PeopleWar
                     if (uniteDef.vie <= 0)
                     {
                         // check if there's no other unit in the box so as to move on
+                        if (this.move)
+                        {
+                            return 2;
+                        }
                         return 1;
                     }
                 }

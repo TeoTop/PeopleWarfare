@@ -110,21 +110,27 @@ namespace WarFareWPF
             int uid = System.Convert.ToInt32(g.Tag);
             BoxView SelectedBoxForUnit = map.SelectedBoxForUnit;
             BoxView box = map.cases[uid];
-            if (isUnitSelected && SelectedBoxForUnit != box)
+            if (isUnitSelected)
             {
+                if (SelectedBoxForUnit == box)
+                {
+                    isUnitSelected = false;
+                    SelectedBoxForUnit.SelectedUnit = null;
+                }
                 // deplacer unité
                 if (SelectedBoxForUnit != null)
                 {
                     UnitView unit = SelectedBoxForUnit.SelectedUnit;
                     if (unit != null)
                     {
-                        Double pm;
-                        if ((pm = unit.unit.verifierDeplacement(SelectedBoxForUnit.Uid, uid, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple)) != 0)
+                        int move;
+                        if ((move = unit.unit.seDeplacer(SelectedBoxForUnit.Uid, uid, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple)) == 1 || move == 2)
                         {
-                            // ne pas oublier de vérifier le cbt
-                            unit.unit.seDeplacer(uid, pm);
-                            box.addUnit(unit, CurrentPlayer);
-                            SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
+                            if (move == 2)
+                            {
+                                box.addUnit(unit, CurrentPlayer);
+                                SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
+                            }
                             unit.HasAlreadyPlayed = true;
                             isUnitSelected = false;
                             SelectedBoxForUnit.SelectedUnit = null;

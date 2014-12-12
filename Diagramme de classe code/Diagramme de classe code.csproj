@@ -43,6 +43,7 @@
     <Compile Include="Implementation\EnumCarte.cs" />
     <Compile Include="Implementation\EnumPeuple.cs" />
     <Compile Include="Implementation\EnumCase.cs" />
+    <Compile Include="Implementation\Move.cs" />
     <Compile Include="Implementation\StrategieCarte.cs" />
     <Compile Include="Implementation\CaseA.cs" />
     <Compile Include="Implementation\CombatImp.cs" />
