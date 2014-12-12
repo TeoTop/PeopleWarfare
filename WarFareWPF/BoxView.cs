@@ -12,7 +12,26 @@ namespace WarFareWPF
         private CaseA box { set;  get; }
         public List<UnitView> unitsJ1;
         public List<UnitView> unitsJ2;
-        public UnitView SelectedUnit { get; set; }
+        private UnitView selectedUnit;
+        public UnitView SelectedUnit
+        {
+            get
+            {
+                return selectedUnit;
+            }
+            set
+            {
+                selectedUnit = value;
+                RaisePropertyChanged("IsUnitSelected");
+            }
+        }
+        public bool IsUnitSelected
+        {
+            get
+            {
+                return SelectedUnit != null;
+            }
+        }
         public int NbUniteJ1
         {
             get

@@ -29,9 +29,10 @@ namespace PeopleWar
          * Modifies the box associated with the unit. 
          * True if movement it's done.
          * @param int c
+         * @param Double pm
          * @return bool
          */
-        bool seDeplacer(int c);
+        bool seDeplacer(int c, Double pm);
 
         /**
          * Lets fighting unity against enemy unit.
@@ -42,15 +43,20 @@ namespace PeopleWar
 
         /**
          * Shows whether the unit can reach the box c.
-         * True if it's possible
+         * Number of pm required to move or 0 if it's impossible
          * @param int cInit
          * @param int c
-         * @param int taille
          * @param EnumPeuple
          * @param Carte carte
          * @param Peuple adv
-         * @return bool
+         * @return Double
          */
-        bool verifierDeplacement(int cInit, int c, int taille, EnumPeuple type, Carte carte, Peuple adv);
+        Double verifierDeplacement(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv);
+
+        /**
+         * Reset caracteristics of an unit
+         * @return void
+         */
+        void reset();
     }
 }

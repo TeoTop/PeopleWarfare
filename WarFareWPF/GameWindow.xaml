@@ -63,7 +63,14 @@
                                         <!--Unités-->
                                         <Grid Visibility="{Binding HasUnitJ1, Converter={StaticResource BoolToVis}}">
                                             <!--Unité Joueur 1-->
+                                            <!-- Ajouter un flag si l'unité a déjà joué (HasAlreadyPlayed) -->
                                             <Rectangle Width="20" Height="20" Fill="{Binding J1.peuple.Color, ElementName=_this}"/>
+                                            <!-- Si une unité est sélectionnée -->
+                                            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="Aqua" Panel.ZIndex="999">
+                                                <Polygon.RenderTransform>
+                                                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
                                             <!--NbUnité Joueur 1-->
                                             <Label Content="{Binding NbUniteJ1}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                                         </Grid>
@@ -164,7 +171,7 @@
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
                 <StackPanel Grid.Column="2">
-                    <Button Content="Fin tour" Margin="20,25" Height="30"/>
+                    <Button Content="Fin tour" Margin="20,25" Height="30" Click="NextTurn"/>
                     <Button Content="Unité suivante" Margin="20,20"  Height="30"/>
                 </StackPanel>
             </Grid>

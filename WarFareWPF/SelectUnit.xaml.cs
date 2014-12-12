@@ -25,27 +25,35 @@ namespace WarFareWPF
         public GameWindow gw;
         public SelectUnit(BoxView box, List<UnitView> units, GameWindow gw)
         {
-            this.units = units;
+            this.units = new List<UnitView>();
+            foreach (var unit in units)
+            {
+                if (!unit.HasAlreadyPlayed)
+                {
+                    this.units.Add(unit);
+                }
+            }
             this.box = box;
             this.gw = gw;
-            /*if (box.SelectedUnit != null)
-                MessageBox.Show(box.SelectedUnit.carac);*/
+            if (this.units.Count == 1)
+            {
+                selectUnit(0);
+                return;
+            }
             InitializeComponent();
         }
 
 
-        public void selectUnit()
+        public void selectUnit(int selectedIndex = -1)
         {
-            int Selected = this.items.SelectedIndex;
+            int Selected = (selectedIndex == -1) ? this.items.SelectedIndex : selectedIndex;
             gw.isUnitSelected = false;
             if (Selected >= 0 && Selected < this.units.Count)
             {
                 box.SelectedUnit = units[Selected];
-                //units[Selected].IsSelected = true;
                 gw.isUnitSelected = true;
                 gw.map.SelectedBoxForUnit = this.box;
             }
-            //MessageBox.Show(box.SelectedUnit.carac);
             this.Close();
         }
 

@@ -42,12 +42,14 @@ namespace WarFareWPF
 
         public int CurrentPlayer { get; set; }
 
-        public int nbUnitesj1 { 
+        public int nbUnitesj1
+        {
             get { return partie.j1.peuple.getNbUnite(); }
         }
 
-        public int nbUnitesj2 { 
-            get { return partie.j2.peuple.getNbUnite(); } 
+        public int nbUnitesj2
+        {
+            get { return partie.j2.peuple.getNbUnite(); }
         }
 
         public SelectUnit su { get; set; }
@@ -60,8 +62,10 @@ namespace WarFareWPF
             J2 = new PlayerView(partie.j2, new Point(Math.Sqrt(partie.carte.cases.Count()) - 1, Math.Sqrt(partie.carte.cases.Count()) - 1));
             CurrentPlayer = 0;
             // definir les cases où les unités seront mises depuis le wrapper
-            map.cases[partie.carte.getKey((int)J1.InitialPosition.X, (int)J1.InitialPosition.Y)].unitsJ1 = J1.peuple.units;
-            map.cases[partie.carte.getKey((int)J2.InitialPosition.X, (int)J2.InitialPosition.Y)].unitsJ2 = J2.peuple.units;
+            List<UnitView> unitsJ1 = map.cases[partie.carte.getKey((int)J1.InitialPosition.X, (int)J1.InitialPosition.Y)].unitsJ1;
+            List<UnitView> unitsJ2 = map.cases[partie.carte.getKey((int)J2.InitialPosition.X, (int)J2.InitialPosition.Y)].unitsJ2;
+            J1.peuple.units.ForEach(unit => unitsJ1.Add(unit));
+            J2.peuple.units.ForEach(unit => unitsJ2.Add(unit));
             isUnitSelected = false;
             InitializeComponent();
         }
@@ -114,12 +118,16 @@ namespace WarFareWPF
                     UnitView unit = SelectedBoxForUnit.SelectedUnit;
                     if (unit != null)
                     {
-                        if (unit.unit.verifierDeplacement(uid, SelectedBoxForUnit.Uid, (int)Math.Sqrt(map.carte.cases.Count), getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple))
+                        Double pm;
+                        if ((pm = unit.unit.verifierDeplacement(SelectedBoxForUnit.Uid, uid, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple)) != 0)
                         {
-                            unit.unit.seDeplacer(uid);
+                            // ne pas oublier de vérifier le cbt
+                            unit.unit.seDeplacer(uid, pm);
                             box.addUnit(unit, CurrentPlayer);
                             SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
+                            unit.HasAlreadyPlayed = true;
                             isUnitSelected = false;
+                            SelectedBoxForUnit.SelectedUnit = null;
                         }
                     }
                 }
@@ -130,8 +138,26 @@ namespace WarFareWPF
                 List<UnitView> units = box.getUnits(CurrentPlayer);
                 if (su != null) su.Close();
                 su = new SelectUnit(box, units, this);
-                su.Show();
-                su.Activate();
+                if (su.IsInitialized)
+                {
+                    su.ShowDialog();
+                    //Focus
+                    su.Activate();
+                }
+            }
+        }
+
+        private void NextTurn(object sender, RoutedEventArgs e)
+        {
+            JoueurImp j;
+            if ((j = (JoueurImp)partie.verifierFinPartie()) == null)
+            {
+                this.switchPlayer();
+                this.getCurrentPlayer().peuple.reset();
+            }
+            else
+            {
+                // j est vainqueur
             }
         }
     }

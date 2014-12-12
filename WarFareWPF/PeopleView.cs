@@ -35,5 +35,12 @@ namespace WarFareWPF
         }
 
 
+
+        public void reset()
+        {
+            // reset units / pm and HasAlreadyPlayed
+            units.ForEach(unit => unit.HasAlreadyPlayed = false);
+            units.ForEach(unit => unit.unit.reset());
+        }
     }
 }
