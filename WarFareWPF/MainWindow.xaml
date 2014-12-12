@@ -1,0 +1,20 @@
+﻿<Window x:Class="WarFareWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PeopleWarfare" Height="350" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="PeopleWarFare" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" FontFamily="SketchFlow Print" FontWeight="Bold" FontStyle="Italic" Width="213"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Nouvelle partie" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="100" Height="50" Click="NewGame" Grid.Row="1"/>
+            <Button Content="Charger partie" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="100" Height="50" Click="ChGame" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</Window>
