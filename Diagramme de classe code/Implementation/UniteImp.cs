@@ -15,13 +15,10 @@ namespace PeopleWar
 
         public int vie { get; set; }
         public Double pm { get; set; }
-
-
         public int point { get; set; }
-
         public UniteImp(int posu)
         {
-            //les statistiques de base sont définie par le jeu
+            //les statistiques de base sont définies par le jeu
             attaque = 2;
             defense = 1;
             vie = 5;
@@ -45,50 +42,31 @@ namespace PeopleWar
         {
             return defense * vie / 5;
         }
-        public int seDeplacer(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
+        public Move seDeplacer(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
         {
             Move move = verifierDeplacement(cInit, c, type, carte, adv);
-            if (!move.move)
-            {
-                if (!move.hasPlayed)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
-            }
-            else
+            this.pm -= move.pm;
+            if (move.mv == EnumMove.MOVE)
             {
                 //se deplacer
-                this.c = c;
-                return 2;
+                this.move(c);
             }
+            return move;
         }
 
-        public int combattre(Unite uniteAdv)
+        public void move(int c)
         {
-            return 1;
+            this.c = c;
         }
-
         public Move verifierDeplacement(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
         {
-            // ajouter une enum MoveCbt et enlver la classe Move
-            Double pmToRemove = 0;
             Move move = new Move();
 
             if (pm <= 0) return move;
 
+            EnumCase box = carte.getCase(c).getType();
+            if (type == EnumPeuple.ELF && box == EnumCase.DESERT) return move;
 
-            if (type == EnumPeuple.ELF && carte.getCase(c).getType() == EnumCase.DESERT) return move;
-
-            if (((type == EnumPeuple.ELF && carte.getCase(c).getType() != EnumCase.FORET) ||
-                (type == EnumPeuple.ORC && carte.getCase(c).getType() != EnumCase.PLAINE)) && pm > 0.5)
-            {
-                pmToRemove = 0.5;
-                move.move = true;
-            }
 
             List<int> casesDispo = new List<int>();
             int taille = (int)Math.Sqrt(((StrategieCarte)carte).cases.Count);
@@ -109,59 +87,61 @@ namespace PeopleWar
                 casesDispo.Add(cInit - (taille + 1));
             }
 
+            if (casesDispo.Contains(c))
+            {
+                move.pm = 1;
+                move.hasPlayed = true;
+                move.mv = EnumMove.MOVE;
+            }
 
             // move on Montagne box for a Nain.
             if (type == EnumPeuple.NAIN && carte.getCase(cInit).getType() == EnumCase.MONTAGNE &&
                 carte.getCase(c).getType() == EnumCase.MONTAGNE)
             {
-                pmToRemove = 1;
-                move.move = true;
+                move.pm = 1;
+                move.hasPlayed = true;
+                move.mv = EnumMove.MOVE;
             }
 
-
-            if (casesDispo.Contains(c))
+            if (((type == EnumPeuple.ELF && box == EnumCase.FORET) ||
+                (type == EnumPeuple.ORC && box == EnumCase.PLAINE) || (type == EnumPeuple.NAIN && box == EnumCase.PLAINE)) && pm > 0.5)
             {
-                pmToRemove = 1;
-                move.move = true;
+                move.pm = 0.5;
+                move.hasPlayed = false;
+                move.mv = EnumMove.MOVE;
             }
 
+            List<Unite> unitesDef;
 
-            List<Unite> uniteDef;
-
-            if ((uniteDef = adv.verifierUnite(c)).Any())
+            if ((unitesDef = adv.verifierUnite(c)).Any())
             {
                 //cbt
-                CombatImp cbt = new CombatImp(this, uniteDef);
-                int resCbt = cbt.effectuerCombat();
-
-                if (resCbt == 1 || resCbt == 2)
-                {
-                    // destroy the other unit
-                    if (resCbt == 1)
-                    {
-                        // do not move
-                        move.move = false;
-                    }
-                }
-                else if (resCbt == 0)
-                {
-                    move.move = false;
-                }
-                else if (resCbt == -1)
-                {
-                    // destroy unit
-                    move.move = false;
-                }
-                move.hasPlayed = true;
+                move.mv = EnumMove.CBT;
+                move.unites = unitesDef;
             }
 
-            this.pm -= pmToRemove;
+            if (move.pm > pm)
+            {
+                move.pm = 0;
+                move.hasPlayed = false;
+                move.mv = EnumMove.NOMOVE;
+            }
+
             return move;
         }
 
-        public void destroy()
+        public bool survive(EnumPeuple type)
         {
-
+            if (type == EnumPeuple.ELF)
+            {
+                Random rnd = new Random();
+                if (rnd.Next() == 0)
+                {
+                    this.vie = 1;
+                    return true;
+                }
+            }
+            return false;
         }
         public void reset()
         {

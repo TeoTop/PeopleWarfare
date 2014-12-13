@@ -29,9 +29,30 @@ namespace WarFareWPF
         }
 
         public JoueurImp joueur { get; set; }
-        public PlayerView(JoueurImp joueur, Point initialPosition)
+        public int nbPoints
+        {
+            get
+            {
+                joueur.calculerNbPoint(map.carte);
+                return joueur.nbPoints;
+            }
+        }
+        public MapView map { get; set; }
+        private bool isMyTurn;
+        public bool IsMyTurn
+        {
+            get { return isMyTurn; }
+            set
+            {
+                isMyTurn = value;
+                RaisePropertyChanged("IsMyTurn");
+            }
+        }
+        public PlayerView(JoueurImp joueur, Point initialPosition, MapView map)
         {
             this.joueur = joueur;
+            this.map = map;
+            isMyTurn = false;
             peuple = new PeopleView(joueur.peuple);
             InitialPosition = initialPosition;
         }

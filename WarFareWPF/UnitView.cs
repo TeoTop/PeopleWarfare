@@ -10,7 +10,19 @@ namespace WarFareWPF
     public class UnitView : Notifier
     {
         public UniteImp unit;
-        public bool HasAlreadyPlayed { get; set; }
+        private bool hasAlreadyPlayed;
+        public bool HasAlreadyPlayed
+        {
+            get
+            {
+                return hasAlreadyPlayed;
+            }
+            set
+            {
+                hasAlreadyPlayed = value;
+                RaisePropertyChanged("HasAlreadyPlayed");
+            }
+        }
         private bool isSelected;
         public bool IsSelected
         {

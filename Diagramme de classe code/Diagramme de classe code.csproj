@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\Users\helomari\Desktop\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\EnumBattle.cs" />
     <Compile Include="Implementation\EnumCarte.cs" />
+    <Compile Include="Implementation\EnumMove.cs" />
     <Compile Include="Implementation\EnumPeuple.cs" />
     <Compile Include="Implementation\EnumCase.cs" />
     <Compile Include="Implementation\Move.cs" />

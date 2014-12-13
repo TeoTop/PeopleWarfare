@@ -56,6 +56,11 @@ namespace PeopleWar
                 unites.Add(new UniteImp(posu));
             }
         }
+        public void destroy(Unite unite)
+        {
+            unites.Remove((UniteImp)unite);
+            unite = null;
+        }
 
         public abstract EnumPeuple getType();
     }

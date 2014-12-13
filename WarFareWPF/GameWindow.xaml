@@ -11,8 +11,11 @@
         <converters:RatioToHeightConverter x:Key="RatioToHeightConverter"/>
         <converters:RatioToMarginConverter x:Key="RatioToMarginConverter"/>
         <converters:RatioToCoordConverter x:Key="RatioToCoordConverter"/>
-        <converters:PositionToVisibilityConverter x:Key="PositionToVisibilityConverter"/> 
-
+        <converters:PositionToVisibilityConverter x:Key="PositionToVisibilityConverter"/>
+        <converters:ListToVis x:Key="ListToVis"/>
+        <converters:BoolToBackgroundConverter x:Key="BoolToBackgroundConverter"/>
+        
+        
         <!--<converters:MultiBooleanToVisibilityConverter x:Key="MConverter" />-->
     </Window.Resources>
     <Border BorderThickness="2" BorderBrush="Black" Margin="5">
@@ -29,7 +32,7 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ListBox DataContext="{Binding map, ElementName=_this}" SelectedItem="{Binding SelectedBox, Mode=TwoWay}" ItemsSource="{Binding cases}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <ListBox Name="listCase" DataContext="{Binding map, ElementName=_this}" SelectedItem="{Binding SelectedBox, Mode=TwoWay}" ItemsSource="{Binding cases}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="{Binding Columns}" Margin="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToMarginConverter}, ConverterParameter=5 15 45 15}" VerticalAlignment="Center"  MouseWheel="Grid_MouseWheel"/>
@@ -128,9 +131,8 @@
                                         </Grid>
                                     </Grid>
                                     
-                                    <!-- Informations case et unités sélectionnées-->
-
-                                    <!--ZOOM-->
+                                    
+                                    <!-- Box is selected -->
                                     <Grid Height="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToHeightConverter}}" Visibility="{Binding RowPair, Converter={StaticResource BoolToVis}}">
                                         <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Red" Visibility="{Binding IsSelected, Converter={StaticResource BoolToVis}}" StrokeThickness="2" Panel.ZIndex="2">
                                             <Polygon.RenderTransform>
@@ -155,13 +157,39 @@
                     <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="15" Content="Tours et actions : "/>
                     <Slider DataContext="{Binding map, ElementName=_this}" Value="{Binding Zoom}" Minimum="0" Maximum="400" TickFrequency="10" TickPlacement="BottomRight" LargeChange="10" SmallChange="5"/>
                     <Label DataContext="{Binding map, ElementName=_this}" Content="{Binding Zoom}"/>
-                    <!--Test-->
-                    <!--<Polygon HorizontalAlignment="Center" DataContext="{Binding map, ElementName=_this}" Points="{Binding Zoom, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black" Fill="#FF1515E8">
-                        <Polygon.RenderTransform>
-                            <TranslateTransform Y="60"/>
-                        </Polygon.RenderTransform>
-                    </Polygon>-->
-                    <!--FinTest-->
+                    <!-- Informations case et unités sélectionnées -->
+                    <Grid Visibility="{Binding map.IsBoxSelected, Converter={StaticResource BoolToVis}}">
+                        <ListBox Name="items" DataContext="{Binding SelectedItem, ElementName=listCase}" ItemsSource="{Binding units}" SelectedItem="{Binding SelectedUnit}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0" Visibility="{Binding unitsCount, Converter={StaticResource ListToVis}}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="1"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Center">
+                                        <Image Source="res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" Width="32" Height="32" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                                        <Label Content="{Binding carac}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox DataContext="{Binding SelectedItem, ElementName=listCase}" ItemsSource="{Binding otherUnits}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0" Visibility="{Binding otherUnitsCount, Converter={StaticResource ListToVis}}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="1"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Center">
+                                        <Image Source="res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" Width="32" Height="32" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                                        <Label Content="{Binding carac}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </StackPanel>
             </Grid>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" />
@@ -176,22 +204,39 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="20" Content="{Binding partie.j1.nom, ElementName=_this}"/>
-                    <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="20" Content="{Binding partie.j2.nom, ElementName=_this}"/>
-                    <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,50,0,0" FontSize="15" Content="Nombre d'unités : "/>
-                    <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,50,0,0" FontSize="15" Content="Nombre d'unités : "/>
-                    <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="185,50,0,0" FontSize="15" Content="{Binding nbUnitesj1, ElementName=_this}"/>
-                    <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="185,50,0,0" FontSize="15" Content="{Binding nbUnitesj2, ElementName=_this}"/>
-                    <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,80,0,0" FontSize="15" Content="Nombre de points : "/>
-                    <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,80,0,0" FontSize="15" Content="Nombre de points : "/>
-                    <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding partie.j1.nbPoints, ElementName=_this}"/>
-                    <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding partie.j1.nbPoints, ElementName=_this}"/>
+                    <Grid Grid.Column="0" DataContext="{Binding J1, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="20" Content="{Binding joueur.nom}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,50,0,0" FontSize="15" Content="Nombre d'unités : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="185,50,0,0" FontSize="15" Content="{Binding peuple.nbUnite}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,80,0,0" FontSize="15" Content="Nombre de points : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding nbPoints}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" DataContext="{Binding J2, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="20" Content="{Binding joueur.nom}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,50,0,0" FontSize="15" Content="Nombre d'unités : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="185,50,0,0" FontSize="15" Content="{Binding peuple.nbUnite}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,80,0,0" FontSize="15" Content="Nombre de points : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding nbPoints}"/>
+                    </Grid>
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
-                <StackPanel Grid.Column="2">
-                    <Button Content="Fin tour" Margin="20,25" Height="30" Click="NextTurn"/>
-                    <Button Content="Unité suivante" Margin="20,20"  Height="30"/>
-                </StackPanel>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Nombre de tours : " VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                        <Label Grid.Column="1" Content="{Binding nbTour}" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <Button Grid.Row="1" Content="Fin tour" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="30" Click="NextTurn"/>
+                    <Button Grid.Row="2" Content="Unité suivante" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="30"/>
+                </Grid>
             </Grid>
         </Grid>
     </Border>

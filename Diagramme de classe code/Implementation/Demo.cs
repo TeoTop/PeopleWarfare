@@ -10,7 +10,7 @@ namespace PeopleWar
         public Demo()
         {
             cases = new List<CaseA>();
-            nbCase = 36;
+            nbCase = 4; // modifier en 36
             type = EnumCarte.DEMO;
         }
 

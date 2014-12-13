@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PeopleWar;
 using System.Windows.Controls.Primitives;
+using System.ComponentModel;
 
 namespace WarFareWPF
 {
@@ -39,27 +40,38 @@ namespace WarFareWPF
             set;
         }
 
-
-        public int CurrentPlayer { get; set; }
-
-        public int nbUnitesj1
+        private int currentPlayer;
+        public int CurrentPlayer
         {
-            get { return partie.j1.peuple.getNbUnite(); }
+            get
+            {
+                return currentPlayer;
+            }
+            set
+            {
+                currentPlayer = value;
+                getOtherPlayer().IsMyTurn = false;
+                getCurrentPlayer().IsMyTurn = true;
+            }
         }
-
-        public int nbUnitesj2
+        public int OtherPlayer
         {
-            get { return partie.j2.peuple.getNbUnite(); }
+            get
+            {
+                return (CurrentPlayer + 1) % 2;
+            }
         }
-
         public SelectUnit su { get; set; }
-
+        public String nbTour
+        {
+            get { return partie.getNbTour() + "/" + partie.nbTourMax; }
+        }
         public GameWindow(PartieImp partie)
         {
             this.partie = partie;
-            this.map = new MapView(partie.carte);
-            J1 = new PlayerView(partie.j1, new Point(0, 0));
-            J2 = new PlayerView(partie.j2, new Point(Math.Sqrt(partie.carte.cases.Count()) - 1, Math.Sqrt(partie.carte.cases.Count()) - 1));
+            this.map = new MapView(partie.carte, this);
+            J1 = new PlayerView(partie.j1, new Point(0, 0), map);
+            J2 = new PlayerView(partie.j2, new Point(Math.Sqrt(partie.carte.cases.Count()) - 1, Math.Sqrt(partie.carte.cases.Count()) - 1), map);
             CurrentPlayer = 0;
             // definir les cases où les unités seront mises depuis le wrapper
             List<UnitView> unitsJ1 = map.cases[partie.carte.getKey((int)J1.InitialPosition.X, (int)J1.InitialPosition.Y)].unitsJ1;
@@ -110,35 +122,78 @@ namespace WarFareWPF
             int uid = System.Convert.ToInt32(g.Tag);
             BoxView SelectedBoxForUnit = map.SelectedBoxForUnit;
             BoxView box = map.cases[uid];
-            if (isUnitSelected)
-            {
-                if (SelectedBoxForUnit == box)
+            /*if (isUnitSelected)
+            {*/
+                /*if (SelectedBoxForUnit == box)
                 {
                     isUnitSelected = false;
                     SelectedBoxForUnit.SelectedUnit = null;
-                }
+                }*/
                 // deplacer unité
-                if (SelectedBoxForUnit != null)
+            if (SelectedBoxForUnit != null)
+            {
+                UnitView unit = SelectedBoxForUnit.SelectedUnit;
+                if (unit != null)
                 {
-                    UnitView unit = SelectedBoxForUnit.SelectedUnit;
-                    if (unit != null)
+                    Move move = unit.unit.seDeplacer(SelectedBoxForUnit.Uid, uid, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple);
+                    unit.HasAlreadyPlayed = move.hasPlayed;
+                    switch (move.mv)
                     {
-                        int move;
-                        if ((move = unit.unit.seDeplacer(SelectedBoxForUnit.Uid, uid, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple)) == 1 || move == 2)
-                        {
-                            if (move == 2)
-                            {
-                                box.addUnit(unit, CurrentPlayer);
-                                SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
-                            }
-                            unit.HasAlreadyPlayed = true;
+                        case EnumMove.MOVE:
+                            box.addUnit(unit, CurrentPlayer);
+                            SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
                             isUnitSelected = false;
                             SelectedBoxForUnit.SelectedUnit = null;
+                            break;
+                        case EnumMove.NOMOVE:
+                            isUnitSelected = false;
+                            SelectedBoxForUnit.SelectedUnit = null;
+                            break;
+                        case EnumMove.CBT:
+                            CombatImp cbt = new CombatImp(unit.unit, move.unites);
+                            EnumBattle battle = cbt.effectuerCombat();
+                            switch (battle)
+                            {
+                                case EnumBattle.CBT_DRAW:
+                                    isUnitSelected = false;
+                                    SelectedBoxForUnit.SelectedUnit = null;
+                                    break;
+                                case EnumBattle.CBT_LOSS:
+                                    if (!cbt.uniteAtt.survive(getCurrentPlayer().peuple.peuple.getType()))
+                                    {
+                                        SelectedBoxForUnit.destroyUnit(cbt.uniteAtt, CurrentPlayer);
+                                        getCurrentPlayer().peuple.destroy(cbt.uniteAtt);
+                                    }
+                                    break;
+                                case EnumBattle.CBT_VICTORY_MOVE:
+                                    if (!cbt.uniteDef.survive(getOtherPlayer().peuple.peuple.getType()))
+                                    {
+                                        box.destroyUnit(cbt.uniteDef, OtherPlayer);
+                                        getOtherPlayer().peuple.destroy(cbt.uniteDef);
+                                        unit.unit.move(uid);
+                                        box.addUnit(unit, CurrentPlayer);
+                                        SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
+                                    }
+                                    isUnitSelected = false;
+                                    SelectedBoxForUnit.SelectedUnit = null;
+                                    break;
+                                case EnumBattle.CBT_VICTORY_NOMOVE:
+                                    if (!cbt.uniteDef.survive(getOtherPlayer().peuple.peuple.getType()))
+                                    {
+                                        box.destroyUnit(cbt.uniteDef, OtherPlayer);
+                                        getOtherPlayer().peuple.destroy(cbt.uniteDef);
+                                    }
+                                    isUnitSelected = false;
+                                    SelectedBoxForUnit.SelectedUnit = null;
+                                    break;
+                            }
+                            break;
                         }
+                        this.verifierFinPartie();
                     }
-                }
-            }
-            else
+                }   
+            //}
+            /*else
             {
                 // selectionner unité
                 List<UnitView> units = box.getUnits(CurrentPlayer);
@@ -150,21 +205,47 @@ namespace WarFareWPF
                     //Focus
                     su.Activate();
                 }
-            }
+            }*/
         }
 
+        public bool verifierFinPartie()
+        {
+            if ((j = (JoueurImp)partie.verifierFinPartie()) == null)
+            {
+                // j est vainqueur
+                MessageBox.Show(j.nom + " gagne la partie");
+                return true;
+            }
+            return false;
+        }
         private void NextTurn(object sender, RoutedEventArgs e)
         {
             JoueurImp j;
-            if ((j = (JoueurImp)partie.verifierFinPartie()) == null)
+            // reset boxes
+            map.resetBoxes();
+            this.getCurrentPlayer().RaisePropertyChanged("nbPoints");
+            if (!this.verifierFinPartie())
             {
-                this.switchPlayer();
+                this.items.SelectedItem = null;
                 this.getCurrentPlayer().peuple.reset();
+                this.switchPlayer();
+                if (map.SelectedBox != null)
+                {
+                    map.SelectedBox.RaisePropertyChanged("units");
+                    map.SelectedBox.RaisePropertyChanged("unitsCount");
+                    map.SelectedBox.RaisePropertyChanged("otherUnits");
+                    map.SelectedBox.RaisePropertyChanged("otherUnitsCount");
+                }
+                partie.tours.Add(new TourImp()); // à changer lors de l'implementation des tours en ajoutant un TourView et ici on ajoute TourView.tour
+                RaisePropertyChanged("nbTour");
             }
-            else
-            {
-                // j est vainqueur
-            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChanged(String property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

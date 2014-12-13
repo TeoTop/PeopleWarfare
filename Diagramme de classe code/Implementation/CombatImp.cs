@@ -65,14 +65,19 @@ namespace PeopleWar
 
         /**
          * Launch a battle
-         * Return 0 if it's a draw, 1 if it's a victory, 2 if it's a victory and the units can move, -1 a loss
-         * @return int
+         * Return
+         * CBT_DRAW : if it's a draw
+         * CBT_VICTORY_NOMOVE if it's a victory
+         * CBT_VICTORY_MOVE if it's a victory and the units can move
+         * CBT_LOSS if it's a loss
+         * @return EnumMoveBattle
          */
-        public int effectuerCombat()
+        public EnumBattle effectuerCombat()
         {
             int nbCombat = calculerNbCombat();
             while (nbCombat > 0)
             {
+                // revoir cette méthode
                 if (successAtt())
                 {
                     uniteDef.vie -= 1;
@@ -81,9 +86,9 @@ namespace PeopleWar
                         // check if there's no other unit in the box so as to move on
                         if (this.move)
                         {
-                            return 2;
+                            return EnumBattle.CBT_VICTORY_MOVE;
                         }
-                        return 1;
+                        return EnumBattle.CBT_VICTORY_NOMOVE;
                     }
                 }
                 else
@@ -91,12 +96,13 @@ namespace PeopleWar
                     uniteAtt.vie -= 1;
                     if (uniteAtt.vie <= 0)
                     {
-                        return -1;
+                        return EnumBattle.CBT_LOSS;
                     }
                 }
             }
-            return 0;
+            return EnumBattle.CBT_DRAW;
         }
+
 
         public bool successAtt()
         {

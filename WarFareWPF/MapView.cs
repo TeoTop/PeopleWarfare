@@ -29,8 +29,13 @@ namespace WarFareWPF
                 if (selectedBox != null) selectedBox.IsSelected = false;
                 selectedBox = value;
                 if (selectedBox != null) selectedBox.IsSelected = true;
+                RaisePropertyChanged("IsBoxSelected");
                 RaisePropertyChanged("SelectedBox");
             }
+        }
+        public bool IsBoxSelected
+        {
+            get { return SelectedBox != null; }
         }
         public int _zoom;
         public int Zoom
@@ -45,13 +50,13 @@ namespace WarFareWPF
                 RaisePropertyChanged("Zoom");
             }
         }
-        public MapView(StrategieCarte map)
+        public MapView(StrategieCarte map, GameWindow gw)
         {
             carte = map;
             int i = 0;
             foreach (var box in carte.cases)
             {
-                BoxView boxview = new BoxView(carte.getX(i), carte.getY(i), i, box);
+                BoxView boxview = new BoxView(carte.getX(i), carte.getY(i), i, box, this, gw);
                 _cases.Add(boxview);
                 i++;
             }
@@ -67,6 +72,9 @@ namespace WarFareWPF
             }
             return toReturn;
         }
-
+        public void resetBoxes()
+        {
+            cases.Select(box => box.SelectedUnit = null);
+        }
     }
 }

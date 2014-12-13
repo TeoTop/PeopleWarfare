@@ -8,13 +8,17 @@ namespace PeopleWar
 {
     public class Move
     {
-        public bool move { get; set; }
+        public Double pm { get; set; }
         public bool hasPlayed { get; set; }
+        public EnumMove mv { get; set; }
+        public List<Unite> unites { get; set; }
 
         public Move()
         {
-            move = false;
+            pm = 0;
+            mv = EnumMove.NOMOVE;
             hasPlayed = false;
+            unites = new List<Unite>();
         }
     }
 }

@@ -56,7 +56,7 @@ namespace PeopleWar
          */
         public int getNbTour()
         {
-            return this.tours.Count();
+            return this.tours.Count() / 2 + 1;
         }
 
         public bool verifierSelUnite()
@@ -89,7 +89,7 @@ namespace PeopleWar
             {
                 return this.j1;
             }
-            else if (this.getNbTour() >= nbTourMax)
+            else if (this.getNbTour() > nbTourMax)
             {
                 return (this.j1.calculerNbPoint(carte) > this.j2.calculerNbPoint(carte)) ? this.j1 : this.j2;
             }
