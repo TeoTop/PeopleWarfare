@@ -4,7 +4,7 @@
         xmlns:converters="clr-namespace:Converters;assembly=Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WarFareWPF.GameWindow"
         xmlns:local="clr-namespace:WarFareWPF"
-        Title="GameWindow" Height="600" Width="800" x:Name="_this" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized">
+        Title="GameWindow" Height="600" Width="800" x:Name="_this" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" KeyUp="_this_KeyUp">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <converters:RatioToPointsConverter x:Key="RatioToPointsConverter"/>

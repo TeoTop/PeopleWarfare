@@ -247,5 +247,19 @@ namespace WarFareWPF
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
+
+        private void _this_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool handle = (Keyboard.Modifiers & ModifierKeys.Control) > 0;
+            if (e.Key == Key.S && handle)
+            {
+                this.save();
+            }
+        }
+
+        public void save()
+        {
+            MessageBox.Show("Save");
+        }
     }
 }
