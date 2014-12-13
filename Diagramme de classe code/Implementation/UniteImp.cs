@@ -104,10 +104,10 @@ namespace PeopleWar
             }
 
             if (((type == EnumPeuple.ELF && box == EnumCase.FORET) ||
-                (type == EnumPeuple.ORC && box == EnumCase.PLAINE) || (type == EnumPeuple.NAIN && box == EnumCase.PLAINE)) && pm > 0.5)
+                (type == EnumPeuple.ORC && box == EnumCase.PLAINE) || (type == EnumPeuple.NAIN && box == EnumCase.PLAINE)) && pm >= 0.5)
             {
                 move.pm = 0.5;
-                move.hasPlayed = false;
+                move.hasPlayed = move.pm <= 0;
                 move.mv = EnumMove.MOVE;
             }
 

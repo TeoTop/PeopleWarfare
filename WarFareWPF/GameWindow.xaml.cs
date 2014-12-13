@@ -62,10 +62,6 @@ namespace WarFareWPF
             }
         }
         public SelectUnit su { get; set; }
-        public String nbTour
-        {
-            get { return partie.getNbTour() + "/" + partie.nbTourMax; }
-        }
         public GameWindow(PartieImp partie)
         {
             this.partie = partie;
@@ -210,7 +206,8 @@ namespace WarFareWPF
 
         public bool verifierFinPartie()
         {
-            if ((j = (JoueurImp)partie.verifierFinPartie()) == null)
+            JoueurImp j;
+            if ((j = (JoueurImp)partie.verifierFinPartie()) != null)
             {
                 // j est vainqueur
                 MessageBox.Show(j.nom + " gagne la partie");
@@ -220,25 +217,28 @@ namespace WarFareWPF
         }
         private void NextTurn(object sender, RoutedEventArgs e)
         {
-            JoueurImp j;
             // reset boxes
             map.resetBoxes();
             this.getCurrentPlayer().RaisePropertyChanged("nbPoints");
+            this.items.SelectedItem = null;
+            this.getCurrentPlayer().peuple.reset();
+            this.switchPlayer();
+            if (map.SelectedBox != null)
+            {
+                map.SelectedBox.RaisePropertyChanged("units");
+                map.SelectedBox.RaisePropertyChanged("unitsCount");
+                map.SelectedBox.RaisePropertyChanged("otherUnits");
+                map.SelectedBox.RaisePropertyChanged("otherUnitsCount");
+            }
+            partie.tours.Add(new TourImp()); // à changer lors de l'implementation des tours en ajoutant une classe TourView et ici on ajoute TourView.tour
             if (!this.verifierFinPartie())
             {
-                this.items.SelectedItem = null;
-                this.getCurrentPlayer().peuple.reset();
-                this.switchPlayer();
-                if (map.SelectedBox != null)
-                {
-                    map.SelectedBox.RaisePropertyChanged("units");
-                    map.SelectedBox.RaisePropertyChanged("unitsCount");
-                    map.SelectedBox.RaisePropertyChanged("otherUnits");
-                    map.SelectedBox.RaisePropertyChanged("otherUnitsCount");
-                }
-                partie.tours.Add(new TourImp()); // à changer lors de l'implementation des tours en ajoutant un TourView et ici on ajoute TourView.tour
                 RaisePropertyChanged("nbTour");
             }
+        }
+        public String nbTour
+        {
+            get { return partie.getNbTour() + "/" + partie.nbTourMax; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

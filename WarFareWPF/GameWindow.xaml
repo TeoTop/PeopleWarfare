@@ -165,11 +165,75 @@
                                     <UniformGrid Columns="1"/>
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="Padding" Value="0,0,0,0"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center">
-                                        <Image Source="res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" Width="32" Height="32" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-                                        <Label Content="{Binding carac}"/>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Height="16">
+                                            <Grid.Background>
+                                                <ImageBrush ImageSource="res/ombre.png" TileMode="FlipX"/>
+                                            </Grid.Background>
+                                        </Grid>
+                                        <Image Grid.Row="1" Source="res/unit.png" Width="32" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        <Grid Grid.Row="2" Height="16"/>
+                                        <Grid Grid.Row="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Source="res/health.png" Width="32" Height="32" HorizontalAlignment="Right"/>
+                                                <Label Grid.Column="1" Content="{Binding vie}" HorizontalAlignment="Left"/>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Source="res/sword.png" Width="32" Height="32"/>
+                                                <Label Grid.Column="1" Content="{Binding attaque}" />
+                                            </Grid>
+                                            <Grid Grid.Column="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Source="res/shield.png" Width="32" Height="32"/>
+                                                <Label Grid.Column="1" Content="{Binding defense}" />
+                                            </Grid>
+                                            <Grid Grid.Column="3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Source="res/boot.png" Width="32" Height="32"/>
+                                                <Label Grid.Column="1" Content="{Binding pm}" />
+                                            </Grid>
+                                            <Image Grid.Column="5" Source="res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" Width="32" Height="32"/>
+                                        </Grid>
+                                        <Grid Grid.Row="4" Height="16">
+                                            <Grid.Background>
+                                                <ImageBrush ImageSource="res/ombre.png" TileMode="FlipX"/>
+                                            </Grid.Background>
+                                        </Grid>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

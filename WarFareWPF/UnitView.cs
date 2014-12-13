@@ -36,6 +36,35 @@ namespace WarFareWPF
                 RaisePropertyChanged("IsSelected");
             }
         }
+        public int vie
+        {
+            get
+            {
+
+                return unit.vie;
+            }
+        }
+        public int attaque
+        {
+            get
+            {
+                return unit.attaque;
+            }
+        }
+        public int defense
+        {
+            get
+            {
+                return unit.defense;
+            }
+        }
+        public Double pm
+        {
+            get
+            {
+                return unit.pm;
+            }
+        }
         public String carac
         {
             get { return unit.afficherCaracteristique(); }

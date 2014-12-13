@@ -71,6 +71,8 @@ namespace WarFareWPF
             }
             RaisePropertyChanged("units");
             RaisePropertyChanged("unitsCount");
+            RaisePropertyChanged("otherUnits");
+            RaisePropertyChanged("otherUnitsCount");
         }
 
         public void removeUnit(UnitView unit, int player)
@@ -89,6 +91,8 @@ namespace WarFareWPF
             }
             RaisePropertyChanged("units");
             RaisePropertyChanged("unitsCount");
+            RaisePropertyChanged("otherUnits");
+            RaisePropertyChanged("otherUnitsCount");
         }
         public ObservableCollection<UnitView> units
         {
@@ -104,9 +108,15 @@ namespace WarFareWPF
         {
             get { return units.Count; }
         }
-        public List<UnitView> otherUnits
+        public ObservableCollection<UnitView> otherUnits
         {
-            get { return getUnits(gw.OtherPlayer); }
+            get
+            {
+                List<UnitView> units = getUnits(gw.OtherPlayer);
+                ObservableCollection<UnitView> obUnits = new ObservableCollection<UnitView>();
+                units.ForEach(unit => obUnits.Add(unit));
+                return obUnits;
+            }
         }
         public int otherUnitsCount
         {
