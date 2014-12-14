@@ -112,7 +112,7 @@ namespace WarFareWPF
             }
         }
 
-        private void SelectUnit(object sender, MouseButtonEventArgs e)
+        public void SelectUnit(object sender, MouseButtonEventArgs e)
         {
             Grid g = sender as Grid;
             int uid = System.Convert.ToInt32(g.Tag);
@@ -209,8 +209,9 @@ namespace WarFareWPF
             JoueurImp j;
             if ((j = (JoueurImp)partie.verifierFinPartie()) != null)
             {
+                this.getCurrentPlayer().RaisePropertyChanged("nbPoints");
                 // j est vainqueur
-                MessageBox.Show(j.nom + " gagne la partie");
+                MessageBox.Show(j.nom + " gagne la partie " + this.getCurrentPlayer().joueur.nbPoints.ToString() + " à " + this.getOtherPlayer().joueur.nbPoints.ToString());
                 return true;
             }
             return false;

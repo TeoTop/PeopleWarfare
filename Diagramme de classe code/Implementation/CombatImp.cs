@@ -59,14 +59,14 @@ namespace PeopleWar
         {
             float att = 0,
                   def = 0,
-                  taux = ((att = uniteAtt.getAttEff()) > (def = uniteDef.getDefEff())) ? (def / 2 * att) : (1 - att / 2 * def);
+                  taux = ((att = uniteAtt.getAttEff()) > (def = uniteDef.getDefEff())) ? (def / (2 * att)) : (1 - att / (2 * def));
             return (1 - taux);
         }
 
         /**
          * Launch a battle
          * Return
-         * CBT_DRAW : if it's a draw
+         * CBT_DRAW if it's a draw
          * CBT_VICTORY_NOMOVE if it's a victory
          * CBT_VICTORY_MOVE if it's a victory and the units can move
          * CBT_LOSS if it's a loss
@@ -107,7 +107,7 @@ namespace PeopleWar
         public bool successAtt()
         {
             Random rnd = new Random();
-            float rand = rnd.Next(0, 1);
+            float rand = (float)rnd.NextDouble();
             float reussite = calculerReussiteAtt();
             float[] probability = new float[2] { reussite, 1 - reussite };
             Boolean[] success = new Boolean[2] { true, false };

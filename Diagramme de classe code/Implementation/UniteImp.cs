@@ -35,12 +35,12 @@ namespace PeopleWar
 
         public float getAttEff()
         {
-            return attaque * vie / 5;
+            return attaque * vie / 5.0F;
         }
 
         public float getDefEff()
         {
-            return defense * vie / 5;
+            return defense * vie / 5.0F;
         }
         public Move seDeplacer(int cInit, int c, EnumPeuple type, Carte carte, Peuple adv)
         {
@@ -115,9 +115,12 @@ namespace PeopleWar
 
             if ((unitesDef = adv.verifierUnite(c)).Any())
             {
-                //cbt
-                move.mv = EnumMove.CBT;
-                move.unites = unitesDef;
+                if (move.mv == EnumMove.MOVE)
+                {
+                    //cbt
+                    move.mv = EnumMove.CBT;
+                    move.unites = unitesDef;
+                }
             }
 
             if (move.pm > pm)
