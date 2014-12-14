@@ -13,8 +13,8 @@ public:
 	~Algos() {}
 	int* generer_carte(int nbCase, int nbTypeCase);
 	int* placer_joueurs(int nbCase);
-	int** suggestion_cases(int** cases, int taille,  int* posEnnemi, int posActuelle, int typeUnite);
-	int** cases_atteignable(int* cases, int* posEnnemi, int posActuelle, int typeUnite, int pm);
+	int** suggestion_cases(int** cases, int nbCase, int taille,  int* posEnnemi, int nbEnn, int posActuelle, int typeUnite);
+	int** cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn, int posActuelle, int typeUnite, int pm);
 private:
 
 };

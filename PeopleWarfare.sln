@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Diagrammes UML", "Diagrammes UML\Diagrammes UML.modelproj", "{B720C493-AC56-4B1C-AAAA-0C4455875864}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper", "Wrapper\Wrapper.vcxproj", "{54DC2436-E251-4714-827D-DBB505EDADF1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Algos", "Algos\Algos.vcxproj", "{DC76E54C-19CB-490E-801A-72EDF1DAA445}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,16 @@ Global
 		{DC76E54C-19CB-490E-801A-72EDF1DAA445}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{DC76E54C-19CB-490E-801A-72EDF1DAA445}.Release|Win32.ActiveCfg = Release|Win32
 		{DC76E54C-19CB-490E-801A-72EDF1DAA445}.Release|Win32.Build.0 = Release|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Debug|Win32.Build.0 = Debug|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Release|Any CPU.ActiveCfg = Release|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Release|Win32.ActiveCfg = Release|Win32
+		{11CBDEFF-BCC7-4C63-AF90-A7B7A685A90D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
