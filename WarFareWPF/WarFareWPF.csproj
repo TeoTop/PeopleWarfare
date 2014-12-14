@@ -60,6 +60,7 @@
     <Compile Include="Dictionary.xaml.cs">
       <DependentUpon>Dictionary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameView.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>

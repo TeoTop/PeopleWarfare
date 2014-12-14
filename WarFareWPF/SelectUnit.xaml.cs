@@ -47,12 +47,12 @@ namespace WarFareWPF
         public void selectUnit(int selectedIndex = -1)
         {
             int Selected = (selectedIndex == -1) ? this.items.SelectedIndex : selectedIndex;
-            gw.isUnitSelected = false;
+            //gw.isUnitSelected = false;
             if (Selected >= 0 && Selected < this.units.Count)
             {
                 box.SelectedUnit = units[Selected];
-                gw.isUnitSelected = true;
-                gw.map.SelectedBoxForUnit = this.box;
+                //gw.isUnitSelected = true;
+                //gw.map.SelectedBoxForUnit = this.box;
             }
             this.Close();
         }

@@ -11,8 +11,8 @@ namespace WarFareWPF
     public class BoxView : Notifier
     {
         private CaseA box { set;  get; }
-        public List<UnitView> unitsJ1 { get; set; }
-        public List<UnitView> unitsJ2 { get; set; }
+        public ObservableCollection<UnitView> unitsJ1 { get; set; }
+        public ObservableCollection<UnitView> unitsJ2 { get; set; }
         private UnitView selectedUnit;
         public UnitView SelectedUnit
         {
@@ -62,17 +62,15 @@ namespace WarFareWPF
                 unitsJ1.Add(unit);
                 RaisePropertyChanged("NbUniteJ1");
                 RaisePropertyChanged("HasUnitJ1");
+                RaisePropertyChanged("unitsJ1");
             }
             else
             {
                 unitsJ2.Add(unit);
                 RaisePropertyChanged("NbUniteJ2");
                 RaisePropertyChanged("HasUnitJ2");
+                RaisePropertyChanged("unitsJ2");
             }
-            RaisePropertyChanged("units");
-            RaisePropertyChanged("unitsCount");
-            RaisePropertyChanged("otherUnits");
-            RaisePropertyChanged("otherUnitsCount");
         }
 
         public void removeUnit(UnitView unit, int player)
@@ -82,56 +80,25 @@ namespace WarFareWPF
                 unitsJ1.Remove(unit);
                 RaisePropertyChanged("NbUniteJ1");
                 RaisePropertyChanged("HasUnitJ1");
+                RaisePropertyChanged("unitsJ1");
             }
             else
             {
                 unitsJ2.Remove(unit);
                 RaisePropertyChanged("NbUniteJ2");
                 RaisePropertyChanged("HasUnitJ2");
+                RaisePropertyChanged("unitsJ2");
             }
-            RaisePropertyChanged("units");
-            RaisePropertyChanged("unitsCount");
-            RaisePropertyChanged("otherUnits");
-            RaisePropertyChanged("otherUnitsCount");
-        }
-        public ObservableCollection<UnitView> units
-        {
-            get
-            {
-                List<UnitView> units = getUnits(gw.CurrentPlayer);
-                ObservableCollection<UnitView> obUnits = new ObservableCollection<UnitView>();
-                units.ForEach(unit => obUnits.Add(unit));
-                return obUnits;
-            }
-        }
-        public int unitsCount
-        {
-            get { return units.Count; }
-        }
-        public ObservableCollection<UnitView> otherUnits
-        {
-            get
-            {
-                List<UnitView> units = getUnits(gw.OtherPlayer);
-                ObservableCollection<UnitView> obUnits = new ObservableCollection<UnitView>();
-                units.ForEach(unit => obUnits.Add(unit));
-                return obUnits;
-            }
-        }
-        public int otherUnitsCount
-        {
-            get { return otherUnits.Count; }
         }
         
 
         public List<UnitView> getUnits(int player)
         {
-            return (player == 0) ? unitsJ1 : unitsJ2;
+            return ((player == 0) ? unitsJ1 : unitsJ2).ToList();
         }
         public int Uid { get; set; }
-        public GameWindow gw { get; set; }
         public MapView map { get; set; }
-        public BoxView(int row, int column, int i, CaseA box, MapView map, GameWindow gw)
+        public BoxView(int row, int column, int i, CaseA box, MapView map)
         {
             this.box = box;
             switch (box.getType())
@@ -144,9 +111,8 @@ namespace WarFareWPF
             this.Row = row;
             this.Column = column;
             this.Uid = i;
-            unitsJ1 = new List<UnitView>();
-            unitsJ2 = new List<UnitView>();
-            this.gw = gw;
+            unitsJ1 = new ObservableCollection<UnitView>();
+            unitsJ2 = new ObservableCollection<UnitView>();
             this.map = map;
         }
 

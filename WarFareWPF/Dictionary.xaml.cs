@@ -10,9 +10,9 @@ namespace WarFareWPF
     public partial class Dictionary
     {
         public static GameWindow gw { get; set; }
-        public void SelectUnit(object sender, MouseButtonEventArgs e)
+        public void MoveUnit(object sender, MouseButtonEventArgs e)
         {
-            gw.SelectUnit(sender, e);
+            gw.MoveUnit(sender, e);
         }
 
     }

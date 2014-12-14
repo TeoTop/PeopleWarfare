@@ -50,13 +50,13 @@ namespace WarFareWPF
                 RaisePropertyChanged("Zoom");
             }
         }
-        public MapView(StrategieCarte map, GameWindow gw)
+        public MapView(StrategieCarte map)
         {
             carte = map;
             int i = 0;
             foreach (var box in carte.cases)
             {
-                BoxView boxview = new BoxView(carte.getX(i), carte.getY(i), i, box, this, gw);
+                BoxView boxview = new BoxView(carte.getX(i), carte.getY(i), i, box, this);
                 _cases.Add(boxview);
                 i++;
             }

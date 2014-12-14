@@ -10,6 +10,8 @@
     <converters:PositionToVisibilityConverter x:Key="PositionToVisibilityConverter"/>
     <converters:ListToVis x:Key="ListToVis"/>
     <converters:BoolToBackgroundConverter x:Key="BoolToBackgroundConverter"/>
+    <converters:PlayerToItemsSourceConverter x:Key="PlayerToItemsSourceConverter"/>
+    
     <ControlTemplate x:Key="buttonPrecTemplate" TargetType="Button">
         <Border Name="border" BorderThickness="0" Background="Transparent">
             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -39,39 +41,39 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="templateCase">
-        <Grid Tag="{Binding Uid}" Height="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToHeightConverter}}" MouseRightButtonUp="SelectUnit">
+        <Grid Tag="{Binding Uid}" Height="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToHeightConverter}}" MouseRightButtonUp="MoveUnit">
             <!--Cases-->
-            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black">
+            <Polygon Points="{Binding game.map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black">
                 <Polygon.RenderTransform>
-                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                    <TranslateTransform Y="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
                 </Polygon.RenderTransform>
                 <Polygon.Fill>
                     <ImageBrush ImageSource="{Binding Src}"/>
                 </Polygon.Fill>
             </Polygon>
             <!--Case sélectionnée-->
-            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsSelected, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2" Fill="#4CFF8866">
+            <Polygon Points="{Binding game.map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsSelected, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2" Fill="#4CFF8866">
                 <Polygon.RenderTransform>
-                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                    <TranslateTransform Y="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
                 </Polygon.RenderTransform>
             </Polygon>
             <!--Unités-->
             <Grid Visibility="{Binding HasUnitJ1, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2">
                 <!--Unité Joueur 1-->
-                <Rectangle Width="20" Height="20" Fill="{Binding J1.peuple.Color, ElementName=_this}"/>
+                <Rectangle Width="20" Height="20" Fill="{Binding game.J1.peuple.Color, ElementName=_this}"/>
                 <!--NbUnité Joueur 1-->
                 <Label Content="{Binding NbUniteJ1}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             </Grid>
             <Grid Visibility="{Binding HasUnitJ2, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2">
                 <!--Unité Joueur 2-->
-                <Rectangle Width="20" Height="20" Fill="{Binding J2.peuple.Color, ElementName=_this}"/>
+                <Rectangle Width="20" Height="20" Fill="{Binding game.J2.peuple.Color, ElementName=_this}"/>
                 <!--NbUnité Joueur 2-->
                 <Label Content="{Binding NbUniteJ2}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
             </Grid>
             <!-- Si une unité est sélectionnée -->
-            <Polygon Points="{Binding map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="#664CFFEF">
+            <Polygon Points="{Binding game.map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="#664CFFEF">
                 <Polygon.RenderTransform>
-                    <TranslateTransform Y="{Binding map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                    <TranslateTransform Y="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
                 </Polygon.RenderTransform>
             </Polygon>
         </Grid>

@@ -107,7 +107,7 @@ namespace PeopleWar
                 (type == EnumPeuple.ORC && box == EnumCase.PLAINE) || (type == EnumPeuple.NAIN && box == EnumCase.PLAINE)) && pm >= 0.5)
             {
                 move.pm = 0.5;
-                move.hasPlayed = move.pm <= 0;
+                move.hasPlayed = pm - move.pm <= 0;
                 move.mv = EnumMove.MOVE;
             }
 
@@ -138,7 +138,7 @@ namespace PeopleWar
             if (type == EnumPeuple.ELF)
             {
                 Random rnd = new Random();
-                if (rnd.Next() == 0)
+                if (rnd.Next(0, 1) == 0)
                 {
                     this.vie = 1;
                     return true;
