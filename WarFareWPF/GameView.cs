@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using System.Threading;
 namespace WarFareWPF
 {
     public class GameView : Notifier
@@ -52,6 +53,7 @@ namespace WarFareWPF
         {
             get { return game.getNbTour() + "/" + game.nbTourMax; }
         }
+        public EnumBattle battle { get; set; }
         /*public bool isUnitSelected
         {
             get;
@@ -133,53 +135,50 @@ namespace WarFareWPF
                         case EnumMove.MOVE:
                             box.addUnit(unit, CurrentPlayer);
                             SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
-                            //isUnitSelected = false;
                             SelectedBoxForUnit.SelectedUnit = null;
                             break;
                         case EnumMove.NOMOVE:
-                            //isUnitSelected = false;
                             SelectedBoxForUnit.SelectedUnit = null;
                             break;
                         case EnumMove.CBT:
-                            CombatImp cbt = new CombatImp(unit.unit, move.unites);
-                            EnumBattle battle = cbt.effectuerCombat();
-                            switch (battle)
+                            BattleWindow battle = new BattleWindow(unit, getOtherPlayer().peuple.Select(move.unites), this);
+                            battle.ShowDialog();
+
+                            switch (this.battle)
                             {
                                 case EnumBattle.CBT_DRAW:
-                                    //isUnitSelected = false;
                                     SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                                 case EnumBattle.CBT_LOSS:
-                                    if (!cbt.uniteAtt.survive(getCurrentPlayer().peuple.peuple.getType()))
-                                    {
-                                        SelectedBoxForUnit.destroyUnit(cbt.uniteAtt, CurrentPlayer);
-                                        getCurrentPlayer().peuple.destroy(cbt.uniteAtt);
-                                    }
+                                    SelectedBoxForUnit.destroyUnit(battle.battle.unitAtt.unit, CurrentPlayer);
+                                    getCurrentPlayer().peuple.destroy(battle.battle.unitAtt.unit);
+                                    SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                                 case EnumBattle.CBT_VICTORY_MOVE:
-                                    if (!cbt.uniteDef.survive(getOtherPlayer().peuple.peuple.getType()))
-                                    {
-                                        box.destroyUnit(cbt.uniteDef, OtherPlayer);
-                                        getOtherPlayer().peuple.destroy(cbt.uniteDef);
-                                        unit.unit.move(uid);
-                                        box.addUnit(unit, CurrentPlayer);
-                                        SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
-                                    }
-                                    //isUnitSelected = false;
+                                    box.destroyUnit(battle.battle.unitDef.unit, OtherPlayer);
+                                    getOtherPlayer().peuple.destroy(battle.battle.unitDef.unit);
+                                    unit.unit.move(uid);
+                                    box.addUnit(unit, CurrentPlayer);
+                                    SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
                                     SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                                 case EnumBattle.CBT_VICTORY_NOMOVE:
-                                    if (!cbt.uniteDef.survive(getOtherPlayer().peuple.peuple.getType()))
-                                    {
-                                        box.destroyUnit(cbt.uniteDef, OtherPlayer);
-                                        getOtherPlayer().peuple.destroy(cbt.uniteDef);
-                                    }
-                                    //isUnitSelected = false;
+                                    box.destroyUnit(battle.battle.unitDef.unit, OtherPlayer);
+                                    getOtherPlayer().peuple.destroy(battle.battle.unitDef.unit);
                                     SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                             }
                             break;
                     }
+                    // les raise ne fonctionnent pas
+                    SelectedBoxForUnit.RaisePropertyChanged("unitsJ1");
+                    SelectedBoxForUnit.RaisePropertyChanged("NbUniteJ1");
+                    SelectedBoxForUnit.RaisePropertyChanged("unitsJ2");
+                    SelectedBoxForUnit.RaisePropertyChanged("NbUniteJ2");
+                    box.RaisePropertyChanged("unitsJ1");
+                    box.RaisePropertyChanged("NbUniteJ1");
+                    box.RaisePropertyChanged("unitsJ2");
+                    box.RaisePropertyChanged("NbUniteJ2");
                     this.verifierFinPartie();
                 }
             }
@@ -236,5 +235,6 @@ namespace WarFareWPF
         {
             MessageBox.Show("Save");
         }
+
     }
 }

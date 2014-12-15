@@ -12,6 +12,7 @@
     <converters:BoolToBackgroundConverter x:Key="BoolToBackgroundConverter"/>
     <converters:PlayerToItemsSourceConverter x:Key="PlayerToItemsSourceConverter"/>
     
+    <!--User control-->
     <ControlTemplate x:Key="buttonPrecTemplate" TargetType="Button">
         <Border Name="border" BorderThickness="0" Background="Transparent">
             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />

@@ -138,7 +138,7 @@ namespace PeopleWar
             if (type == EnumPeuple.ELF)
             {
                 Random rnd = new Random();
-                if (rnd.Next(0, 1) == 0)
+                if (rnd.Next(0, 2) == 0)
                 {
                     this.vie = 1;
                     return true;

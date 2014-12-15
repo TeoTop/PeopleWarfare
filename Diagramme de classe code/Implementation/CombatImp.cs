@@ -27,6 +27,9 @@ namespace PeopleWar
 
         public bool move { get; set; }
 
+        public int nbCbtMax { get; set; }
+        public int nbCbt { get; set; }
+
         /**
          * Constructor
          * @param Unite uniteAtt
@@ -34,9 +37,13 @@ namespace PeopleWar
          */
         public CombatImp(UniteImp uniteAtt, List<Unite> unitesDef)
         {
-            this.uniteAtt = uniteAtt;
             this.move = unitesDef.Count - 1 == 0;
-            this.uniteDef = (UniteImp) choisirUniteDef(unitesDef);
+
+            this.uniteAtt = uniteAtt;
+            this.uniteDef = (UniteImp)choisirUniteDef(unitesDef);
+
+            this.nbCbtMax = calculerNbCombat();
+            this.nbCbt = 0;
         }
 
         /**
@@ -72,12 +79,11 @@ namespace PeopleWar
          * CBT_LOSS if it's a loss
          * @return EnumMoveBattle
          */
-        public EnumBattle effectuerCombat()
+        /*public EnumBattle effectuerCombat()
         {
             int nbCombat = calculerNbCombat();
             while (nbCombat > 0)
             {
-                // revoir cette méthode
                 if (successAtt())
                 {
                     uniteDef.vie -= 1;
@@ -101,8 +107,45 @@ namespace PeopleWar
                 }
             }
             return EnumBattle.CBT_DRAW;
-        }
+        }*/
 
+        /**
+         * Launch a round
+         * Return
+         * CBT_DRAW_LOSS if the attacker lost the round and did not die
+         * CBT_DRAW_VICTORY if the attacker won the round and the defender did not die
+         * CBT_VICTORY_NOMOVE if it's a victory
+         * CBT_VICTORY_MOVE if it's a victory and the units can move
+         * CBT_LOSS if it's a loss
+         * @return EnumMoveBattle
+         */
+        public EnumBattle attaquer()
+        {
+            this.nbCbt++;
+            if (successAtt())
+            {
+                uniteDef.vie -= 1;
+                if (uniteDef.vie <= 0)
+                {
+                    // check if there's no other unit in the box so as to move on
+                    if (this.move)
+                    {
+                        return EnumBattle.CBT_VICTORY_MOVE;
+                    }
+                    return EnumBattle.CBT_VICTORY_NOMOVE;
+                }
+                return EnumBattle.CBT_DRAW_VICTORY;
+            }
+            else
+            {
+                uniteAtt.vie -= 1;
+                if (uniteAtt.vie <= 0)
+                {
+                    return EnumBattle.CBT_LOSS;
+                }
+                return EnumBattle.CBT_DRAW_LOSS;
+            }
+        }
 
         public bool successAtt()
         {

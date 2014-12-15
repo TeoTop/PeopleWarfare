@@ -60,5 +60,10 @@ namespace WarFareWPF
             units.Remove(unite);
             unite = null;
         }
+
+        public List<UnitView> Select(List<Unite> list)
+        {
+            return this.units.Where(unit => list.Contains(unit.unit)).ToList();
+        }
     }
 }

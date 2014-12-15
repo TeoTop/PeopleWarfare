@@ -7,9 +7,11 @@ namespace PeopleWar
 {
     public enum EnumBattle
     {
-        CBT_DRAW,
         CBT_LOSS,
         CBT_VICTORY_MOVE,
         CBT_VICTORY_NOMOVE,
+        CBT_DRAW_VICTORY,
+        CBT_DRAW_LOSS,
+        CBT_DRAW,
     }
 }
