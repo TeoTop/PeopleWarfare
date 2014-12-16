@@ -60,17 +60,27 @@
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeaveWindows.xaml.cs">
+      <DependentUpon>LeaveWindows.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MapView.cs" />
     <Compile Include="NewGame.xaml.cs">
       <DependentUpon>NewGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="PeopleView.cs" />
     <Compile Include="PlayerView.cs" />
+    <Compile Include="Sauvegarde.xaml.cs">
+      <DependentUpon>Sauvegarde.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectUnit.xaml.cs">
       <DependentUpon>SelectUnit.xaml</DependentUpon>
     </Compile>
     <Compile Include="UnitView.cs" />
     <Page Include="GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeaveWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,6 +102,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sauvegarde.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
