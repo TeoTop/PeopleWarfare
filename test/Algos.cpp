@@ -1,7 +1,9 @@
-#include <time.h>
-#include <stdlib.h>
+#include "stdafx.h"
 #include "algos.h"
+#include <time.h>
 #include <math.h>
+#include <stdlib.h>
+#include <iostream>
 
 int* Algos::generer_carte(int nbCase, int nbTypeCase) {
 	srand(time(NULL));
@@ -59,9 +61,8 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 				versEnn = true;
 			}
 		}
-		if (!versEnn) {
-			cases[i][0] = -1; nbCaseDispoCourante--;
-		}
+		if (!versEnn) { 
+			cases[i][0] = -1; nbCaseDispoCourante--; }
 	}
 
 	switch (typeUnite)
@@ -100,7 +101,7 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 		}
 	}
 
-	int** cases_sucg = new int*[nbCaseDispoCourante + 1];
+	int** cases_sucg  = new int*[nbCaseDispoCourante+1];
 	cases_sucg[0] = new int[1];
 
 	int c = 1;
@@ -127,13 +128,13 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 	if (pm == 0){
 		return NULL;
 	}
-	
+
 	cases_possible[0] = posActuelle - taille;
 	cases_possible[1] = posActuelle + taille;
 	cases_possible[2] = posActuelle + 1;
 	cases_possible[3] = posActuelle - 1;
 
-	if ((posActuelle/taille) % 2 == 1)
+	if ((posActuelle / taille) % 2 == 1)
 	{
 		cases_possible[4] = posActuelle - (taille - 1);
 		cases_possible[5] = posActuelle + (taille + 1);
@@ -206,14 +207,14 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 	for (int i = 0; i < taille_dispo; i++){
 		if (cases_possible[i] >= 0 && cases_possible[i] < nbCase){           // case ou l'on peut aller
 			cases_selec = (int*)realloc(cases_selec, (++taille_selec)*sizeof(int));
-			cases_selec[taille_selec - 1] = cases_possible[i];
+			cases_selec[taille_selec-1] = cases_possible[i];
 		}
 	}
 
 	//on retourne un tableau[taille_selec][3] + une ligne en zero pour connaitre la taille.
 	int** case_dispo = new int*[taille_selec];
 	case_dispo[0] = new int[1];
-	case_dispo[0][0] = taille_selec-1;
+	case_dispo[0][0] = taille_selec;
 	for (int i = 1; i < taille_selec; i++){
 		case_dispo[i] = new int[3];
 		case_dispo[i][0] = cases_selec[i];			//n° de case
@@ -225,7 +226,24 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 			}
 		}
 	}
-	
+	/*
+	int p;
+	int** case_dispo = new int*[(taille_dispo + 1)];
+	case_dispo[0] = new int[1];
+	case_dispo[0][0] = taille_dispo;
+	for (int i = 1; i <= taille_dispo; i++){
+		p = i - 1;
+		case_dispo[i] = new int[3];
+		case_dispo[i][0] = cases_possible[p];			//n° de case
+		case_dispo[i][1] = cases[cases_possible[p]];	//type de case
+		case_dispo[i][2] = 0;							//deplacement ou attaque
+		for (int j = 0; j < nbEnn; j++){
+			if (cases_possible[p] == posEnnemi[j]){
+				case_dispo[i][2] = 1;
+			}
+		}
+	}*/
+
 	return case_dispo;
 }
 
@@ -242,14 +260,3 @@ int* Algos::placer_joueurs(int nbCase) {
 	}
 	return placement;
 }
-
-
-EXTERNC DLL Algos* Algos_New() {
-	return new Algos();
-}
-EXTERNC DLL void Algos_Delete(Algos* algos) {
-	delete algos;
-}
-/*EXTERNC DLL int* Gen_GenCarte(Algos* gen, int nbCase, int nbTypeCase) {
-	return gen->generer_carte(nbCase, nbTypeCase);
-}*/

@@ -1,2 +1,0 @@
-H:\4INFO\PeopleWarfare\WarFareWPF\bin\Debug\WarFareWPF.exe.config
-H:\Desktop\gen\WarFareWPF.exe.config
