@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{b720c493-ac56-4b1c-aaaa-0c4455875864}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>Diagrammes UML</Name>
+    <RootNamespace>Diagrammes UML</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Content Include="Combat.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Combat.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Combat.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="CreerPartie.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="CreerPartie.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>CreerPartie.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Deplacement.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Deplacement.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Deplacement.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Diagramme_joueur.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Diagramme_joueur.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Diagramme_joueur.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="PeopleWarfare.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PeopleWarfare.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>PeopleWarfare.classdiagram</DependentUpon>
+    </Content>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="JouerPartie.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JouerPartie.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>JouerPartie.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\Diagrammes UML.uml">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+</Project>

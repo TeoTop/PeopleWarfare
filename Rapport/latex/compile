@@ -1,0 +1,2 @@
+#/bin/bash
+pdflatex rapport.tex && gnome-open rapport.pdf
