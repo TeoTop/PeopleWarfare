@@ -13,9 +13,9 @@
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="12*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Sauvegarder" Grid.Column="1" HorizontalAlignment="Left" Margin="10.4,27,0,0" VerticalAlignment="Top" Width="100" Click="sauvegardePartie"/>
+            <Button Content="Sauvegarder" Grid.Column="1" HorizontalAlignment="Left" Margin="10.4,27,0,0" VerticalAlignment="Top" Width="100" Click="SaveWindowsPartie"/>
             <Button Content="Quitter" Grid.Column="2" HorizontalAlignment="Left" Margin="10.4,27,0,0" VerticalAlignment="Top" Width="100"/>
-            <Button Content="Annuler" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.203,0.396" Click="Button_Click"/>
+            <Button Content="Annuler" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.203,0.396" Click="Cancel"/>
         </Grid>
         <Label Content="Vous souhaitez quitter une partie non sauvegardé.&#xD;&#xA;Souhaitez-vous la sauvegarder ? " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="410" FontSize="18"/>
     </Grid>

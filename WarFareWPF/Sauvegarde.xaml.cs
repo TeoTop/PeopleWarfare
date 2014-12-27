@@ -30,5 +30,10 @@ namespace WarFareWPF
         {
 
         }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
