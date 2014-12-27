@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/ombre.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/elf.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/nain.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/orc.png")]
 
 

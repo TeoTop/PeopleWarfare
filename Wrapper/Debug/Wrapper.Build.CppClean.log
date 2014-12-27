@@ -1,12 +1,11 @@
-h:\4info\peoplewarfare\debug\wrapper.dll
-h:\4info\peoplewarfare\debug\wrapper.pdb
 h:\4info\peoplewarfare\wrapper\debug\vc120.pdb
 h:\4info\peoplewarfare\wrapper\debug\.netframework,version=v4.5.assemblyattributes.obj
 h:\4info\peoplewarfare\debug\wrapper.lib
 h:\4info\peoplewarfare\debug\wrapper.exp
+h:\4info\peoplewarfare\debug\wrapper.pdb
 h:\4info\peoplewarfare\wrapper\debug\wrapper.vcxprojresolveassemblyreference.cache
 h:\4info\peoplewarfare\wrapper\debug\wrapper.obj
-h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\link.write.1.tlog
+h:\4info\peoplewarfare\debug\wrapper.dll
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\metagen.write.1.tlog
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\cl.read.1.tlog
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\cl.write.1.tlog
@@ -15,5 +14,6 @@ h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\metagen.read.1.tlog
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\link.command.1.tlog
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\wrapper.write.1u.tlog
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\link.read.1.tlog
+h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\link.write.1.tlog
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\rsaenh.dll.bi
 h:\4info\peoplewarfare\wrapper\debug\wrapper.tlog\tzres.dll.bi

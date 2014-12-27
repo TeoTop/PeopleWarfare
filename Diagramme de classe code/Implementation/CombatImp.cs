@@ -121,7 +121,6 @@ namespace PeopleWar
          */
         public EnumBattle attaquer()
         {
-            this.nbCbt++;
             if (successAtt())
             {
                 uniteDef.vie -= 1;
@@ -145,6 +144,11 @@ namespace PeopleWar
                 }
                 return EnumBattle.CBT_DRAW_LOSS;
             }
+        }
+
+        public void incCbt()
+        {
+            this.nbCbt++;
         }
 
         public bool successAtt()

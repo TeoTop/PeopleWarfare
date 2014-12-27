@@ -11,6 +11,7 @@
     <converters:ListToVis x:Key="ListToVis"/>
     <converters:BoolToBackgroundConverter x:Key="BoolToBackgroundConverter"/>
     <converters:PlayerToItemsSourceConverter x:Key="PlayerToItemsSourceConverter"/>
+    <converters:PlayerToSrc x:Key="PlayerToSrc"/>
     
     <!--User control-->
     <ControlTemplate x:Key="buttonPrecTemplate" TargetType="Button">
@@ -60,16 +61,28 @@
             </Polygon>
             <!--Unités-->
             <Grid Visibility="{Binding HasUnitJ1, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="9*"/>
+                    </Grid.RowDefinitions>
+                </Grid>
                 <!--Unité Joueur 1-->
-                <Rectangle Width="20" Height="20" Fill="{Binding game.J1.peuple.Color, ElementName=_this}"/>
+                <Image Grid.Row="1" Source="{Binding game.J1.peuple.Src, ElementName=_this}" Width="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" Height="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <!--NbUnité Joueur 1-->
-                <Label Content="{Binding NbUniteJ1}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                <Label Grid.Row="0" Content="{Binding NbUniteJ1}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=18}" Margin="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToMarginConverter},ConverterParameter=-30 0 0 0}" FontWeight="Bold"/>
             </Grid>
             <Grid Visibility="{Binding HasUnitJ2, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="9*"/>
+                    </Grid.RowDefinitions>
+                </Grid>
                 <!--Unité Joueur 2-->
-                <Rectangle Width="20" Height="20" Fill="{Binding game.J2.peuple.Color, ElementName=_this}"/>
+                <Image Grid.Row="1" Source="{Binding game.J2.peuple.Src, ElementName=_this}" Width="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" Height="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <!--NbUnité Joueur 2-->
-                <Label Content="{Binding NbUniteJ2}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                <Label Grid.Row="0" Content="{Binding NbUniteJ2}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=18}" Margin="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToMarginConverter},ConverterParameter=-30 0 0 0}" FontWeight="Bold"/>
             </Grid>
             <!-- Si une unité est sélectionnée -->
             <Polygon Points="{Binding game.map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding IsUnitSelected, Converter={StaticResource BoolToVis}}" Fill="#664CFFEF">
@@ -77,71 +90,6 @@
                     <TranslateTransform Y="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
                 </Polygon.RenderTransform>
             </Polygon>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="templateInfo">
-        <Grid VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Height="16">
-                <Grid.Background>
-                    <ImageBrush ImageSource="res/ombre.png" TileMode="FlipX"/>
-                </Grid.Background>
-            </Grid>
-            <Image Grid.Row="1" Source="res/unit.png" Width="32" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Grid Grid.Row="2" Height="16"/>
-            <Grid Grid.Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="res/health.png" Width="32" Height="32" HorizontalAlignment="Right"/>
-                    <Label Grid.Column="1" Content="{Binding vie}" HorizontalAlignment="Left"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="res/sword.png" Width="32" Height="32"/>
-                    <Label Grid.Column="1" Content="{Binding attaque}" />
-                </Grid>
-                <Grid Grid.Column="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="res/shield.png" Width="32" Height="32"/>
-                    <Label Grid.Column="1" Content="{Binding defense}" />
-                </Grid>
-                <Grid Grid.Column="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="res/boot.png" Width="32" Height="32"/>
-                    <Label Grid.Column="1" Content="{Binding pm}" />
-                </Grid>
-                <Image Grid.Column="5" Source="res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" Width="32" Height="32"/>
-            </Grid>
-            <Grid Grid.Row="4" Height="16">
-                <Grid.Background>
-                    <ImageBrush ImageSource="res/ombre.png" TileMode="FlipX"/>
-                </Grid.Background>
-            </Grid>
         </Grid>
     </ControlTemplate>
 </ResourceDictionary>

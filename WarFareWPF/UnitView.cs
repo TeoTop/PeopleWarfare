@@ -69,12 +69,15 @@ namespace WarFareWPF
         {
             get { return unit.afficherCaracteristique(); }
         }
+        public PeopleView people { get; set; }
 
-        public UnitView(UniteImp unit)
+        public UnitView(UniteImp unit, PeopleView people)
         {
             this.unit = unit;
+            this.people = people;
             IsSelected = false;
             HasAlreadyPlayed = false;
         }
+
     }
 }

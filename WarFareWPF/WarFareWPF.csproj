@@ -79,6 +79,15 @@
     <Compile Include="SelectUnit.xaml.cs">
       <DependentUpon>SelectUnit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\InfoPeuple.xaml.cs">
+      <DependentUpon>InfoPeuple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewRoundAnim.xaml.cs">
+      <DependentUpon>NewRoundAnim.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TextBlockAnim.xaml.cs">
+      <DependentUpon>TextBlockAnim.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnitView.cs" />
     <Page Include="BattleWindow.xaml">
       <SubType>Designer</SubType>
@@ -110,6 +119,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SelectUnit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\InfoPeuple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NewRoundAnim.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TextBlockAnim.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +201,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\ombre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\elf.png" />
+    <Resource Include="res\nain.png" />
+    <Resource Include="res\orc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

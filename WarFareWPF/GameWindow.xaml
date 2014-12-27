@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="clr-namespace:Converters;assembly=Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WarFareWPF.GameWindow"
-        xmlns:local="clr-namespace:WarFareWPF"
+        xmlns:controls="clr-namespace:WarFareWPF.UserControls"
         Title="GameWindow" Height="600" Width="800" x:Name="_this" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" KeyUp="_this_KeyUp">
     <Border BorderThickness="2" BorderBrush="Black" Margin="5">
         <Grid>
@@ -86,7 +86,7 @@
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ContentControl Template="{DynamicResource ResourceKey=templateInfo}"/>
+                                    <controls:InfoPeuple Player="{Binding game.CurrentPlayer,ElementName=_this}"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -117,7 +117,7 @@
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ContentControl Template="{DynamicResource ResourceKey=templateInfo}"/>
+                                    <controls:InfoPeuple Player="{Binding game.OtherPlayer,ElementName=_this}"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -155,8 +155,9 @@
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                         <RowDefinition Height="2*"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -168,6 +169,7 @@
                     </Grid>
                     <Button Grid.Row="1" Content="Fin tour" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="30" Click="NextTurn"/>
                     <Button Grid.Row="2" Content="Unité suivante" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="30"/>
+                    <Button Grid.Row="3" Content="Quiter la partie" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="20,0,20,0" Height="30" Click="Quit"/>
                 </Grid>
             </Grid>
         </Grid>

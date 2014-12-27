@@ -34,7 +34,9 @@ namespace WarFareWPF
         {
             MyTask task = new MyTask(() => battle.Do());
             task.WaitWithPumping();
+            Thread.Sleep(500);
+            this.Close();
         }
-        
+               
     }
 }

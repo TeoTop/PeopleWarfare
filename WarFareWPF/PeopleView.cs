@@ -27,7 +27,7 @@ namespace WarFareWPF
             units = new List<UnitView>();
             for (int i = 0; i < peuple.getNbUnite(); i++)
             {
-                units.Add(new UnitView((UniteImp)peuple.getUnite(i)));
+                units.Add(new UnitView((UniteImp)peuple.getUnite(i), this));
             }
             selectedUnit = units[peuple.uniteActuel];
             switch (peuple.getType())

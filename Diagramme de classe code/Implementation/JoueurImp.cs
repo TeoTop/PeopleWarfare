@@ -22,6 +22,7 @@ namespace PeopleWar
 
         public int calculerNbPoint(Carte carte)
         {
+            nbPoints = 0;
             // adds 1 point for each unit still alive
             foreach (UniteImp u in peuple.unites)
             {
@@ -31,7 +32,6 @@ namespace PeopleWar
                     nbPoints += u.point;
                 }
             }
-
             return nbPoints;
         }
 

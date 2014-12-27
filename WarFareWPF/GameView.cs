@@ -26,7 +26,6 @@ namespace WarFareWPF
             get;
             set;
         }
-
         private int currentPlayer;
         public int CurrentPlayer
         {
@@ -135,10 +134,8 @@ namespace WarFareWPF
                         case EnumMove.MOVE:
                             box.addUnit(unit, CurrentPlayer);
                             SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
-                            SelectedBoxForUnit.SelectedUnit = null;
                             break;
                         case EnumMove.NOMOVE:
-                            SelectedBoxForUnit.SelectedUnit = null;
                             break;
                         case EnumMove.CBT:
                             BattleWindow battle = new BattleWindow(unit, getOtherPlayer().peuple.Select(move.unites), this);
@@ -147,12 +144,10 @@ namespace WarFareWPF
                             switch (this.battle)
                             {
                                 case EnumBattle.CBT_DRAW:
-                                    SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                                 case EnumBattle.CBT_LOSS:
                                     SelectedBoxForUnit.destroyUnit(battle.battle.unitAtt.unit, CurrentPlayer);
                                     getCurrentPlayer().peuple.destroy(battle.battle.unitAtt.unit);
-                                    SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                                 case EnumBattle.CBT_VICTORY_MOVE:
                                     box.destroyUnit(battle.battle.unitDef.unit, OtherPlayer);
@@ -160,16 +155,15 @@ namespace WarFareWPF
                                     unit.unit.move(uid);
                                     box.addUnit(unit, CurrentPlayer);
                                     SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
-                                    SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                                 case EnumBattle.CBT_VICTORY_NOMOVE:
                                     box.destroyUnit(battle.battle.unitDef.unit, OtherPlayer);
                                     getOtherPlayer().peuple.destroy(battle.battle.unitDef.unit);
-                                    SelectedBoxForUnit.SelectedUnit = null;
                                     break;
                             }
                             break;
                     }
+                    SelectedBoxForUnit.SelectedUnit = null;
                     // les raise ne fonctionnent pas
                     SelectedBoxForUnit.RaisePropertyChanged("unitsJ1");
                     SelectedBoxForUnit.RaisePropertyChanged("NbUniteJ1");
@@ -179,6 +173,7 @@ namespace WarFareWPF
                     box.RaisePropertyChanged("NbUniteJ1");
                     box.RaisePropertyChanged("unitsJ2");
                     box.RaisePropertyChanged("NbUniteJ2");
+                    this.getCurrentPlayer().RaisePropertyChanged("nbPoints");
                     this.verifierFinPartie();
                 }
             }
@@ -203,7 +198,6 @@ namespace WarFareWPF
             JoueurImp j;
             if ((j = (JoueurImp)game.verifierFinPartie()) != null)
             {
-                this.getCurrentPlayer().RaisePropertyChanged("nbPoints");
                 // j est vainqueur
                 MessageBox.Show(j.nom + " gagne la partie " + this.getCurrentPlayer().joueur.nbPoints.ToString() + " à " + this.getOtherPlayer().joueur.nbPoints.ToString());
                 return true;
@@ -215,7 +209,6 @@ namespace WarFareWPF
         {
             // reset boxes
             map.resetBoxes();
-            this.getCurrentPlayer().RaisePropertyChanged("nbPoints");
             this.getCurrentPlayer().peuple.reset();
             this.switchPlayer();
             if (map.SelectedBox != null)

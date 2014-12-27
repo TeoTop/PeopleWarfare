@@ -47,8 +47,6 @@ namespace WarFareWPF
             this.game.NextTurn(sender, e);
             game.RaisePropertyChanged("CurrentPlayer");
             game.RaisePropertyChanged("OtherPlayer");
-            //this.items1.ItemsSource = ((BoxView)this.items1.DataContext).getUnits(game.CurrentPlayer);
-            //this.items2.ItemsSource = ((BoxView)this.items2.DataContext).getUnits(game.OtherPlayer);
         }
 
         private void _this_KeyUp(object sender, KeyEventArgs e)
@@ -57,6 +55,28 @@ namespace WarFareWPF
             if (e.Key == Key.S && handle)
             {
                 this.game.save();
+            }
+            if (e.Key == Key.F1)
+            {
+                this.NextTurn(null, null);
+            }
+            if (e.Key == Key.W && handle)
+            {
+                this.Quit(null, null);
+            }
+        }
+
+        private void Quit(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Vous êtes sûr de vouloir quitter la partie ?", "Quitter", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                if (MessageBox.Show("Voulez vous sauvegarder la partie ?", "Sauvegarder", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    game.save();
+                }
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
             }
         }
 

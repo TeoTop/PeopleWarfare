@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 H:\4INFO\PeopleWarfare\WarFareWPF\App.xaml
-61591701607
+9-1442492452
 
-25-1362306676
+281268731082
 171664377550
-BattleWindow.xaml;GameWindow.xaml;MainWindow.xaml;Dictionary.xaml;NewGame.xaml;SelectUnit.xaml;
+BattleWindow.xaml;GameWindow.xaml;MainWindow.xaml;Dictionary.xaml;NewGame.xaml;SelectUnit.xaml;UserControls\InfoPeuple.xaml;UserControls\NewRoundAnim.xaml;UserControls\TextBlockAnim.xaml;
 
 False
 
