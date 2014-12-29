@@ -15,11 +15,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\gen\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -58,10 +58,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EnumCarteToIsCheckedConverter.cs" />
+    <Compile Include="ListToVis.cs" />
+    <Compile Include="PlayerToItemsSourceConverter.cs" />
+    <Compile Include="PlayerToSrc.cs" />
     <Compile Include="PositionToVisibilityConverter.cs" />
     <Compile Include="RatioToCoordConverter.cs" />
     <Compile Include="RatioToHeightConverter.cs" />
     <Compile Include="RatioToMarginConverter.cs" />
+    <Compile Include="BoolToBackgroundConverter.cs" />
     <Compile Include="RatioToPointsConverter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace WarFareWPF
     public class Notifier : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaisePropertyChanged(String property)
+        public void RaisePropertyChanged(String property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));

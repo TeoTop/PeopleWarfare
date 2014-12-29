@@ -132,6 +132,7 @@ namespace WarFareWPF
             PartieImp partie = dp.creerPartie(this.j1.Text, this.j2.Text, this.carte, (EnumPeuple)this.p1.SelectedIndex, (EnumPeuple)this.p2.SelectedIndex);
             GameWindow gw = new GameWindow(partie);
             gw.Show();
+            Dictionary.gw = gw;
             this.Close();
         }
 

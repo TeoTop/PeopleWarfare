@@ -14,16 +14,12 @@ namespace WarFareWPF
         {
             get { return Math.Sqrt(carte.nbCase); }
         }
-
         private List<BoxView> _cases = new List<BoxView>();
-
         public List<BoxView> cases
         {
             get { return _cases; }
         }
-
         public BoxView SelectedBoxForUnit { get; set; }
-
         private BoxView selectedBox;
         public BoxView SelectedBox
         {
@@ -33,10 +29,14 @@ namespace WarFareWPF
                 if (selectedBox != null) selectedBox.IsSelected = false;
                 selectedBox = value;
                 if (selectedBox != null) selectedBox.IsSelected = true;
+                RaisePropertyChanged("IsBoxSelected");
                 RaisePropertyChanged("SelectedBox");
             }
         }
-
+        public bool IsBoxSelected
+        {
+            get { return SelectedBox != null; }
+        }
         public int _zoom;
         public int Zoom
         {
@@ -50,14 +50,13 @@ namespace WarFareWPF
                 RaisePropertyChanged("Zoom");
             }
         }
-
         public MapView(StrategieCarte map)
         {
             carte = map;
             int i = 0;
             foreach (var box in carte.cases)
             {
-                BoxView boxview = new BoxView(carte.getX(i), carte.getY(i), i, box);
+                BoxView boxview = new BoxView(carte.getX(i), carte.getY(i), i, box, this);
                 _cases.Add(boxview);
                 i++;
             }
@@ -73,6 +72,9 @@ namespace WarFareWPF
             }
             return toReturn;
         }
-
+        public void resetBoxes()
+        {
+            cases.Select(box => box.SelectedUnit = null);
+        }
     }
 }

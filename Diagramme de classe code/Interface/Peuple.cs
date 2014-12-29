@@ -53,5 +53,12 @@ namespace PeopleWar
          * @return EnumPeuple
          */
         EnumPeuple getType();
+
+        /*
+         * Destroy an unit
+         * @param Unite
+         * @return void
+         */
+        void destroy(Unite uniteImp);
     }
 }

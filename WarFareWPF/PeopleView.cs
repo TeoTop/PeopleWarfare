@@ -16,6 +16,10 @@ namespace WarFareWPF
         public string Src { get; set; }
         public string Type { get; set; }
         public string Color { get; set; }
+        public int nbUnite
+        {
+            get { return peuple.getNbUnite(); }
+        }
 
         public PeopleView(PeupleA peuple)
         {
@@ -23,7 +27,7 @@ namespace WarFareWPF
             units = new List<UnitView>();
             for (int i = 0; i < peuple.getNbUnite(); i++)
             {
-                units.Add(new UnitView((UniteImp)peuple.getUnite(i)));
+                units.Add(new UnitView((UniteImp)peuple.getUnite(i), this));
             }
             selectedUnit = units[peuple.uniteActuel];
             switch (peuple.getType())
@@ -35,5 +39,31 @@ namespace WarFareWPF
         }
 
 
+
+        public void reset()
+        {
+            // reset units / pm and HasAlreadyPlayed
+            units.ForEach(unit => unit.HasAlreadyPlayed = false);
+            units.ForEach(unit => unit.unit.reset());
+        }
+
+        internal void destroy(UniteImp uniteImp)
+        {
+            UnitView unite = units.Where(unit => unit.unit == uniteImp).First();
+            this.destroy(unite);
+            peuple.destroy(unite.unit);
+            RaisePropertyChanged("nbUnite");
+        }
+
+        private void destroy(UnitView unite)
+        {
+            units.Remove(unite);
+            unite = null;
+        }
+
+        public List<UnitView> Select(List<Unite> list)
+        {
+            return this.units.Where(unit => list.Contains(unit.unit)).ToList();
+        }
     }
 }

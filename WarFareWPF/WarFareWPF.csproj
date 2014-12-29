@@ -56,11 +56,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BattleView.cs" />
+    <Compile Include="BattleWindow.xaml.cs">
+      <DependentUpon>BattleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BoxView.cs" />
     <Compile Include="ListActionView.cs" />
     <Compile Include="EndGame.xaml.cs">
       <DependentUpon>EndGame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dictionary.xaml.cs">
+      <DependentUpon>Dictionary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameView.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
@@ -68,6 +76,8 @@
       <DependentUpon>LeaveWindows.xaml</DependentUpon>
     </Compile>
     <Compile Include="MapView.cs" />
+    <Compile Include="MyString.cs" />
+    <Compile Include="MyTask.cs" />
     <Compile Include="NewGame.xaml.cs">
       <DependentUpon>NewGame.xaml</DependentUpon>
     </Compile>
@@ -79,8 +89,18 @@
     <Compile Include="SelectUnit.xaml.cs">
       <DependentUpon>SelectUnit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\InfoPeuple.xaml.cs">
+      <DependentUpon>InfoPeuple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewRoundAnim.xaml.cs">
+      <DependentUpon>NewRoundAnim.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TextBlockAnim.xaml.cs">
+      <DependentUpon>TextBlockAnim.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnitView.cs" />
     <Page Include="EndGame.xaml">
+    <Page Include="BattleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,6 +138,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SelectUnit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\InfoPeuple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NewRoundAnim.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TextBlockAnim.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +205,26 @@
     <Resource Include="res\foret.png" />
     <Resource Include="res\ocean.png" />
     <Resource Include="res\plaine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\boot.png" />
+    <Resource Include="res\health.png" />
+    <Resource Include="res\shield.png" />
+    <Resource Include="res\sword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\unit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\ombre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\elf.png" />
+    <Resource Include="res\nain.png" />
+    <Resource Include="res\orc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

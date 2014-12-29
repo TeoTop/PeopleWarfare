@@ -1,10 +1,6 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PeopleWar;
 using System.Windows.Controls.Primitives;
+using System.ComponentModel;
 
 namespace WarFareWPF
 {
@@ -25,147 +22,63 @@ namespace WarFareWPF
     /// </summary>
     public partial class GameWindow : Window
     {
-        public PartieImp partie { get; set; }
-        public MapView map { get; set; }
-        public PlayerView J1 { get; set; }
-
-        public PlayerView J2 { get; set; }
-
-        public ListActionView actions { get; set; }
-
-        public bool isUnitSelected { get; set; }
-
-        public int CurrentPlayer { get; set; }
-
-        public int nbUnitesj1 { 
-            get { return partie.j1.peuple.getNbUnite(); }
-        }
-
-        public int nbUnitesj2 { 
-            get { return partie.j2.peuple.getNbUnite(); } 
-        }
-
+        public GameView game { get; set; }
         public SelectUnit su { get; set; }
-
-        public GameWindow(PartieImp partie)
+        public GameWindow(PartieImp game)
         {
-            this.partie = partie;
-            this.map = new MapView(partie.carte);
-            J1 = new PlayerView(partie.j1, new Point(0, 0));
-            J2 = new PlayerView(partie.j2, new Point(Math.Sqrt(partie.carte.cases.Count()) - 1, Math.Sqrt(partie.carte.cases.Count()) - 1));
-            actions = new ListActionView(this.partie.tours, "Chemin/Vers/Dossier/AutoSave");
-            CurrentPlayer = 0;
-            // definir les cases où les unités seront mises depuis le wrapper
-            map.cases[partie.carte.getKey((int)J1.InitialPosition.X, (int)J1.InitialPosition.Y)].unitsJ1 = J1.peuple.units;
-            map.cases[partie.carte.getKey((int)J2.InitialPosition.X, (int)J2.InitialPosition.Y)].unitsJ2 = J2.peuple.units;
-            isUnitSelected = false;
+            this.game = new GameView(game);
             InitializeComponent();
         }
 
-        public PlayerView getCurrentPlayer()
-        {
-            return CurrentPlayer == 0 ? J1 : J2;
-        }
-
-        public PlayerView getOtherPlayer()
-        {
-            return CurrentPlayer == 0 ? J2 : J1;
-        }
-
-        public void switchPlayer()
-        {
-            CurrentPlayer = CurrentPlayer == 0 ? 1 : 0;
-        }
 
         private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            //ctrl
+            this.game.Grid_MouseWheel(sender, e);
+        }
+
+        public void MoveUnit(object sender, MouseButtonEventArgs e)
+        {
+            this.game.MoveUnit(sender, e);
+        }
+
+        private void NextTurn(object sender, RoutedEventArgs e)
+        {
+            this.items.SelectedItem = null;
+            this.game.NextTurn(sender, e);
+            game.RaisePropertyChanged("CurrentPlayer");
+            game.RaisePropertyChanged("OtherPlayer");
+        }
+
+        private void _this_KeyUp(object sender, KeyEventArgs e)
+        {
             bool handle = (Keyboard.Modifiers & ModifierKeys.Control) > 0;
-            if (handle)
+            if (e.Key == Key.S && handle)
             {
-                // zoom / dezoom without scroll if ctrl is handled
-                if (e.Delta > 0)
-                {
-                    this.map.Zoom += 5;
-                }
-                else
-                {
-                    this.map.Zoom -= 5;
-                }
-                e.Handled = true;
+                this.game.save();
+            }
+            if (e.Key == Key.F1)
+            {
+                this.NextTurn(null, null);
+            }
+            if (e.Key == Key.W && handle)
+            {
+                this.Quit(null, null);
             }
         }
 
-        private void SelectUnit(object sender, MouseButtonEventArgs e)
+        private void Quit(object sender, RoutedEventArgs e)
         {
-            Grid g = sender as Grid;
-            int uid = System.Convert.ToInt32(g.Tag);
-            BoxView SelectedBoxForUnit = map.SelectedBoxForUnit;
-            BoxView box = map.cases[uid];
-            if (isUnitSelected && SelectedBoxForUnit != box)
+            if (MessageBox.Show("Vous êtes sûr de vouloir quitter la partie ?", "Quitter", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                // deplacer unité
-                if (SelectedBoxForUnit != null)
+                if (MessageBox.Show("Voulez vous sauvegarder la partie ?", "Sauvegarder", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    UnitView unit = SelectedBoxForUnit.SelectedUnit;
-                    if (unit != null)
-                    {
-                        if (unit.unit.verifierDeplacement(uid, SelectedBoxForUnit.Uid, (int)Math.Sqrt(map.carte.cases.Count), getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple))
-                        {
-                            unit.unit.seDeplacer(uid);
-                            box.addUnit(unit, CurrentPlayer);
-                            SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
-                            isUnitSelected = false;
-                        }
-                    }
+                    game.save();
                 }
-            }
-            else
-            {
-                // selectionner unité
-                List<UnitView> units = box.getUnits(CurrentPlayer);
-                if (su != null) su.Close();
-                su = new SelectUnit(box, units, this);
-                su.Show();
-                su.Activate();
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
             }
         }
 
-        private void btnSauvgarder(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.FileName = "peopleWarfare_save";     //nom par default du fichier
-                saveFileDialog.Filter = "PeopleWarfare (*.ppw)|*.ppw|Tous les fichiers (*.*)|*.*";  //liste des extension
-                saveFileDialog.FilterIndex = 1;     // met ppw comme extension par default, 2 pour l'autre
-                saveFileDialog.Title = "Sauvegarde de partie de PeopleWarfare";  //titre de la fenetre
-                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // trouver le dossier bureau
-
-                if (saveFileDialog.ShowDialog() == true)
-                {
-                    IFormatter formatter = new BinaryFormatter();
-                    Stream stream = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, FileAccess.Write);
-                    formatter.Serialize(stream, partie);
-                    stream.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur lors de la sauvegarde: " + ex.Message);
-            }
-        }
-
-        private void btnQuitter(object sender, RoutedEventArgs e)
-        {
-            if (partie.sauvegarde)
-            {
-                //quitter
-            }
-            else
-            {
-                //sauvegarder avant
-            }
-        }
     }
 }

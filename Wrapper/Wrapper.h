@@ -8,7 +8,6 @@ namespace Wrapper {
 	public ref class WrapperAlgos {
 	private:
 		Algos* algos;
-
 		int* arrayToPtr(array<int>^ arr){
 			pin_ptr<int> ptr = &arr[0];
 			return ptr;
@@ -59,7 +58,6 @@ namespace Wrapper {
 			int col = 3;
 			return ptrTo2DArray(ptr, ligne, col);
 		}
-	
 	};
 }
 #endif

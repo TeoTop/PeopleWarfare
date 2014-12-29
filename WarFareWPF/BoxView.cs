@@ -5,25 +5,46 @@ using System.Text;
 using PeopleWar;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 namespace WarFareWPF
 {
     public class BoxView : Notifier
     {
         private CaseA box { set;  get; }
-        public List<UnitView> unitsJ1;
-        public List<UnitView> unitsJ2;
-        public UnitView SelectedUnit { get; set; }
+        public ObservableCollection<UnitView> unitsJ1 { get; set; }
+        public ObservableCollection<UnitView> unitsJ2 { get; set; }
+        private UnitView selectedUnit;
+        public UnitView SelectedUnit
+        {
+            get
+            {
+                return selectedUnit;
+            }
+            set
+            {
+                selectedUnit = value;
+                if (map.SelectedBoxForUnit != null && map.SelectedBoxForUnit != this)
+                {
+                    BoxView box = map.SelectedBoxForUnit;
+                    map.SelectedBoxForUnit = null;
+                    box.SelectedUnit = null;
+                }
+                map.SelectedBoxForUnit = this;
+                RaisePropertyChanged("IsUnitSelected");
+            }
+        }
+        public bool IsUnitSelected
+        {
+            get
+            {
+                return SelectedUnit != null;
+            }
+        }
         public int NbUniteJ1
         {
             get
             {
                 return unitsJ1.Count;
-            }
-            set
-            {
-                //_nbUniteJ1 = value;
-                RaisePropertyChanged("NbUniteJ1");
-                RaisePropertyChanged("HasUnitJ1");
             }
         }
         public int NbUniteJ2
@@ -31,12 +52,6 @@ namespace WarFareWPF
             get
             {
                 return unitsJ2.Count;
-            }
-            set
-            {
-                //_nbUniteJ2 = value;
-                RaisePropertyChanged("NbUniteJ2");
-                RaisePropertyChanged("HasUnitJ2");
             }
         }
 
@@ -46,12 +61,15 @@ namespace WarFareWPF
             {
                 unitsJ1.Add(unit);
                 RaisePropertyChanged("NbUniteJ1");
-                RaisePropertyChanged("HasUnitJ1");}
+                RaisePropertyChanged("HasUnitJ1");
+                RaisePropertyChanged("unitsJ1");
+            }
             else
             {
                 unitsJ2.Add(unit);
                 RaisePropertyChanged("NbUniteJ2");
                 RaisePropertyChanged("HasUnitJ2");
+                RaisePropertyChanged("unitsJ2");
             }
         }
 
@@ -62,22 +80,25 @@ namespace WarFareWPF
                 unitsJ1.Remove(unit);
                 RaisePropertyChanged("NbUniteJ1");
                 RaisePropertyChanged("HasUnitJ1");
+                RaisePropertyChanged("unitsJ1");
             }
             else
             {
                 unitsJ2.Remove(unit);
                 RaisePropertyChanged("NbUniteJ2");
                 RaisePropertyChanged("HasUnitJ2");
+                RaisePropertyChanged("unitsJ2");
             }
         }
+        
 
         public List<UnitView> getUnits(int player)
         {
-            return (player == 0) ? unitsJ1 : unitsJ2;
+            return ((player == 0) ? unitsJ1 : unitsJ2).ToList();
         }
         public int Uid { get; set; }
-
-        public BoxView(int row, int column, int i, CaseA box)
+        public MapView map { get; set; }
+        public BoxView(int row, int column, int i, CaseA box, MapView map)
         {
             this.box = box;
             switch (box.getType())
@@ -90,8 +111,9 @@ namespace WarFareWPF
             this.Row = row;
             this.Column = column;
             this.Uid = i;
-            unitsJ1 = new List<UnitView>();
-            unitsJ2 = new List<UnitView>();
+            unitsJ1 = new ObservableCollection<UnitView>();
+            unitsJ2 = new ObservableCollection<UnitView>();
+            this.map = map;
         }
 
         public string Src { get; set; }
@@ -133,6 +155,13 @@ namespace WarFareWPF
         public override string ToString()
         {
             return "(" + Row + ", " + Column + ")" + ", Type : " + Type;
+        }
+
+        internal void destroyUnit(UniteImp uniteImp, int player)
+        {
+            List<UnitView> units = getUnits(player);
+            UnitView unite = units.Where(unit => unit.unit == uniteImp).First();
+            this.removeUnit(unite, player);
         }
     }
 }

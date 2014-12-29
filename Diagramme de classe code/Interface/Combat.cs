@@ -12,10 +12,12 @@ namespace PeopleWar
 
         float calculerReussiteAtt();
 
-        int effectuerCombat();
+        //EnumBattle effectuerCombat();
 
         Unite choisirUniteDef(List<Unite> UnitesDef);
 
         bool successAtt();
+        
+        EnumBattle attaquer();
     }
 }

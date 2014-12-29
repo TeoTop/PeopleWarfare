@@ -10,7 +10,19 @@ namespace WarFareWPF
     public class UnitView : Notifier
     {
         public UniteImp unit;
-        public bool HasAlreadyPlayed;
+        private bool hasAlreadyPlayed;
+        public bool HasAlreadyPlayed
+        {
+            get
+            {
+                return hasAlreadyPlayed;
+            }
+            set
+            {
+                hasAlreadyPlayed = value;
+                RaisePropertyChanged("HasAlreadyPlayed");
+            }
+        }
         private bool isSelected;
         public bool IsSelected
         {
@@ -24,16 +36,48 @@ namespace WarFareWPF
                 RaisePropertyChanged("IsSelected");
             }
         }
+        public int vie
+        {
+            get
+            {
+
+                return unit.vie;
+            }
+        }
+        public int attaque
+        {
+            get
+            {
+                return unit.attaque;
+            }
+        }
+        public int defense
+        {
+            get
+            {
+                return unit.defense;
+            }
+        }
+        public Double pm
+        {
+            get
+            {
+                return unit.pm;
+            }
+        }
         public String carac
         {
             get { return unit.afficherCaracteristique(); }
         }
+        public PeopleView people { get; set; }
 
-        public UnitView(UniteImp unit)
+        public UnitView(UniteImp unit, PeopleView people)
         {
             this.unit = unit;
+            this.people = people;
             IsSelected = false;
             HasAlreadyPlayed = false;
         }
+
     }
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-using PeopleWar;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,23 +34,7 @@ namespace WarFareWPF
 
         private void ChGame(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog1.Filter = "PeopleWarfare (*.ppw)|*.ppw|Tous les fichiers (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.Title = "Chargement d'une sauvegarde PeopleWarfare";
-
-            if (openFileDialog1.ShowDialog() == true)
-            {
-                DirecteurPartie dp = new DirecteurPartie();
-                dp.definirMonteur(new MonteurNvllePartie());
-                PartieImp partie = dp.chargerPartie(openFileDialog1.FileName);
-                GameWindow gw = new GameWindow(partie);
-                gw.Show();
-                this.Close();
-            }
+            MessageBox.Show("ChGame");
         }
 
     }
