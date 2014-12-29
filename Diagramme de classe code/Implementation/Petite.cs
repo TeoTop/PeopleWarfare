@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class Petite : StrategieCarte
     {
         public Petite()

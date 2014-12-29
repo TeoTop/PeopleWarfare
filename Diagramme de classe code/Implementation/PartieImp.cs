@@ -5,8 +5,11 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class PartieImp : Partie
     {
+        public PartieImp() { }
+
         /**
          * PartieImp Constructor
          * @param int carte
@@ -22,6 +25,7 @@ namespace PeopleWar
             this.joueurCourant = 0;
             tours = new List<TourImp>();
             this.nbTourMax = nbTourMax;
+            this.sauvegarde = false;
         }
 
         public List<PeopleWar.TourImp> tours { get; set; }
@@ -30,6 +34,7 @@ namespace PeopleWar
 
         public int nbTourMax { get; set; }
 
+        public bool sauvegarde { get; set; }
         public int caseCourant { get; set; }
 
         public int joueurCourant { get; set; }

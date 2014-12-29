@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class JoueurImp : Joueur
     {
         public PeupleA peuple { get; set; }

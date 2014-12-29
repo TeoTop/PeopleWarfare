@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public abstract class CaseA : Case
     {
         public abstract EnumCase getType();

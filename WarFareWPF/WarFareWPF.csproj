@@ -57,6 +57,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BoxView.cs" />
+    <Compile Include="ListActionView.cs" />
+    <Compile Include="EndGame.xaml.cs">
+      <DependentUpon>EndGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
@@ -69,13 +73,17 @@
     </Compile>
     <Compile Include="PeopleView.cs" />
     <Compile Include="PlayerView.cs" />
-    <Compile Include="Sauvegarde.xaml.cs">
-      <DependentUpon>Sauvegarde.xaml</DependentUpon>
+    <Compile Include="SaveWindows.xaml.cs">
+      <DependentUpon>SaveWindows.xaml</DependentUpon>
     </Compile>
     <Compile Include="SelectUnit.xaml.cs">
       <DependentUpon>SelectUnit.xaml</DependentUpon>
     </Compile>
     <Compile Include="UnitView.cs" />
+    <Page Include="EndGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,7 +113,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sauvegarde.xaml">
+    <Page Include="SaveWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

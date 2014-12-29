@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class Montagne : CaseA
     {
         public Montagne()

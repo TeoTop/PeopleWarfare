@@ -9,7 +9,6 @@ namespace PeopleWar
     {
         public MonteurChPartie()
         {
-            throw new System.NotImplementedException();
         }
 
         public override StrategieCarte creerCarte(EnumCarte carte)

@@ -14,12 +14,16 @@ namespace WarFareWPF
         {
             get { return Math.Sqrt(carte.nbCase); }
         }
+
         private List<BoxView> _cases = new List<BoxView>();
+
         public List<BoxView> cases
         {
             get { return _cases; }
         }
+
         public BoxView SelectedBoxForUnit { get; set; }
+
         private BoxView selectedBox;
         public BoxView SelectedBox
         {
@@ -32,6 +36,7 @@ namespace WarFareWPF
                 RaisePropertyChanged("SelectedBox");
             }
         }
+
         public int _zoom;
         public int Zoom
         {
@@ -45,6 +50,7 @@ namespace WarFareWPF
                 RaisePropertyChanged("Zoom");
             }
         }
+
         public MapView(StrategieCarte map)
         {
             carte = map;

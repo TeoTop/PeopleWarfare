@@ -11,7 +11,7 @@
         <converters:RatioToHeightConverter x:Key="RatioToHeightConverter"/>
         <converters:RatioToMarginConverter x:Key="RatioToMarginConverter"/>
         <converters:RatioToCoordConverter x:Key="RatioToCoordConverter"/>
-        <converters:PositionToVisibilityConverter x:Key="PositionToVisibilityConverter"/> 
+        <converters:PositionToVisibilityConverter x:Key="PositionToVisibilityConverter"/>
 
         <!--<converters:MultiBooleanToVisibilityConverter x:Key="MConverter" />-->
     </Window.Resources>
@@ -102,7 +102,7 @@
                                             <Label Content="{Binding NbUniteJ2}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
                                         </Grid>
                                     </Grid>
-                                    
+
                                     <!-- Informations case et unités sélectionnées-->
 
                                     <!--ZOOM-->
@@ -126,18 +126,30 @@
                     </ListBox>
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
-                <StackPanel Grid.Column="2">
-                    <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="15" Content="Tours et actions : "/>
-                    <Slider DataContext="{Binding map, ElementName=_this}" Value="{Binding Zoom}" Minimum="0" Maximum="400" TickFrequency="10" TickPlacement="BottomRight" LargeChange="10" SmallChange="5"/>
-                    <Label DataContext="{Binding map, ElementName=_this}" Content="{Binding Zoom}"/>
-                    <!--Test-->
-                    <!--<Polygon HorizontalAlignment="Center" DataContext="{Binding map, ElementName=_this}" Points="{Binding Zoom, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black" Fill="#FF1515E8">
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="15" Content="Tours et actions : "/>
+                        <Slider DataContext="{Binding map, ElementName=_this}" Value="{Binding Zoom}" Minimum="0" Maximum="400" TickFrequency="10" TickPlacement="BottomRight" LargeChange="10" SmallChange="5"/>
+                        <Label DataContext="{Binding map, ElementName=_this}" Content="{Binding Zoom}"/>
+                        <!--Test-->
+                        <!--<Polygon HorizontalAlignment="Center" DataContext="{Binding map, ElementName=_this}" Points="{Binding Zoom, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black" Fill="#FF1515E8">
                         <Polygon.RenderTransform>
                             <TranslateTransform Y="60"/>
                         </Polygon.RenderTransform>
                     </Polygon>-->
-                    <!--FinTest-->
-                </StackPanel>
+                        <!--FinTest-->
+                    </StackPanel>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <StackPanel Grid.Row="2">
+                        <Label Content="Label" Padding="10,0" FontSize="13" Height="20"/>
+
+                    </StackPanel>
+                </Grid>
             </Grid>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" />
             <Grid Grid.Row="2">
@@ -163,9 +175,11 @@
                     <Label Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding partie.j1.nbPoints, ElementName=_this}"/>
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
-                <StackPanel Grid.Column="2">
-                    <Button Content="Fin tour" Margin="20,25" Height="30"/>
-                    <Button Content="Unité suivante" Margin="20,20"  Height="30"/>
+                <StackPanel Grid.Column="2" Margin="0.4,0,0.4,-0.2">
+                    <Button Content="Fin tour" Margin="20,15" Height="20"/>
+                    <Button Content="Unité suivante" Margin="20,0"  Height="20"/>
+                    <Button Content="Sauvegarder partie" Margin="20,15"  Height="20" Click="btnSauvgarder"/>
+                    <Button Content="Quitter" Margin="20,0"  Height="20" Click="btnQuitter"/>
                 </StackPanel>
             </Grid>
         </Grid>

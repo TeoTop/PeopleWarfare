@@ -23,5 +23,15 @@ namespace WarFareWPF
         {
             InitializeComponent();
         }
+
+        private void btnAnnuler(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnQuitter(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

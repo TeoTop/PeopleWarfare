@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public enum EnumPeuple
     {
         NULL = -1,

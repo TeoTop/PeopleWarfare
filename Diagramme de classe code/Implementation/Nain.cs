@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class Nain : PeupleA
     {
         public Nain(int nbUnite, int posu)

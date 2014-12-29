@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace PeopleWar
@@ -45,6 +48,26 @@ namespace PeopleWar
             JoueurImp j1 = MonteurPartie.creerJoueur(nom1, p1, nbUnite, posu1);
             JoueurImp j2 = MonteurPartie.creerJoueur(nom2, p2, nbUnite, posu2);
             return new PartieImp(c, j1, j2, nbTourMax);
+        }
+
+        public PartieImp chargerPartie(String fichier)
+        {
+            PartieImp partie = new PartieImp();
+
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(fichier, FileMode.Open, FileAccess.Read);
+                partie = (PartieImp)formatter.Deserialize(stream);
+                stream.Close();
+                
+            }
+            catch(Exception e)
+            {
+
+            }
+
+            return partie;
         }
 
         /**

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class Orc : PeupleA
     {
         public Orc(int nbUnite, int posu)

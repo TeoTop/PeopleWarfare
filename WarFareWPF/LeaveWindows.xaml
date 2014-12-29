@@ -13,8 +13,8 @@
                 <ColumnDefinition Width="375*"/>
                 <ColumnDefinition Width="119*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Annuler" HorizontalAlignment="Left" Margin="265,10,0,-5" VerticalAlignment="Top" Width="100" Height="30" FontSize="18"/>
-            <Button Content="Quitter" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,10,0,-5" VerticalAlignment="Top" Width="100" Height="30" FontSize="18"/>
+            <Button Content="Annuler" HorizontalAlignment="Left" Margin="265,10,0,-5" VerticalAlignment="Top" Width="100" Height="30" FontSize="18" Click="btnAnnuler"/>
+            <Button Content="Quitter" Grid.Column="1" HorizontalAlignment="Left" Margin="9.8,10,0,-5" VerticalAlignment="Top" Width="100" Height="30" FontSize="18" Click="btnQuitter"/>
         </Grid>
 
     </Grid>

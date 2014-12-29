@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class UniteImp : Unite
     {
         public int c { get; set; }

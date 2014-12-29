@@ -5,24 +5,18 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class TourImp : Tour
     {
         /**
          * List of battles
          */
-        public List<CombatImp> combats
-        {
-            get;
-            set;
-        }
+        public List<CombatImp> combats { get; set; }
 
         /**
          * Constructor
          */
-        public TourImp()
-        {
-            combats = new List<CombatImp>();
-        }
+        public TourImp() { combats = new List<CombatImp>(); }
 
        
 

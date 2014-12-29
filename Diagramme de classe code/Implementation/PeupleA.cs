@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public abstract class PeupleA : Peuple
     {
         public int uniteActuel { get; set; }

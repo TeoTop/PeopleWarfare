@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class Elf : PeupleA
     {
         public Elf(int nbUnite, int posu)

@@ -5,25 +5,18 @@ using System.Text;
 
 namespace PeopleWar
 {
+    [Serializable]
     public class CombatImp : Combat
     {
         /**
          * @var UniteImp uniteDef
          */ 
-        public UniteImp uniteDef
-        {
-            get;
-            set;
-        }
+        public UniteImp uniteDef { get; set; }
 
         /**
          * @var UniteImp uniteAtt
          */
-        public UniteImp uniteAtt
-        {
-            get;
-            set;
-        }
+        public UniteImp uniteAtt { get; set; }
 
         /**
          * Constructor

@@ -1,0 +1,29 @@
+﻿<Window x:Class="WarFareWPF.EndGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="_this" Title="EndGame" Height="400" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Félicitation !!! Longue vie au vainqueur " HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" FontSize="25" FontFamily="Arial"/>
+        <Label Content="{Binding winner.joueur.nom, ElementName=_this}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="20"/>
+        <Grid HorizontalAlignment="Left" Height="208" Margin="0,0.4,-0.4,0" Grid.Row="2" VerticalAlignment="Top" Width="694">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Grid.Column="0" Source="{Binding winner.peuple.Src, ElementName=_this}"/>
+            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Grid.Column="1" Source="{Binding winner.peuple.Src, ElementName=_this}"/>
+            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Grid.Column="2" Source="{Binding winner.peuple.Src, ElementName=_this}"/>
+        </Grid>
+        <Button Content="Revenir au menu" HorizontalAlignment="Left" Margin="330,9.6,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="15" Width="150"/>
+        <Button Content="Quitter le jeu" HorizontalAlignment="Left" Margin="520,9.6,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="15" Width="150"/>
+
+
+    </Grid>
+</Window>

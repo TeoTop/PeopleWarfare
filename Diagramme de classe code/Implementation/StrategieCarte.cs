@@ -7,6 +7,7 @@ using Wrapper;
 
 namespace PeopleWar
 {
+    [Serializable]
     public abstract class StrategieCarte : Carte
     {
 
