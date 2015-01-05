@@ -1,0 +1,12 @@
+C:\Users\théo\Desktop\gen\TestSauvegarde.exe.config
+C:\Users\théo\Desktop\gen\TestSauvegarde.exe
+C:\Users\théo\Desktop\gen\TestSauvegarde.pdb
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\MainWindow.baml
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\MainWindow.g.cs
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\App.g.cs
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde_MarkupCompile.cache
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.g.resources
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.Properties.Resources.resources
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.csproj.GenerateResource.Cache
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.exe
+C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.pdb
