@@ -5,6 +5,7 @@ using System.Text;
 using PeopleWar;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 namespace WarFareWPF
 {
     public class MapView : Notifier
@@ -43,17 +44,27 @@ namespace WarFareWPF
         {
             get
             {
-                return _zoom;
+                return _zoom * 5;
             }
             set
             {
-                _zoom = (int)((value <= 400) ? (value >= 0) ? value : _zoom : _zoom);
+                value /= 5;
+                Double val = value + 0.2;
+                _zoom = (int)((val <= 80) ? (value >= 0) ? value : 0 : 80);
                 RaisePropertyChanged("Zoom");
             }
         }
+        public List<Point> DefaultSizePoint { get; set; }
         public MapView(StrategieCarte map)
         {
             carte = map;
+            this.DefaultSizePoint = new List<Point>();
+            DefaultSizePoint.Add(new Point(0, 0));
+            DefaultSizePoint.Add(new Point(40, 20));
+            DefaultSizePoint.Add(new Point(80, 0));
+            DefaultSizePoint.Add(new Point(80, -40));
+            DefaultSizePoint.Add(new Point(40, -60));
+            DefaultSizePoint.Add(new Point(0, -40));
             int i = 0;
             foreach (var box in carte.cases)
             {
@@ -61,6 +72,15 @@ namespace WarFareWPF
                 _cases.Add(boxview);
                 i++;
             }
+
+            /*int nbCase = map.nbCase;
+            int dim = (int)Math.Sqrt(nbCase);
+            Double height = Application.Current.Windows.OfType<GameWindow>().First().SB.ActualHeight;
+
+            Double poss = height / dim;
+
+            Zoom = (int)(100 / 80 * poss);*/
+
             Zoom = 100;
         }
 
@@ -75,7 +95,12 @@ namespace WarFareWPF
         }
         public void resetBoxes()
         {
-            cases.Select(box => box.SelectedUnit = null);
+            cases.ForEach(box => box.SelectedUnit = null);
+        }
+
+        public void MoveSelectedBox(int p)
+        {
+            SelectedBox = cases.Where(b => b.box == carte.getCase(p)).First();
         }
     }
 }

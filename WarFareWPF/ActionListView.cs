@@ -92,9 +92,14 @@ namespace WarFareWPF
             actions.Last().Labels.Add(label);
         }
 
+        // IIIIIIIIIIIIIICCCCCCCCCCCCCCCCIIIIIIIIIIIIIII
+
         public void loadTurn(List<MoveImp> moves)
         {
-            addTurn();
+            //addTurn();  remplacer par ce qu'il y en dessous
+            String header = "Tour x de joueur y";
+            actions.Add(new ExpanderView(header));
+
             moves.ForEach(m => loadAction(m));
         }
     }

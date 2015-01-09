@@ -93,6 +93,13 @@ namespace PeopleWar
                 move.pm = 1;
                 move.hasPlayed = true;
                 move.mv = EnumMove.MOVE;
+                if (((type == EnumPeuple.ELF && box == EnumCase.FORET) ||
+                    (type == EnumPeuple.ORC && box == EnumCase.PLAINE) || (type == EnumPeuple.NAIN && box == EnumCase.PLAINE)))
+                {
+                    move.pm = 0.5;
+                    move.hasPlayed = pm - move.pm <= 0;
+                    move.mv = EnumMove.MOVE;
+                }
             }
 
             // move on Montagne box for a Nain.
@@ -104,13 +111,6 @@ namespace PeopleWar
                 move.mv = EnumMove.MOVE;
             }
 
-            if (((type == EnumPeuple.ELF && box == EnumCase.FORET) ||
-                (type == EnumPeuple.ORC && box == EnumCase.PLAINE) || (type == EnumPeuple.NAIN && box == EnumCase.PLAINE)) && pm >= 0.5)
-            {
-                move.pm = 0.5;
-                move.hasPlayed = pm - move.pm <= 0;
-                move.mv = EnumMove.MOVE;
-            }
 
             List<Unite> unitesDef;
 

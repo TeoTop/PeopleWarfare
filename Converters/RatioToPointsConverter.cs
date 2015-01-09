@@ -10,30 +10,32 @@ using System.Windows.Media;
 
 namespace Converters
 {
-    public class RatioToPointsConverter : IValueConverter
+    public class RatioToPointsConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            PointCollection defaut = new PointCollection();
-            int zoom = (int)value;
-            defaut.Add(new Point(0, 0));
-            defaut.Add(new Point(40, 20));
-            defaut.Add(new Point(80, 0));
-            defaut.Add(new Point(80, -40));
-            defaut.Add(new Point(40, -60));
-            defaut.Add(new Point(0, -40));
-            IEnumerable<Point> points = defaut.Select(item => new Point(item.X * zoom / 100, item.Y * zoom / 100));
+            PointCollection points = new PointCollection();
+            int zoom = (int)values[0];
+            List<Point> default_point = (List<Point>)values[1];
 
-            String points_string = points.Aggregate("", (acc, item) => acc + " " + item.X.ToString().Replace(",", ".") + "," + item.Y.ToString().Replace(",", "."));
+            default_point.ForEach(p => points.Add(new Point(p.X * zoom / 100, p.Y * zoom / 100)));
+
+            /*default_point.Split(' ').ToList().ForEach(d => {
+                List<Double> p = d.Split(',').ToList().Select(s => System.Convert.ToDouble(s)).ToList();
+                points.Add(new Point(p[0] * zoom / 100, p[1] * zoom / 100 ));
+            });*/
+
+            /*String points_string = points.Aggregate("", (acc, item) => acc + " " + item.X.ToString().Replace(",", ".") + "," + item.Y.ToString().Replace(",", "."));
             points_string = points_string.Substring(1, points_string.Length - 1);
-            //Console.WriteLine(points_string);
 
-            return points_string;
+            return points_string;*/
+
+            return points;
         }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
-            //return Binding.DoNothing;
         }
     }
 }

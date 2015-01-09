@@ -4,9 +4,26 @@
         xmlns:converters="clr-namespace:Converters;assembly=Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WarFareWPF.GameWindow"
         xmlns:controls="clr-namespace:WarFareWPF.UserControls" Closing="_this_Closing"
-        Title="GameWindow" Height="600" Width="800" x:Name="_this" x:Uid="GameWindow" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" KeyUp="_this_KeyUp">
-    <Border BorderThickness="2" BorderBrush="Black" Margin="5">
-        <Grid>
+        Title="GameWindow" x:Name="_this" x:Uid="GameWindow" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" KeyUp="_this_KeyUp" ContentRendered="_this_ContentRendered">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+    <Menu Grid.Row="0">
+        <MenuItem Header="_Fichier">
+            <MenuItem Header="_Nouveau..." Click="NewGame"/>
+            <Separator/>
+            <MenuItem Header="_Charger..." Click="ChGame"/>
+            <Separator/>
+            <MenuItem Header="_Enregistrer" Click="Save"/>
+            <MenuItem Header="_Enregistrer sous..." Click="SaveAs"/>
+            <Separator/>
+            <MenuItem Header="_Quitter" Click="Quit"/>
+        </MenuItem>
+    </Menu>
+    <Border BorderThickness="2" BorderBrush="Black" Margin="5" Grid.Row="1">
+        <Grid Name="SB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" />
                 <RowDefinition Height="8" />
@@ -38,10 +55,15 @@
                     <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="False" Margin="0 0 0 20">
                     <StackPanel>
-                        <Grid Visibility="{Binding game.map.IsBoxSelected, Converter={StaticResource BoolToVis}}">
+                        <Grid>
                             <ListBox Name="items" DataContext="{Binding SelectedItem, ElementName=listCase}" SelectedItem="{Binding SelectedUnit}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0">
+                                <ListBox.Template>
+                                    <ControlTemplate>
+                                        <ItemsPresenter />
+                                    </ControlTemplate>
+                                </ListBox.Template>
                                 <ListBox.ItemsSource>
                                     <MultiBinding Converter="{StaticResource PlayerToItemsSourceConverter}">
                                         <Binding ElementName="_this" Path="game.CurrentPlayer"/>
@@ -107,12 +129,17 @@
                     </StackPanel>
                 </ScrollViewer>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
-                <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0 0 0 20">
                     <ScrollViewer.Background>
                         <ImageBrush ImageSource="res/back.png" TileMode="FlipXY"/>
                     </ScrollViewer.Background>
                     <Grid IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ListBox Name="listCase" Background="Transparent" BorderBrush="Transparent" DataContext="{Binding game.map, ElementName=_this}" SelectedItem="{Binding SelectedBox, Mode=TwoWay}" ItemsSource="{Binding cases}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                            <ListBox.Template>
+                                <ControlTemplate>
+                                    <ItemsPresenter />
+                                </ControlTemplate>
+                            </ListBox.Template>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <UniformGrid Columns="{Binding Columns}" Margin="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToMarginConverter}, ConverterParameter=5 15 45 15}" VerticalAlignment="Center"  MouseWheel="Grid_MouseWheel"/>
@@ -155,7 +182,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="15" Content="Tours et actions : "/>
-                        <Slider DataContext="{Binding game.map, ElementName=_this}" Value="{Binding Zoom}" Minimum="0" Maximum="400" TickFrequency="10" TickPlacement="BottomRight" LargeChange="10" SmallChange="5"/>
+                        <Slider DataContext="{Binding game.map, ElementName=_this}" Value="{Binding Zoom,Converter={StaticResource ConvertZoom}}"  Minimum="0" Maximum="80" TickFrequency="5" TickPlacement="BottomRight" LargeChange="2" SmallChange="1"/>
                         <Label DataContext="{Binding game.map, ElementName=_this}" Content="{Binding Zoom}"/>
                         <!--Test-->
                         <!--<Polygon HorizontalAlignment="Center" DataContext="{Binding map, ElementName=_this}" Points="{Binding Zoom, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black" Fill="#FF1515E8">
@@ -216,4 +243,5 @@
             </Grid>
         </Grid>
     </Border>
+    </Grid>
 </Window>

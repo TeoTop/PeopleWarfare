@@ -27,14 +27,14 @@ namespace WarFareWPF
             InitializeComponent();
         }
 
-        private void NewGame(object sender, RoutedEventArgs e)
+        public void NewGame(object sender, RoutedEventArgs e)
         {
             NewGame n = new NewGame();
             n.Show();
             this.Close();
         }
 
-        private void ChGame(object sender, RoutedEventArgs e)
+        public void ChGame(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
@@ -51,6 +51,8 @@ namespace WarFareWPF
                 PartieImp partie = dp.chargerPartie(openFileDialog1.FileName);
                 GameWindow gw = new GameWindow(partie);
                 gw.Show();
+                gw.game.fileName = openFileDialog1.FileName;
+                gw.game.alreadySaved = true;
                 Dictionary.gw = gw; 
                 this.Close();
             }

@@ -25,3 +25,10 @@ D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.Properties.Resources.resou
 D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.csproj.GenerateResource.Cache
 D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.exe
 D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.pdb
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters.csprojResolveAssemblyReference.cache
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\App.g.cs
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters_MarkupCompile.cache
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters.Properties.Resources.resources
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters.csproj.GenerateResource.Cache
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters.exe
+H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters.pdb

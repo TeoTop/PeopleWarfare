@@ -20,6 +20,8 @@ namespace WarFareWPF
         public PartieImp game { get; set; }
         public MapView map { get; set; }
         public ActionListView al { get; set; }
+        public bool alreadySaved { get; set; }
+        public string fileName { get; set; }
         public PlayerView J1
         {
             get;
@@ -44,6 +46,13 @@ namespace WarFareWPF
             set;
         }*/
         public bool FinPartie { get; set; }
+        /*public UnitView SelectedUnit
+        {
+            get
+            {
+                return map.cases.Where(b => b.SelectedUnit != null).First().SelectedUnit;
+;            }
+        }*/
 
         public GameView(PartieImp game)
         {
@@ -60,6 +69,9 @@ namespace WarFareWPF
             J2.peuple.units.ForEach(unit => map.cases[unit.unit.pos].unitsJ2.Add(unit));
             this.al = new ActionListView(game.tours);
             FinPartie = false;
+            getCurrentPlayer().IsMyTurn = true;
+            alreadySaved = false;
+            fileName = "";
         }
 
         public PlayerView getCurrentPlayer()
@@ -100,12 +112,16 @@ namespace WarFareWPF
             }
         }
 
-        public void MoveUnit(object sender, MouseButtonEventArgs e)
+        public void MoveUnit(object sender, MouseButtonEventArgs e, BoxView SelectedBoxForUnit = null, int toCase = 0)
         {
-            Grid g = sender as Grid;
-            int uid = System.Convert.ToInt32(g.Tag);
-            BoxView SelectedBoxForUnit = map.SelectedBoxForUnit;
-            BoxView box = map.cases[uid];
+            BoxView box;
+            if (SelectedBoxForUnit == null)
+            {
+                Grid g = sender as Grid;
+                toCase = System.Convert.ToInt32(g.Tag);
+                SelectedBoxForUnit = map.SelectedBoxForUnit;
+            }
+            box = map.cases[toCase];
             // deplacer unité
             if (!FinPartie)
             {
@@ -114,7 +130,7 @@ namespace WarFareWPF
                     UnitView unit = SelectedBoxForUnit.SelectedUnit;
                     if (unit != null)
                     {
-                        MoveImp move = (MoveImp)unit.unit.seDeplacer(SelectedBoxForUnit.Uid, uid, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple);
+                        MoveImp move = (MoveImp)unit.unit.seDeplacer(SelectedBoxForUnit.Uid, toCase, getCurrentPlayer().peuple.peuple.getType(), map.carte, getOtherPlayer().peuple.peuple);
                         unit.HasAlreadyPlayed = move.hasPlayed;
                         switch (move.mv)
                         {
@@ -139,7 +155,7 @@ namespace WarFareWPF
                                     case EnumBattle.CBT_VICTORY_MOVE:
                                         box.destroyUnit(battle.battle.unitDef.unit, OtherPlayer);
                                         getOtherPlayer().peuple.destroy(battle.battle.unitDef.unit);
-                                        unit.unit.move(uid);
+                                        unit.unit.move(toCase);
                                         box.addUnit(unit, CurrentPlayer);
                                         SelectedBoxForUnit.removeUnit(unit, CurrentPlayer);
                                         break;
@@ -186,7 +202,7 @@ namespace WarFareWPF
         public void NextTurn(object sender, RoutedEventArgs e)
         {
             // reset boxes
-            map.resetBoxes();
+            //map.resetBoxes();
             this.getCurrentPlayer().peuple.reset();
             this.switchPlayer();
             if (map.SelectedBox != null)
@@ -206,20 +222,27 @@ namespace WarFareWPF
         {
             try
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.FileName = "peopleWarfare_save";     //nom par default du fichier
-                saveFileDialog.Filter = "PeopleWarfare (*.ppw)|*.ppw|Tous les fichiers (*.*)|*.*";  //liste des extension
-                saveFileDialog.FilterIndex = 1;     // met ppw comme extension par default, 2 pour l'autre
-                saveFileDialog.Title = "Sauvegarde de partie de PeopleWarfare";  //titre de la fenetre
-                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // trouver le dossier bureau
-
-                if (saveFileDialog.ShowDialog() == true)
+                SaveFileDialog saveFileDialog = null;
+                bool dialog = false;
+                if (fileName == "")
                 {
-                    IFormatter formatter = new BinaryFormatter();
-                    Stream stream = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate, FileAccess.Write);
-                    formatter.Serialize(stream, game);
-                    stream.Close();
+                    saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.FileName = "peopleWarfare_save";     //nom par default du fichier
+                    saveFileDialog.Filter = "PeopleWarfare (*.ppw)|*.ppw|Tous les fichiers (*.*)|*.*";  //liste des extension
+                    saveFileDialog.FilterIndex = 1;     // met ppw comme extension par default, 2 pour l'autre
+                    saveFileDialog.Title = "Sauvegarde de partie de PeopleWarfare";  //titre de la fenetre
+                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // trouver le dossier bureau
+                    dialog = (bool)saveFileDialog.ShowDialog();
                 }
+                if (dialog)
+                {
+                    fileName = saveFileDialog.FileName;
+                }
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+                formatter.Serialize(stream, game);
+                stream.Close();
+                this.alreadySaved = true;
             }
             catch (Exception ex)
             {
@@ -227,17 +250,27 @@ namespace WarFareWPF
             }
         }
 
+        public void saveAs()
+        {
+            fileName = "";
+            this.save();
+        }
+
 
 
         public void NextUnit(object sender, RoutedEventArgs e)
         {
             PlayerView J = getCurrentPlayer();
-            UnitView u = map.SelectedBox.SelectedUnit;
-            map.SelectedBox.SelectedUnit = null;
-            int index = J.peuple.units.IndexOf(u);
-            UnitView unit = J.peuple.units[(index + 1) % J.peuple.units.Count];
-            map.SelectedBox = map.cases.Where(b => b.Row == map.carte.getX(unit.unit.pos) && b.Column == map.carte.getY(unit.unit.pos)).First();
-            map.SelectedBox.SelectedUnit = unit;
+            List<UnitView> units = J.peuple.units.Where(unite => !unite.HasAlreadyPlayed).ToList();
+            if (units.Count > 0)
+            {
+                UnitView u = map.SelectedBox.SelectedUnit;
+                map.SelectedBox.SelectedUnit = null;
+                int index = J.peuple.units.IndexOf(u);
+                UnitView unit = units[(index + 1) % units.Count];
+                map.SelectedBox = map.cases.Where(b => b.Row == map.carte.getX(unit.unit.pos) && b.Column == map.carte.getY(unit.unit.pos)).First();
+                map.SelectedBox.SelectedUnit = unit;
+            }
         }
     }
 }
