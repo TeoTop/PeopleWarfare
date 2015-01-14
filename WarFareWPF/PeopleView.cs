@@ -25,17 +25,17 @@ namespace WarFareWPF
         {
             this.peuple = peuple;
             units = new List<UnitView>();
-            for (int i = 0; i < peuple.getNbUnite(); i++)
-            {
-                units.Add(new UnitView((UniteImp)peuple.getUnite(i), this));
-            }
-            selectedUnit = units[peuple.uniteActuel];
             switch (peuple.getType())
             {
                 case EnumPeuple.ELF: this.Type = "Elf"; this.Color = "#ff0000"; this.Src = "res/elf.png"; break;
                 case EnumPeuple.NAIN: this.Type = "Nain"; this.Color = "#00ff00"; this.Src = "res/nain.png"; break;
                 case EnumPeuple.ORC: this.Type = "Orc"; this.Color = "#0000ff"; this.Src = "res/orc.png"; break;
             }
+            for (int i = 0; i < peuple.getNbUnite(); i++)
+            {
+                units.Add(new UnitView((UniteImp)peuple.getUnite(i), Src));
+            }
+            selectedUnit = units[peuple.uniteActuel];
         }
 
 

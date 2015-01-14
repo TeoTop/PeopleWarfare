@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActionListView.cs" />
+    <Compile Include="BattleCmd.cs" />
     <Compile Include="BattleView.cs" />
     <Compile Include="BattleWindow.xaml.cs">
       <DependentUpon>BattleWindow.xaml</DependentUpon>
@@ -83,12 +84,11 @@
     </Compile>
     <Compile Include="PeopleView.cs" />
     <Compile Include="PlayerView.cs" />
-    <Compile Include="Sauvegarde.xaml.cs">
-      <DependentUpon>Sauvegarde.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="RoundView.cs" />
     <Compile Include="SelectUnit.xaml.cs">
       <DependentUpon>SelectUnit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Serialize.cs" />
     <Compile Include="UserControls\InfoPeuple.xaml.cs">
       <DependentUpon>InfoPeuple.xaml</DependentUpon>
     </Compile>
@@ -132,10 +132,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Sauvegarde.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

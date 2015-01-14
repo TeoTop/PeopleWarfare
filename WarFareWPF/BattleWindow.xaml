@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:WarFareWPF.UserControls"
-        Title="BattleWindow" Height="300" Width="300" DataContext="{Binding RelativeSource={RelativeSource Self}}" x:Name="_this" WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None" ContentRendered="_this_ContentRendered">
+        Title="BattleWindow" Height="500" Width="700" DataContext="{Binding RelativeSource={RelativeSource Self}}" x:Name="_this" WindowStartupLocation="CenterScreen" ContentRendered="_this_ContentRendered">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
                         </Grid.RowDefinitions>
                         <controls:TextBlockAnim loss_or_victory="{Binding battle.loose_point_att, ElementName=_this}"  /> 
                         <Grid Grid.Row="1">
-                            <Image Source="{Binding battle.unitAtt.people.Src, ElementName=_this}" Height="512" Width="512"/>
+                            <Image Source="{Binding battle.currentRound.unitAtt.Src, ElementName=_this}" Height="Auto" Width="Auto"/>
                         </Grid>
                         <Grid Grid.Row="2" HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/health.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitAtt.vie,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitAtt.vie,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Grid.ColumnDefinitions>
@@ -56,7 +56,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/sword.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitAtt.attaque,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitAtt.attaque,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="2">
                                 <Grid.ColumnDefinitions>
@@ -64,7 +64,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/shield.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitAtt.defense,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitAtt.defense,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
@@ -72,7 +72,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/boot.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitAtt.pm,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitAtt.pm,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -91,7 +91,19 @@
                         </Grid.RowDefinitions>
                         <controls:TextBlockAnim  loss_or_victory="{Binding battle.loose_point_def, ElementName=_this}"/>
                         <Grid Grid.Row="1">
-                            <Image Source="{Binding battle.unitDef.people.Src, ElementName=_this}" Height="512" Width="512"/>
+                            <!--<Viewport3D Name="mainViewport" ClipToBounds="True" HorizontalAlignment="Stretch" Height="300" Width="300">
+                                <Viewport3D.Camera>
+                                    <PerspectiveCamera 
+                                      LookDirection="0,0,-20"
+                                      UpDirection="0,1,0"
+                                      Position="-40,40,40" 
+                                      />
+                                </Viewport3D.Camera>
+                                <Viewport2DVisual3D>
+                                    <Image Source="{Binding battle.currentRound.unitDef.Src, ElementName=_this}"/>
+                                </Viewport2DVisual3D>
+                            </Viewport3D>-->
+                            <Image Source="{Binding battle.currentRound.unitDef.Src, ElementName=_this}" Height="Auto" Width="Auto"/>
                         </Grid>
                         <Grid Grid.Row="2" HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
@@ -107,7 +119,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/health.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitDef.vie,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitDef.vie,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Grid.ColumnDefinitions>
@@ -115,7 +127,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/sword.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitDef.attaque,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitDef.attaque,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="2">
                                 <Grid.ColumnDefinitions>
@@ -123,7 +135,7 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/shield.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitDef.defense,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitDef.defense,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Column="3">
                                 <Grid.ColumnDefinitions>
@@ -131,13 +143,17 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Source="res/boot.png" Width="32" Height="32" VerticalAlignment="Center"/>
-                                <Label Grid.Column="1" Content="{Binding battle.unitDef.pm,ElementName=_this}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Content="{Binding battle.currentRound.unitDef.pm,ElementName=_this}" VerticalAlignment="Center"/>
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        <Label Content="{Binding battle.nRound, ElementName=_this}" HorizontalAlignment="Right"/>
+        <TextBlock HorizontalAlignment="Right">
+            <Run Text="{Binding battle.nRound, ElementName=_this}"/>
+            <Run Text="/"/>
+            <Run Text="{Binding battle.nRoundMax, ElementName=_this, Mode=OneWay}"/>
+        </TextBlock>
     </Grid>
 </Window>

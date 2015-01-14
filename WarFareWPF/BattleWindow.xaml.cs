@@ -24,18 +24,18 @@ namespace WarFareWPF
     {
         public BattleView battle { get; set; }
         
-        public BattleWindow(UnitView unit, List<UnitView> list, GameView gv)
+        public BattleWindow(BattleCmd battle)
         {
-            battle = new BattleView(unit, list, gv);
+            this.battle = new BattleView(battle);
             InitializeComponent();
         }
         
         private void _this_ContentRendered(object sender, EventArgs e)
         {
             MyTask task = new MyTask(() => battle.Do());
-            task.WaitWithPumping();
-            Thread.Sleep(500);
-            this.Close();
+            //task.WaitWithPumping();
+            //Thread.Sleep(500);
+            //this.Close();
         }
                
     }

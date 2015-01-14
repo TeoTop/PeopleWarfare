@@ -230,7 +230,7 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 }
 
 int* Algos::placer_joueurs(int nbCase) {
-	int placement[2];
+	int* placement = (int*)malloc(2 * sizeof(int));
 	srand(time(NULL));
 	if (rand() % 2) {
 		placement[0] = 0;
