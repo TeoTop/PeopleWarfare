@@ -33,7 +33,7 @@ int* Algos::generer_carte(int nbCase, int nbTypeCase) {
 
 // nbCase correspond à la taille du tableau
 int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnemi, int nbEnnemi, int posActuelle, int typeUnite) {
-	int* distanceInit;
+	int** distanceInit;
 	int nbCaseDispoCourante = nbCase;
 	int x, y, a, b, dist;
 	int typeCaseBon, typeCaseMauvais, pertePoint;
@@ -41,28 +41,32 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 
 	x = posActuelle / taille;
 	y = posActuelle % taille;
-	distanceInit = (int*)malloc(sizeof(int)* nbEnnemi);
+	distanceInit = (int**)malloc(sizeof(int*)* nbEnnemi);
 
 	for (int i = 0; i < nbEnnemi; i++){
-		a = posEnnemi[i] / taille;
-		b = posEnnemi[i] % taille;
-		distanceInit[i] = abs(a - x) + abs(b - y);
+		distanceInit[i] = (int*)malloc(sizeof(int)* nbEnnemi);
+		distanceInit[i][0] = posEnnemi[i] / taille;
+		distanceInit[i][1] = posEnnemi[i] % taille;
+		distanceInit[i][2] = abs(distanceInit[i][0] - x + distanceInit[i][1] - y);
 	}
 
 	int versEnn;
 	for (int i = 0; i < nbCase; i++){
-		a = cases[i][0] / taille;
-		b = cases[i][0] % taille;
+		x = cases[i][0] / taille;
+		y = cases[i][0] % taille;
 		versEnn = false;
 
 		for (int j = 0; j < nbEnnemi; j++){
-			dist = abs(a - x) + abs(b - y);
-			if (distanceInit[j] > dist){
+			dist = abs(distanceInit[j][0] - x + distanceInit[j][1] - y);
+			int d = distanceInit[j][2];
+			if (d >= dist){
 				versEnn = true;
 			}
 		}
 		if (!versEnn) { 
-			cases[i][0] = -1; nbCaseDispoCourante--; }
+			cases[i][0] = -1;
+			nbCaseDispoCourante--; 
+		}
 	}
 
 	switch (typeUnite)
@@ -86,22 +90,26 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 
 	if (pertePoint){
 		for (int i = 0; i < nbCase; i++){
-			if (cases[i][1] == typeCaseMauvais){
-				cases[i][0] = -1;
-				--nbCaseDispoCourante;
+			if (cases[i][2] == 0) {
+				if (cases[i][1] == typeCaseMauvais && cases[i][0] != -1){
+					cases[i][0] = -1;
+					--nbCaseDispoCourante;
+				}
 			}
 		}
 	}
 
 
 	for (int i = 0; i < nbCase && nbCaseDispoCourante > 3; i++){
-		if (cases[i][1] != typeCaseBon){
-			cases[i][0] = -1;
-			--nbCaseDispoCourante;
+		if (cases[i][2] == 0) {
+			if (cases[i][1] != typeCaseBon && cases[i][0] != -1){
+				cases[i][0] = -1;
+				--nbCaseDispoCourante;
+			}
 		}
 	}
 
-	int** cases_sucg  = new int*[nbCaseDispoCourante+1];
+	int** cases_sucg = new int*[nbCaseDispoCourante + 1];
 	cases_sucg[0] = new int[1];
 
 	int c = 1;
@@ -120,7 +128,7 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 
 
 
-int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn, int posActuelle, int typeUnite, int pm){
+int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn, int posActuelle, int typeUnite, double pm){
 	int taille_dispo = 6;
 	int taille = sqrt((double)nbCase);
 	int* cases_possible = new int[6];
@@ -136,13 +144,31 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 
 	if ((posActuelle / taille) % 2 == 1)
 	{
-		cases_possible[4] = posActuelle - (taille - 1);
-		cases_possible[5] = posActuelle + (taille + 1);
+		if ((posActuelle%taille) == taille - 1) {
+			cases_possible[4] = -1;
+			cases_possible[5] = -1;
+		}
+		else {
+			cases_possible[4] = posActuelle - (taille - 1);
+			cases_possible[5] = posActuelle + (taille + 1);
+		}
 	}
 	else
 	{
-		cases_possible[4] = posActuelle + (taille - 1);
-		cases_possible[5] = posActuelle - (taille + 1);
+		if ((posActuelle%taille) == 0) {
+			cases_possible[4] = -1;
+			cases_possible[5] = -1;
+		}
+		else {
+			cases_possible[4] = posActuelle + (taille - 1);
+			cases_possible[5] = posActuelle - (taille + 1);
+		}
+	}
+	if ((posActuelle%taille) == 0) {
+		cases_possible[3] = -1;
+	}
+	if ((posActuelle%taille) == taille - 1) {
+		cases_possible[2] = -1;
 	}
 
 	int c;

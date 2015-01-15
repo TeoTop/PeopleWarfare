@@ -54,11 +54,13 @@ namespace WarFareWPF
 
         public KeyEventCommand keyCommand { get; set; }
 
-        public GameWindow(PartieImp game)
+        public GameWindow(PartieImp game, bool pc1 = false, bool pc2 = false)
 
         {
 
-            this.game = new GameView(game);
+            this.game = new GameView(game, this);
+            this.pc1 = pc1;
+            this.pc2 = pc2;
 
             keyCommand = new KeyEventCommand();
 
@@ -124,10 +126,30 @@ namespace WarFareWPF
 
             keyCommand.addAction(new KeyClass(Key.Escape, false), () => this.game.map.resetBoxes());
 
-
+            DoRound();
 
             InitializeComponent();
 
+        }
+
+        private void DoRound()
+        {
+            if (getPc())
+            {
+                MyTask task = new MyTask(() =>
+                {
+                    this.game.DoRound();
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        NextTurn(null, null);
+                    }));
+                });
+            }
+        }
+
+        public bool getPc()
+        {
+            return game.CurrentPlayer == 0 ? pc1 : pc2;
         }
 
 
@@ -170,6 +192,7 @@ namespace WarFareWPF
 
             this.game.alreadySaved = false;
 
+            DoRound();
         }
 
 
@@ -197,14 +220,10 @@ namespace WarFareWPF
         }
 
 
+        // TODO : cases ateignables
         // TODO : Rotate image in battle
         // TODO : nextunit space key
-        // TODO : refresh units when after a battle
-        // TODO : two Run tags in Textblock : done
-        // TODO : deactivate border alt command from listbox element : done
-        // TODO : scrollview scroll infopeuple : done
-        // TODO : Src unit : done
-
+        // TODO : refresh units after a battle
 
 
 
@@ -373,6 +392,10 @@ namespace WarFareWPF
 
 
 
+
+        public bool pc1 { get; set; }
+
+        public bool pc2 { get; set; }
     }
 
 }

@@ -10,3 +10,16 @@ C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvega
 C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.csproj.GenerateResource.Cache
 C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.exe
 C:\Users\théo\Desktop\PeopleWarfare-master\TestSauvegarde\obj\Debug\TestSauvegarde.pdb
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\bin\Debug\TestSauvegarde.exe.config
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\bin\Debug\TestSauvegarde.exe
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\bin\Debug\TestSauvegarde.pdb
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde.csprojResolveAssemblyReference.cache
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\MainWindow.baml
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\MainWindow.g.cs
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\App.g.cs
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde_MarkupCompile.cache
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde.g.resources
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde.Properties.Resources.resources
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde.csproj.GenerateResource.Cache
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde.exe
+C:\Users\helomari\Desktop\PeopleWarfare\TestSauvegarde\obj\Debug\TestSauvegarde.pdb

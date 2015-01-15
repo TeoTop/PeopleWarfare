@@ -12,7 +12,8 @@
     <converters:BoolToBackgroundConverter x:Key="BoolToBackgroundConverter"/>
     <converters:PlayerToItemsSourceConverter x:Key="PlayerToItemsSourceConverter"/>
     <converters:PlayerToSrc x:Key="PlayerToSrc"/>
-
+    <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+    
     <converters:ConvertZoom x:Key="ConvertZoom"/>
 
     <!--User control-->
@@ -55,7 +56,7 @@
                         <ImageBrush ImageSource="res/buttonOn.png"/>
                     </Setter.Value>
                 </Setter>
-            </Trigger> 
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="templateCase">
@@ -104,17 +105,32 @@
                 </Polygon.RenderTransform>
             </Polygon>
 
-            <!--Case atteignable-->
+            <!--Case atteignable et suggeree-->
+            <Grid>
+                <Polygon Visibility="{Binding Atteignable, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2" Fill="#4C0026FF">
 
-            <!--<Polygon Points="{Binding game.map.Zoom, ElementName=_this, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Visibility="{Binding Atteignable, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2" Fill="#6EFC8F">
 
-                <Polygon.RenderTransform>
+                    <Polygon.Points>
 
-                    <TranslateTransform Y="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+                        <MultiBinding Converter="{StaticResource RatioToPointsConverter}">
 
-                </Polygon.RenderTransform>
+                            <Binding ElementName="_this" Path="game.map.Zoom" />
 
-            </Polygon>-->
+                            <Binding ElementName="_this" Path="game.map.DefaultSizePoint"/>
+
+                        </MultiBinding>
+
+                    </Polygon.Points>
+                    <Polygon.RenderTransform>
+
+                        <TranslateTransform Y="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=60}"/>
+
+                    </Polygon.RenderTransform>
+
+                </Polygon>
+                <Image Source="res/star1.png" Visibility="{Binding Suggeree, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="32" Width="32"/>
+
+            </Grid>
 
             <!--Unités-->
             <Grid Visibility="{Binding HasUnitJ1, Converter={StaticResource BoolToVis}}" Panel.ZIndex="2">

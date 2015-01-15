@@ -5,6 +5,8 @@ C:\Users\théo\Desktop\PeopleWarfare-master\Diagramme de classe code\obj\Debug\D
 C:\Users\théo\Desktop\PeopleWarfare-master\Diagramme de classe code\obj\Debug\Diagramme de classe code.pdb
 D:\INSA\gen\Diagramme de classe code.dll
 D:\INSA\gen\Diagramme de classe code.pdb
-H:\4INFO\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.csprojResolveAssemblyReference.cache
-H:\4INFO\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.dll
-H:\4INFO\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.pdb
+C:\Users\helomari\Desktop\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.csprojResolveAssemblyReference.cache
+C:\Users\helomari\Desktop\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.dll
+C:\Users\helomari\Desktop\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.pdb
+C:\Users\helomari\Desktop\Diagramme de classe code.dll
+C:\Users\helomari\Desktop\Diagramme de classe code.pdb

@@ -47,5 +47,10 @@ namespace WarFareWPF
             isMyTurn = false;
             peuple = new PeopleView(joueur.peuple);
         }
+
+        public bool endTurn()
+        {
+            return peuple.units.Where(u => !u.HasAlreadyPlayed).Count() <= 0;
+        }
     }
 }

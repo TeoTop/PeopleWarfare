@@ -10,12 +10,13 @@ namespace WarFareWPF
     {
         public UnitView unitAtt { get; set; }
         public UnitView unitDef { get; set; }
+        public BoxView box { get; set; }
         public CombatImp fight { get; set; }
         public List<RoundView> rounds { get; set; }
         public GameView gv { get; set; }
 
         
-        public BattleCmd(UnitView unit, List<UnitView> list, GameView gv)
+        public BattleCmd(UnitView unit, List<UnitView> list, BoxView box, GameView gv)
         {
             List<Unite> unitesDef = new List<Unite>();
             list.ForEach(l => unitesDef.Add(l.unit));
@@ -27,6 +28,8 @@ namespace WarFareWPF
 
             this.gv = gv;
             this.rounds = new List<RoundView>();
+
+            this.box = box;
         }
 
         public EnumBattle attaquer()

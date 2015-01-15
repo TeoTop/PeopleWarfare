@@ -23,20 +23,46 @@ namespace WarFareWPF
     public partial class BattleWindow : Window
     {
         public BattleView battle { get; set; }
+        public String background
+        {
+            get;
+            set;
+        }
         
-        public BattleWindow(BattleCmd battle)
+        public BattleWindow(BattleCmd battle, GameWindow gw)
         {
             this.battle = new BattleView(battle);
+            this.gw = gw;
+            switch (battle.box.box.getType())
+            {
+                case EnumCase.DESERT:
+                    background = "res/desertBack.png";
+                    break;
+                case EnumCase.FORET:
+                    background = "res/forestBack.png";
+                    break;
+                case EnumCase.MONTAGNE:
+                    background = "res/mountBack.png";
+                    break;
+                case EnumCase.PLAINE:
+                    background = "res/landBack.png";
+                    break;
+            }
             InitializeComponent();
         }
         
         private void _this_ContentRendered(object sender, EventArgs e)
         {
             MyTask task = new MyTask(() => battle.Do());
-            //task.WaitWithPumping();
+            if (gw.getPc())
+            {
+                task.WaitWithPumping();
+            }
             //Thread.Sleep(500);
             //this.Close();
         }
-               
+
+
+        public GameWindow gw { get; set; }
     }
 }

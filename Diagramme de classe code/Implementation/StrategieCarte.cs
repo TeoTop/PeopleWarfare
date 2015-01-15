@@ -25,16 +25,16 @@ namespace PeopleWar
             WrapperAlgos w = new WrapperAlgos();
             int[] cases_tmp = w.generer_carte(nbCase, Enum.GetNames(typeof(EnumCase)).Length);
 
-            int[] arr = new int[nbCase];
-            int[] enn = new int[4]{23,24,25,26};
+            /*int[] arr = new int[nbCase];
+            int[] enn = new int[4]{23,24,25,26};*/
 
             for (int i = 0; i < nbCase; i++)
             {
                 cases.Add((CaseA)FabriqueCase.INSTANCE.getCase((EnumCase)cases_tmp[i]));
-                arr[i] = cases_tmp[i];
+                //arr[i] = cases_tmp[i];
             }
 
-            int[,] dispo = w.cases_atteignable(arr, nbCase, enn, 4, 3, 1, 1);
+            //int[,] dispo = w.cases_atteignable(arr, nbCase, enn, 4, 3, 1, 1);
         }
 
 
