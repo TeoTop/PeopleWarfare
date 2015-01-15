@@ -97,5 +97,9 @@ namespace WarFareWPF
                 _nomUniteJ2 = value;
             }
         }
+
+        public static bool checkJ1 { get; set; }
+
+        public static bool checkJ2 { get; set; }
     }
 }

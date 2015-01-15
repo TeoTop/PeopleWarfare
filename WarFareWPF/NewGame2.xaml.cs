@@ -88,10 +88,11 @@ namespace WarFareWPF
             }
         }
 
-        public NewGame2(PartieImp partie)
+        public NewGame2(PartieImp partie, bool checkJ1, bool checkJ2)
         {
             this.partie = partie;
-
+            this.checkJ1 = checkJ1;
+            this.checkJ2 = checkJ2;
             if (partie.j1.peuple.getType() == AbstractWindow.p1)
             {
                 if (AbstractWindow.skinJ1 != -1)
@@ -137,7 +138,7 @@ namespace WarFareWPF
 
         private void CreateGame(object sender, RoutedEventArgs e)
         {
-            GameWindow gw = new GameWindow(this.partie);
+            GameWindow gw = new GameWindow(this.partie, this.checkJ1, this.checkJ2);
             gw.Show();
             Dictionary.gw = gw;    //transférer dans le contructeur de GameWindows;
             this.Close();
@@ -219,5 +220,9 @@ namespace WarFareWPF
             AbstractWindow.skinJ2 = partie.j2.peuple.skin;
 
         }
+
+        public bool checkJ1 { get; set; }
+
+        public bool checkJ2 { get; set; }
     }
 }

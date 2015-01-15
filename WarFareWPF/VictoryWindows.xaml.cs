@@ -69,15 +69,15 @@ namespace WarFareWPF
          */
         private void backToMenu(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
             Window w = Application.Current.Windows.OfType<GameWindow>().First();
             if (w != null)
             {
                 w.Close();
             }
-
+            if (Application.Current.Windows.OfType<GameWindow>().Count() == 0)
+            {
+                this.Close();
+            }
         }
 
         /*

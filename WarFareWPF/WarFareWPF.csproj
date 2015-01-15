@@ -87,7 +87,7 @@
     </Compile>
     <Compile Include="PeopleView.cs" />
     <Compile Include="PlayerView.cs" />
-	<Compile Include="RoundView.cs" />
+    <Compile Include="RoundView.cs" />
     <Compile Include="Sauvegarde.xaml.cs">
       <DependentUpon>Sauvegarde.xaml</DependentUpon>
     </Compile>
@@ -263,6 +263,17 @@
     <Resource Include="res\button.png" />
     <Resource Include="res\buttonOn.png" />
     <Resource Include="res\precOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\star1.png" />
+    <Resource Include="res\star2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\parcheminFin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\parcheminLargeFin.png" />
+    <Resource Include="res\parcheminLargeTampon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

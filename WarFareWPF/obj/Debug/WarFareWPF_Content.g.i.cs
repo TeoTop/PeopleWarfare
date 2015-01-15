@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/back.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/parcheminlargefin.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/parcheminlargetampon.png")]
 
 

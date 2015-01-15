@@ -34,7 +34,7 @@ namespace PeopleWar
                 arr[i] = cases_tmp[i];
             }
 
-            int[,] dispo = w.cases_atteignable(arr, nbCase, enn, 4, 3, 1, 1);
+            //int[,] dispo = w.cases_atteignable(arr, nbCase, enn, 4, 3, 1, 1);
         }
 
 

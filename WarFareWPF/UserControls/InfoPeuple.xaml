@@ -6,16 +6,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Height="130">
-        <Grid.Background>
-            <ImageBrush ImageSource="../res/parchemin.png" TileMode="FlipX"/>
-        </Grid.Background>
+    <Grid Height="130" Background="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToBrushConverter}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Label Content="{Binding nom}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
-        <Image Grid.Column="0" Source="../res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 30 20 0" Width="22" Height="22"/>
+        <!--<Image Grid.Column="0" Source="../res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 30 20 0" Width="22" Height="22"/>-->
         <Image Grid.Column="0" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
             <Image.Source>
                 <MultiBinding Converter="{StaticResource PlayerToSrc}">

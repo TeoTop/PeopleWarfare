@@ -116,6 +116,8 @@ namespace WarFareWPF
             {
                 this.p2.SelectedIndex = (int)AbstractWindow.p2;
             }
+            checkJ1 = AbstractWindow.checkJ1;
+            checkJ2 = AbstractWindow.checkJ2;
             switch (AbstractWindow.carte)
             {
                 case EnumCarte.DEMO:
@@ -147,7 +149,7 @@ namespace WarFareWPF
             DirecteurPartie dp = new DirecteurPartie();
             dp.definirMonteur(new MonteurNvllePartie());
             PartieImp partie = dp.creerPartie(this.j1.Text, this.j2.Text, this.carte, (EnumPeuple)this.p1.SelectedIndex, (EnumPeuple)this.p2.SelectedIndex);
-            NewGame2 ng2 = new NewGame2(partie);
+            NewGame2 ng2 = new NewGame2(partie, checkJ1, checkJ2);
             ng2.Show();
             this.Close();
         }
@@ -218,12 +220,43 @@ namespace WarFareWPF
             AbstractWindow.p1 = (EnumPeuple)this.p1.SelectedIndex;
             AbstractWindow.p2 = (EnumPeuple)this.p2.SelectedIndex;
             AbstractWindow.carte = this.carte;
+            AbstractWindow.checkJ1 = this.checkJ1;
+            AbstractWindow.checkJ2 = this.checkJ2;
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton r = sender as RadioButton;
             this.Carte = r.Content.ToString();
+        }
+
+        private bool _checkJ1;
+        public bool checkJ1
+        {
+            get
+            {
+                return _checkJ1;
+            }
+            set
+            {
+                _checkJ1 = value;
+                OnPropertyChanged("checkJ1");
+            }
+        }
+
+
+        private bool _checkJ2;
+        public bool checkJ2
+        {
+            get
+            {
+                return _checkJ2;
+            }
+            set
+            {
+                _checkJ2 = value;
+                OnPropertyChanged("checkJ2");
+            }
         }
     }
 }

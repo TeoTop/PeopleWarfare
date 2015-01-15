@@ -4,10 +4,6 @@ using System;
 
 using System.Collections.Generic;
 
-using System;
-
-using System.Collections.Generic;
-
 using System.Linq;
 
 using System.Runtime.Serialization;
@@ -116,12 +112,11 @@ namespace WarFareWPF
 
 
 
-        public GameView(PartieImp game)
+        public GameView(PartieImp game, GameWindow gw)
 
         {
-
             this.game = game;
-
+            this.gw = gw;
             this.map = new MapView(game.carte, this);
 
             J1 = new PlayerView(game.j1, this.map);
@@ -276,13 +271,13 @@ namespace WarFareWPF
 
                             case EnumMove.CBT:
 
-                                BattleCmd battleCmd = new BattleCmd(unit, getOtherPlayer().peuple.Select(move.unites), this);
+                                BattleCmd battleCmd = new BattleCmd(unit, getOtherPlayer().peuple.Select(move.unites), box, this);
 
                                 battleCmd.Do();
 
 
 
-                                BattleWindow battleWin = new BattleWindow(battleCmd);
+                                BattleWindow battleWin = new BattleWindow(battleCmd, gw);
 
                                 battleWin.Show();
 
@@ -405,7 +400,7 @@ namespace WarFareWPF
 
             }*/
 
-            game.tours.Add(new TourImp()); // à changer lors de l'implementation des tours en ajoutant une classe TourView et ici on ajoute TourView.tour
+            al.addTurn();
 
             if (!this.verifierFinPartie())
 
@@ -526,17 +521,106 @@ namespace WarFareWPF
             }
 
         }
-
-        public void cases_atteignables(BoxView boxView)
-
+        public List<int[,]> att_sug(BoxView boxView)
         {
-
             WrapperAlgos w = new WrapperAlgos();
 
-            //int[][] cases_atteignables = w.suggestion_cases();
+            int[] boxes = map.cases.Select(b => b.Uid).ToArray();
+            int nbCase = map.cases.Count;
+            List<UnitView> unitsEnnemi = getOtherPlayer().peuple.units;
+            int[] posEnnemi = map.cases.Join(unitsEnnemi, box => box.Uid, unit => unit.unit.pos, (box, unit) => box.Uid).ToArray();
+            int nbEnn = posEnnemi.Count();
+            int posActuelle = boxView.Uid;
+            int typeUnite = (int)getCurrentPlayer().peuple.peuple.getType();
+            double pm = boxView.SelectedUnit.pm;
 
+            int[,] cases_atteignables = w.cases_atteignable(boxes, nbCase, posEnnemi, nbEnn, posActuelle, typeUnite, pm);
+            int nb = (int)Math.Sqrt(nbCase);
+            int[,] cases_suggerees = w.suggestion_cases((int[,])cases_atteignables.Clone(), cases_atteignables.Length / 3, nb, posEnnemi, nbEnn, posActuelle, typeUnite);
+
+            map.cases.ForEach(b =>
+            {
+                if (this.equal(b.Uid, cases_atteignables))
+                {
+                    b.Atteignable = true;
+                }
+                if (this.equal(b.Uid, cases_suggerees))
+                {
+                    b.Suggeree = true;
+                }
+            });
+            List<int[,]> boxs = new List<int[,]>();
+            boxs.Add(cases_atteignables);
+            boxs.Add(cases_suggerees);
+            return boxs;
         }
 
+        private bool equal(int p, int[,] cases)
+        {
+            for (int i = 0; i < cases.Length / 3; i++)
+            {
+                if (p == cases[i,0])
+                    return true;
+            }
+            return false;
+        }
+
+        public void DoRound()
+        {
+            while (!getCurrentPlayer().endTurn())
+            {
+                Thread.Sleep(500);
+                // choisir unité
+                UnitView unit = getUnit();
+                // choisir case atteignable
+                BoxView box = getBox(unit);
+                // jouer
+                Thread.Sleep(500);
+                DoTurn(box, unit);
+            }
+        }
+
+        private void DoTurn(BoxView box, UnitView unit)
+        {
+            box.SelectedUnit = unit;
+            map.SelectedBox = box;
+            map.SelectedBoxForUnit = box;
+            List<int[,]> boxes = att_sug(box);
+            int b = -1;
+            if (boxes[1].Length / 3 != 0)
+            {
+                b = chooseFrom2DArray(boxes[1]);
+            }
+            else if (boxes[0].Length / 3 != 0)
+            {
+                b = chooseFrom2DArray(boxes[0]);
+            }
+            if (b != -1)
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    MoveUnit(null, null, box, b);
+                }));
+            }
+        }
+
+        private BoxView getBox(UnitView unit)
+        {
+            return map.cases.Where(b => b.Uid == unit.unit.pos).First();
+        }
+
+        private UnitView getUnit()
+        {
+            return getCurrentPlayer().peuple.units.Where(u => !u.HasAlreadyPlayed).First();
+        }
+
+        private int chooseFrom2DArray(int[,] p)
+        {
+            Random rnd = new Random();
+            return p[rnd.Next(p.Length / 3),0];
+        }
+
+        public GameWindow gw { get; set; }
     }
 
 }

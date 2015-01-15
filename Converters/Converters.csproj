@@ -57,6 +57,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BoolToBrushConverter.cs" />
     <Compile Include="ConvertZoom.cs" />
     <Compile Include="EnumCarteToIsCheckedConverter.cs" />
     <Compile Include="ListToVis.cs" />

@@ -194,9 +194,16 @@ namespace WarFareWPF
         public void resetBoxes()
 
         {
-
             cases.ForEach(box => box.SelectedUnit = null);
-
+            resetAttSugg();
+        }
+        public void resetAttSugg()
+        {
+            cases.ForEach(b =>
+            {
+                b.Atteignable = false;
+                b.Suggeree = false;
+            });
         }
 
 
@@ -209,16 +216,12 @@ namespace WarFareWPF
 
         }
 
-
-
-        public void cases_atteignables(BoxView boxView)
-
+        public void att_sug(BoxView boxView)
         {
 
-            gv.cases_atteignables(boxView);
+            gv.att_sug(boxView);
 
         }
-
     }
 
 }

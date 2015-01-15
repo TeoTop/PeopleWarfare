@@ -63,6 +63,10 @@
                             </MultiBinding>
                         </Image.Opacity>
                     </Image>
+                    <Grid Canvas.Top="100">
+                        <Label Content="Ordinateur" Margin="10 -6 0 0"/>
+                        <CheckBox IsChecked="{Binding checkJ1, ElementName=_this}"/>
+                    </Grid>
                 </Canvas>
             </Grid>
 
@@ -111,6 +115,10 @@
                             </MultiBinding>
                         </Image.Opacity>
                     </Image>
+                    <Grid Canvas.Top="100">
+                        <Label Content="Ordinateur" Margin="10 -6 0 0"/>
+                        <CheckBox IsChecked="{Binding checkJ2, ElementName=_this}"/>
+                    </Grid>
                 </Canvas>
             </Grid>
         </Grid>

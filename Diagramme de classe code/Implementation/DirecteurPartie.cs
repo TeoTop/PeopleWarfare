@@ -126,7 +126,7 @@ namespace PeopleWar
                 stream.Close();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
