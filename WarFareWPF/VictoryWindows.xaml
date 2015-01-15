@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WarFareWPF.VictoryWindows"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="VictoryWindows" Height="400" Width="600" WindowStartupLocation="CenterScreen" x:Name="_this">
+        Title="VICTOIRE" Height="400" Width="600" WindowStartupLocation="CenterScreen" x:Name="_this">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="res/menuBack.png" TileMode="FlipX"/>

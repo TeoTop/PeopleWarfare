@@ -25,6 +25,10 @@ namespace PeopleWar
 
         public Plaine Plaine { get; set; }
 
+        public Mer Mer { get; set; }
+
+        public Marais Marais { get; set; }
+
         /**
          * Create a box from his 'type'
          * Use of Lazy instanciation
@@ -63,6 +67,20 @@ namespace PeopleWar
                         Plaine = new Plaine();
                     }
                     c = Plaine;
+                    break;
+                case EnumCase.MER:
+                    if (Mer == null)
+                    {
+                        Mer = new Mer();
+                    }
+                    c = Mer;
+                    break;
+                case EnumCase.MARAIS:
+                    if (Marais == null)
+                    {
+                        Marais = new Marais();
+                    }
+                    c = Marais;
                     break;
             }
             return c;

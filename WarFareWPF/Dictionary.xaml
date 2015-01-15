@@ -13,7 +13,6 @@
     <converters:PlayerToItemsSourceConverter x:Key="PlayerToItemsSourceConverter"/>
     <converters:PlayerToSrc x:Key="PlayerToSrc"/>
     <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
-    
     <converters:ConvertZoom x:Key="ConvertZoom"/>
 
     <!--User control-->

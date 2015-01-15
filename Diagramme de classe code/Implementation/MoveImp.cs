@@ -12,6 +12,9 @@ namespace PeopleWar
         public Double pm { get; set; }
         public bool hasPlayed { get; set; }
         public EnumMove mv { get; set; }
+
+        public UniteImp uniteDep { get; set; }
+
         public List<Unite> unites { get; set; }
         public CombatImp combat { get; set; }
 
@@ -20,6 +23,7 @@ namespace PeopleWar
             pm = 0;
             mv = EnumMove.NOMOVE;
             hasPlayed = false;
+            uniteDep = new UniteImp();
             unites = new List<Unite>();
             combat = null;
         }

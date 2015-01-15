@@ -1,3 +1,6 @@
+H:\4INFO\WarFareWPF.exe.config
+H:\4INFO\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.exe
+H:\4INFO\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.pdb
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.csprojResolveAssemblyReference.cache
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\LeaveWindows.baml
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\MainWindow.baml
@@ -31,13 +34,10 @@ C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF_MarkupCo
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\BattleWindow.baml
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\GameWindow.baml
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.g.resources
+C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.pdb
+C:\Users\helomari\Desktop\WarFareWPF.exe.config
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.Properties.Resources.resources
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.csproj.GenerateResource.Cache
-C:\Users\helomari\Desktop\WarFareWPF.exe.config
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.exe
-C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.pdb
 C:\Users\helomari\Desktop\WarFareWPF.exe
 C:\Users\helomari\Desktop\WarFareWPF.pdb
-H:\4INFO\WarFareWPF.exe.config
-H:\4INFO\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.exe
-H:\4INFO\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.pdb

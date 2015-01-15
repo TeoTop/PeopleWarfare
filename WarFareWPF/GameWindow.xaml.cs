@@ -50,21 +50,29 @@ namespace WarFareWPF
 
         public GameView game { get; set; }
 
+
+
         public SelectUnit su { get; set; }
 
+
+
         public KeyEventCommand keyCommand { get; set; }
+
+
 
         public GameWindow(PartieImp game, bool pc1 = false, bool pc2 = false)
 
         {
 
             this.game = new GameView(game, this);
+
             this.pc1 = pc1;
+
             this.pc2 = pc2;
 
+
+
             keyCommand = new KeyEventCommand();
-
-
 
             // add commands
 
@@ -80,51 +88,65 @@ namespace WarFareWPF
 
             {
 
-                return (x + y) % z;
+                return this.game.map.SelectedBoxForUnit.RowPair ? (x + y) : x + y + 1;
 
             });
+
+
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad6, false), (x, _, z) =>
 
             {
 
-                return (x + 1) % z;
+                return (x + 1);
 
             });
+
+
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad9, false), (x, y, z) =>
 
             {
 
-                return (x - y + 1) % z;
+                return this.game.map.SelectedBoxForUnit.RowPair ? x - y : (x - y + 1);
 
             });
+
+
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad7, false), (x, y, z) =>
 
             {
 
-                return (x - y) % z;
+                return this.game.map.SelectedBoxForUnit.RowPair ? x - y - 1 : (x - y);
 
             });
+
+
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad4, false), (x, _, z) =>
 
             {
 
-                return (x - 1) % z;
+                return (x - 1);
 
             });
+
+
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad1, false), (x, y, z) =>
 
             {
 
-                return (x + y - 1) % z;
+                return this.game.map.SelectedBoxForUnit.RowPair ? x + y - 1 : (x + y);
 
             });
 
+
+
             keyCommand.addAction(new KeyClass(Key.Escape, false), () => this.game.map.resetBoxes());
+
+
 
             DoRound();
 
@@ -132,27 +154,45 @@ namespace WarFareWPF
 
         }
 
+
+
         private void DoRound()
+
         {
+
             if (getPc())
+
             {
+
                 MyTask task = new MyTask(() =>
+
                 {
+
                     this.game.DoRound();
+
                     Dispatcher.BeginInvoke(new Action(() =>
+
                     {
+
                         NextTurn(null, null);
+
                     }));
+
                 });
+
             }
+
         }
+
+
 
         public bool getPc()
+
         {
+
             return game.CurrentPlayer == 0 ? pc1 : pc2;
+
         }
-
-
 
 
 
@@ -193,6 +233,7 @@ namespace WarFareWPF
             this.game.alreadySaved = false;
 
             DoRound();
+
         }
 
 
@@ -203,11 +244,7 @@ namespace WarFareWPF
 
             bool handle = (Keyboard.Modifiers & ModifierKeys.Control) > 0;
 
-
-
             KeyClass key = new KeyClass(e.Key, handle);
-
-
 
             if (keyCommand.actions.Keys.Contains(key))
 
@@ -220,11 +257,14 @@ namespace WarFareWPF
         }
 
 
-        // TODO : cases ateignables
-        // TODO : Rotate image in battle
-        // TODO : nextunit space key
-        // TODO : refresh units after a battle
 
+        // TODO : cases ateignables
+
+        // TODO : Rotate image in battle
+
+        // TODO : nextunit space key
+
+        // TODO : refresh units after a battle
 
 
 
@@ -246,7 +286,7 @@ namespace WarFareWPF
 
             {
 
-                if (!game.alreadySaved && !game.game.save && (MessageBox.Show("Voulez vous sauvegarder la partie ?", "Sauvegarder", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes))
+                if (!game.alreadySaved && (MessageBox.Show("Voulez vous sauvegarder la partie ?", "Sauvegarder", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes))
 
                 {
 
@@ -330,7 +370,7 @@ namespace WarFareWPF
 
             // zoom
 
-            this.game.map.Zoom = (int)((100 / SB.RowDefinitions[3].ActualHeight) * (80 / (int)(Math.Sqrt(game.map.carte.nbCase))));
+            this.game.map.Zoom = (int)((100 / SB.RowDefinitions[3].ActualHeight) * (60 / (int)(Math.Sqrt(game.map.carte.nbCase))));
 
         }
 
@@ -370,7 +410,7 @@ namespace WarFareWPF
 
         }
 
-
+        
 
         private void Save(object sender, RoutedEventArgs e)
 
@@ -392,11 +432,15 @@ namespace WarFareWPF
 
 
 
-
         public bool pc1 { get; set; }
 
+
+
         public bool pc2 { get; set; }
+
     }
 
 }
+
+
 

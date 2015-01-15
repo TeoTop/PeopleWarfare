@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PeopleWar;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using PeopleWar;
 
 namespace WarFareWPF
 {
@@ -50,17 +51,17 @@ namespace WarFareWPF
             }
         }
 
-        public ActionListView(List<TourImp> tours)
+        public ActionListView(PartieImp partie)
         {
-            this.tours = tours;
+            this.tours = partie.tours;
             actions = new ObservableCollection<ExpanderView>();
             if (tours.Count != 0)
             {
-                tours.ForEach(t => loadTurn(t.mouvements));
+                tours.ForEach(t => loadTurn(t.mouvements, partie));
             }
             else
             {
-                this.addTurn();
+                this.addTurn(partie);
             }
         }
 
@@ -70,10 +71,16 @@ namespace WarFareWPF
             loadAction(move);
         }
 
-        public void addTurn()
+        public void addTurn(PartieImp partie)
         {
             tours.Add(new TourImp());
-            String header = "Tour x de joueur y";
+            JoueurImp j;
+            if(partie.joueurCourant == 0){
+                j = partie.j1;
+            } else {
+                j = partie.j2;
+            }
+            String header = "Tour "+ partie.getNbTour() +" de " + j.nom;
             actions.Add(new ExpanderView(header));
         }
 
@@ -82,19 +89,46 @@ namespace WarFareWPF
             String label = "null";
             if (move.combat != null)
             {
-                label = "Combat entre x et y";
+                String att = move.combat.uniteAtt.nom;
+                String def = move.combat.uniteDef.nom;
+                label = att +" attaque " + def;
+                actions.Last().Labels.Add(label);
+
+                if (move.combat.resultat == EnumBattle.CBT_VICTORY_MOVE || move.combat.resultat == EnumBattle.CBT_VICTORY_NOMOVE)
+                {
+                    def = move.combat.uniteDef.nom;
+                    label = def + " est mort";
+                    actions.Last().Labels.Add(label);
+                }
+
+                if (move.combat.resultat == EnumBattle.CBT_LOSS)
+                {
+                    att = move.combat.uniteAtt.nom;
+                    label = att + " est mort";
+                    actions.Last().Labels.Add(label);
+                }
+                
             }
             else
             {
-                label = "Déplacement de x";
+                String dep = move.uniteDep.nom;
+                label = "Déplacement de " + dep;
+                actions.Last().Labels.Add(label);
             }
-
-            actions.Last().Labels.Add(label);
         }
 
-        public void loadTurn(List<MoveImp> moves)
+        public void loadTurn(List<MoveImp> moves, PartieImp partie)
         {
-            String header = "Tour x de joueur y";
+            JoueurImp j;
+            if (partie.joueurCourant == 0)
+            {
+                j = partie.j1;
+            }
+            else
+            {
+                j = partie.j2;
+            }
+            String header = "Tour " + partie.getNbTour() + " de " + j.nom;
             actions.Add(new ExpanderView(header));
             moves.ForEach(m => loadAction(m));
         }
