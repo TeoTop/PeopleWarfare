@@ -28,7 +28,6 @@ namespace PeopleWar
             this.joueurCourant = 0;
             tours = new List<TourImp>();
             this.nbTourMax = nbTourMax;
-            this.save = false;
         }
 
         public List<TourImp> tours { get; set; }
@@ -40,8 +39,6 @@ namespace PeopleWar
         public int caseCourant { get; set; }
 
         public int joueurCourant { get; set; }
-
-        public Boolean save { get; set; }
 
         public JoueurImp j1 { get; set; }
 
@@ -65,7 +62,10 @@ namespace PeopleWar
          */
         public int getNbTour()
         {
-            return this.tours.Count() / 2 + 1;
+            double n = this.tours.Count() + 1;
+            n /= 2.0;
+            n = Math.Floor(n);
+            return (int)n;
         }
 
         public bool verifierSelUnite()

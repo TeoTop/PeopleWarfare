@@ -74,6 +74,7 @@ namespace WarFareWPF
             {
                 w.Close();
             }
+
             if (Application.Current.Windows.OfType<GameWindow>().Count() == 0)
             {
                 this.Close();

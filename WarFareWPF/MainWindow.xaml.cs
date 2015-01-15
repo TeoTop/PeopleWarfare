@@ -24,6 +24,7 @@ namespace WarFareWPF
     {
         public MainWindow()
         {
+            AbstractWindow.clearWindows();
             InitializeComponent();
         }
 

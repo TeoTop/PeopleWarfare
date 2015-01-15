@@ -230,6 +230,10 @@ namespace WarFareWPF
 
                 case EnumCase.PLAINE: this.Type = "Plaine"; this.Src = "res/plaine.png"; break;
 
+                case EnumCase.MER: this.Type = "Mer"; this.Src = "res/mer.png"; break;
+
+                case EnumCase.MARAIS: this.Type = "Marais"; this.Src = "res/marais.png"; break;
+
             }
 
             this.Row = row;

@@ -103,7 +103,7 @@ namespace PeopleWar
             {
                 move.pm = 1;
                 move.hasPlayed = true;
-                move.mv = EnumMove.MOVE;
+                move.mv = EnumMove.MOVE; 
 
                 if (((type == EnumPeuple.ELF && box == EnumCase.FORET) ||
 

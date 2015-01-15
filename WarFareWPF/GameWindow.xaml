@@ -6,6 +6,9 @@
         xmlns:controls="clr-namespace:WarFareWPF.UserControls" Closing="_this_Closing"
         Title="GameWindow" x:Name="_this" x:Uid="GameWindow" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" KeyUp="_this_KeyUp" ContentRendered="_this_ContentRendered">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="res/fondPrincipal.png" TileMode="FlipXY"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
@@ -33,18 +36,39 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2.4*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150">
-                        <Label Grid.Column="0" Content="Nombre de tours : "/>
-                        <Label Grid.Column="0" Content="{Binding game.nbTour}"/>
-                    </StackPanel>
-                    <Button Grid.Column="1" Content="Unité suivante" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="25" Click="NextUnit"/>
-                    <Button Grid.Column="2" Content="Fin tour" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="25" Click="NextTurn"/>
-                    <Button Grid.Column="3" Content="Quitter la partie" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="25" Click="Quit"/>
+                    <Grid Grid.Column="0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="res/parchemin.png"/>
+                        </Grid.Background>
+                        <!--controls:InfoPeuple DataContext="{Binding SelectedItem.SelectedUnit, ElementName=listCase}" Player="{Binding game.CurrentPlayer,ElementName=_this}"/-->
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="res/parcheminLarge.png"/>
+                        </Grid.Background>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Grid.Column="0" Content="Nombre de tours : " FontFamily="Lucida Calligraphy" FontSize="20" FontWeight="Bold"/>
+                            <Label Grid.Column="0" Content="{Binding game.nbTour}" FontFamily="Lucida Calligraphy" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="res/parcheminLarge.png"/>
+                        </Grid.Background>
+                        <Button Grid.Column="0" Content="Unité suivante" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="160" Height="70" FontFamily="Lucida Calligraphy" FontSize="15"
+                        Click="NextUnit" Template="{StaticResource ResourceKey=buttonGeneral}"/>
+
+                        <Button Grid.Column="1" Content="Fin tour" HorizontalAlignment="Center"  Width="160" Height="70" FontFamily="Lucida Calligraphy" FontSize="15"
+                        Click="NextTurn" Template="{StaticResource ResourceKey=buttonGeneral}"/>
+                    </Grid>
                 </Grid>
                 <Separator Grid.Row="1" HorizontalAlignment="Stretch" />
                 <Grid Grid.Row="2" Margin="0,0,0.4,0" Grid.RowSpan="2">
@@ -186,10 +210,12 @@
                             <RowDefinition Height="10"/>
                             <RowDefinition Height="4*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0">
-                            <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="15" Content="Tours et actions : "/>
-                            <Slider DataContext="{Binding game.map, ElementName=_this}" Value="{Binding Zoom,Converter={StaticResource ConvertZoom}}"  Minimum="0" Maximum="80" TickFrequency="5" TickPlacement="BottomRight" LargeChange="2" SmallChange="1"/>
-                            <Label DataContext="{Binding game.map, ElementName=_this}" Content="{Binding Zoom}"/>
+                        <Grid Grid.Row="0">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="res/parcheminLarge.png"/>
+                            </Grid.Background>
+                            <Slider DataContext="{Binding game.map, ElementName=_this}" Value="{Binding Zoom,Converter={StaticResource ConvertZoom}}" Minimum="0" Maximum="80" TickFrequency="5" TickPlacement="BottomRight" LargeChange="2" SmallChange="1" Width="230" Margin="-5 40 0 0"/>
+                            <!--Label DataContext="{Binding game.map, ElementName=_this}" Content="{Binding Zoom}"/-->
                             <!--Test-->
                             <!--<Polygon HorizontalAlignment="Center" DataContext="{Binding map, ElementName=_this}" Points="{Binding Zoom, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black" Fill="#FF1515E8">
                         <Polygon.RenderTransform>
@@ -197,21 +223,25 @@
                         </Polygon.RenderTransform>
                     </Polygon>-->
                             <!--FinTest-->
-                        </StackPanel>
+                        </Grid>
                         <Separator Grid.Row="1" HorizontalAlignment="Stretch"/>
                         <!--<ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <StackPanel Name="ActionList" DataContext="{Binding al, ElementName=_this}" >
                             <Label Content="Liste des actions :" Padding="10,0" FontSize="13" Height="20"/>
                         </StackPanel>
                     </ScrollViewer>-->
-                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0 10 0 10">
-                            <StackPanel>
+                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0 10 0 10" Padding="30 20 30 30">
+                            <ScrollViewer.Background>
+                                <ImageBrush ImageSource="res/parcheminLong.png"/>
+                            </ScrollViewer.Background>
+                            <StackPanel >
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Lucida Calligraphy" FontSize="16" Margin="30,0,0,0" Content="Tours et actions : "/>
                                 <ItemsControl ItemsSource="{Binding actions}" DataContext="{Binding game.al, ElementName=_this}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Expander Header="{Binding Header}">
+                                            <Expander Header="{Binding Header}" FontFamily="Lucida Calligraphy" FontSize="15">
                                                 <StackPanel>
-                                                    <ItemsControl ItemsSource="{Binding Labels}"/>
+                                                    <ItemsControl ItemsSource="{Binding Labels}" Margin="40 0 0 0" FontFamily="Lucida Calligraphy" FontSize="15"/>
                                                 </StackPanel>
                                             </Expander>
                                         </DataTemplate>
@@ -233,18 +263,18 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" DataContext="{Binding game.J1, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="20" Content="{Binding joueur.nom}"/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,50,0,0" FontSize="15" Content="Nombre d'unités : "/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="185,50,0,0" FontSize="15" Content="{Binding peuple.nbUnite}"/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,80,0,0" FontSize="15" Content="Nombre de points : "/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding nbPoints}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,30,0,0" FontFamily="Lucida Calligraphy" FontSize="20" Content="{Binding joueur.nom}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,70,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre d'unités : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,68,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding peuple.nbUnite}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre de points : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="265,98,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding nbPoints}"/>
                     </Grid>
                     <Grid Grid.Column="1" DataContext="{Binding game.J2, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" FontSize="20" Content="{Binding joueur.nom}"/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,50,0,0" FontSize="15" Content="Nombre d'unités : "/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="185,50,0,0" FontSize="15" Content="{Binding peuple.nbUnite}"/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,80,0,0" FontSize="15" Content="Nombre de points : "/>
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,80,0,0" FontSize="15" Content="{Binding nbPoints}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,30,0,0" FontFamily="Lucida Calligraphy" FontSize="20" Content="{Binding joueur.nom}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,70,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre d'unités : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,68,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding peuple.nbUnite}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre de points : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="265,98,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding nbPoints}"/>
                     </Grid>
                 </Grid>
             </Grid>

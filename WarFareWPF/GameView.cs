@@ -46,6 +46,8 @@ namespace WarFareWPF
 
         public bool alreadySaved { get; set; }
 
+        public bool alreadyFinished { get; set; }
+
         public string fileName { get; set; }
 
         public PlayerView J1
@@ -77,9 +79,7 @@ namespace WarFareWPF
         public String nbTour
 
         {
-
             get { return game.getNbTour() + "/" + game.nbTourMax; }
-
         }
 
         public EnumBattle battle { get; set; }
@@ -127,13 +127,15 @@ namespace WarFareWPF
 
             J2.peuple.units.ForEach(unit => map.cases[unit.unit.pos].unitsJ2.Add(unit));
 
-            this.al = new ActionListView(game.tours);
+            this.al = new ActionListView(game);
 
             FinPartie = false;
 
             getCurrentPlayer().IsMyTurn = true;
 
             alreadySaved = false;
+            alreadyFinished = false;
+
 
             fileName = "";
 
@@ -258,6 +260,7 @@ namespace WarFareWPF
                         {
 
                             case EnumMove.MOVE:
+                                move.uniteDep = unit.unit;
 
                                 box.addUnit(unit, CurrentPlayer);
 
@@ -289,6 +292,10 @@ namespace WarFareWPF
                                         break;
 
                                     case EnumBattle.CBT_LOSS:
+                                        if (getOtherPlayer().peuple.peuple.getType() == EnumPeuple.ORC)
+                                        {
+                                            battleCmd.unitDef.unit.point += 1;
+                                        }
 
                                         SelectedBoxForUnit.destroyUnit(battleCmd.unitAtt.unit, CurrentPlayer);
 
@@ -297,6 +304,11 @@ namespace WarFareWPF
                                         break;
 
                                     case EnumBattle.CBT_VICTORY_MOVE:
+
+                                        if (getCurrentPlayer().peuple.peuple.getType() == EnumPeuple.ORC)
+                                        {
+                                            battleCmd.unitAtt.unit.point += 1;
+                                        }
 
                                         box.destroyUnit(battleCmd.unitDef.unit, OtherPlayer);
 
@@ -311,6 +323,11 @@ namespace WarFareWPF
                                         break;
 
                                     case EnumBattle.CBT_VICTORY_NOMOVE:
+
+                                        if (getCurrentPlayer().peuple.peuple.getType() == EnumPeuple.ORC)
+                                        {
+                                            battleCmd.unitAtt.unit.point += 1;
+                                        }
 
                                         box.destroyUnit(battleCmd.unitDef.unit, OtherPlayer);
 
@@ -353,29 +370,19 @@ namespace WarFareWPF
 
 
         public bool verifierFinPartie()
-
         {
-
             JoueurImp j;
 
             if ((j = (JoueurImp)game.verifierFinPartie()) != null)
-
             {
-
                 FinPartie = true;
-
                 // j est vainqueur
-
                 VictoryWindows vw = new VictoryWindows(j);
-
                 vw.Show();
-
+                alreadyFinished = true;
                 return true;
-
             }
-
             return false;
-
         }
 
 
@@ -400,7 +407,7 @@ namespace WarFareWPF
 
             }*/
 
-            al.addTurn();
+            al.addTurn(this.game);
 
             if (!this.verifierFinPartie())
 
@@ -413,41 +420,26 @@ namespace WarFareWPF
         }
 
         public void save()
-
         {
-
             try
-
             {
-
                 SaveFileDialog saveFileDialog = null;
                 bool saveFromDialog = false;
-
                 bool dialog = true;
-
+                
                 if (fileName == "")
-
                 {
-
                     saveFileDialog = new SaveFileDialog();
-
                     saveFileDialog.FileName = "peopleWarfare_save";     //nom par default du fichier
-
                     saveFileDialog.Filter = "PeopleWarfare (*.ppw)|*.ppw|Tous les fichiers (*.*)|*.*";  //liste des extension
-
                     saveFileDialog.FilterIndex = 1;     // met ppw comme extension par default, 2 pour l'autre
-
                     saveFileDialog.Title = "Sauvegarde de partie de PeopleWarfare";  //titre de la fenetre
-
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // trouver le dossier bureau
-
                     dialog = (bool)saveFileDialog.ShowDialog();
                     saveFromDialog = true;
-
                 }
 
                 if (dialog)
-
                 {
                     if (saveFromDialog)
                     {
@@ -455,39 +447,22 @@ namespace WarFareWPF
                     }
 
                     IFormatter formatter = new BinaryFormatter();
-
                     Stream stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-
                     formatter.Serialize(stream, game);
-
                     stream.Close();
-
                     this.alreadySaved = true;
-
                 }
-
             }
-
             catch (Exception ex)
-
             {
-
                 MessageBox.Show("Erreur lors de la sauvegarde: " + ex.Message);
-
             }
-
         }
 
-
-
         public void saveAs()
-
         {
-
             fileName = "";
-
             this.save();
-
         }
 
 

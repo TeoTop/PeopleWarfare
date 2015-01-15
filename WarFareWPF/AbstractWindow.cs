@@ -101,5 +101,20 @@ namespace WarFareWPF
         public static bool checkJ1 { get; set; }
 
         public static bool checkJ2 { get; set; }
+
+        public static void clearWindows()
+        {
+            j1 = "Joueur1";
+            j2 = "Joueur2";
+            _p1 = EnumPeuple.NULL;
+            _p2 = EnumPeuple.NULL;
+            _carte = EnumCarte.DEMO;
+            _skinJ1 = -1;
+            _skinJ2 = -1;
+            checkJ1 = false;
+            checkJ2 = false;
+            AbstractWindow.nomUniteJ1.Clear();
+            AbstractWindow.nomUniteJ2.Clear();
+        }
     }
 }

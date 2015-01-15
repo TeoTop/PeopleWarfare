@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>res\logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -263,17 +266,20 @@
     <Resource Include="res\button.png" />
     <Resource Include="res\buttonOn.png" />
     <Resource Include="res\precOn.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="res\fondPrincipal.png" />
+    <Resource Include="res\parcheminLong.png" />
+    <Resource Include="res\parcheminLarge.png" />
     <Resource Include="res\star1.png" />
     <Resource Include="res\star2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="res\parcheminFin.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="res\parcheminLargeFin.png" />
     <Resource Include="res\parcheminLargeTampon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

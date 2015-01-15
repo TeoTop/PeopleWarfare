@@ -12,5 +12,7 @@ namespace PeopleWar
         FORET,
         PLAINE,
         MONTAGNE,
+        MER,
+        MARAIS,
     }
 }

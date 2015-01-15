@@ -13,7 +13,6 @@ namespace PeopleWar
 {
 
     [Serializable]
-
     public class CombatImp : Combat
 
     {
@@ -62,7 +61,7 @@ namespace PeopleWar
 
         public int nbCbt { get; set; }
 
-
+        public EnumBattle resultat { get; set; }
 
         public List<Round> rounds { get; set; }
 
@@ -96,7 +95,7 @@ namespace PeopleWar
 
             this.nbCbt = 0;
 
-
+            resultat = EnumBattle.CBT_DRAW;
 
             rounds = new List<Round>();
 
@@ -289,11 +288,12 @@ namespace PeopleWar
                     if (this.move)
 
                     {
-
+                        resultat = EnumBattle.CBT_VICTORY_MOVE;
                         return EnumBattle.CBT_VICTORY_MOVE;
 
                     }
 
+                    resultat = EnumBattle.CBT_VICTORY_NOMOVE;
                     return EnumBattle.CBT_VICTORY_NOMOVE;
 
                 }
@@ -311,7 +311,7 @@ namespace PeopleWar
                 if (uniteAtt.vie <= 0)
 
                 {
-
+                    resultat = EnumBattle.CBT_LOSS;
                     return EnumBattle.CBT_LOSS;
 
                 }
