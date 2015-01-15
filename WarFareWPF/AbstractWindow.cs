@@ -45,5 +45,57 @@ namespace WarFareWPF
                 _carte = value;
             }
         }
+
+        private static int _skinJ1 = -1;
+        public static int skinJ1
+        {
+            get
+            {
+                return _skinJ1;
+            }
+            set
+            {
+                _skinJ1 = value;
+            }
+        }
+
+        private static int _skinJ2 = -1;
+        public static int skinJ2
+        {
+            get
+            {
+                return _skinJ2;
+            }
+            set
+            {
+                _skinJ2 = value;
+            }
+        }
+
+        private static List<string> _nomUniteJ1 = new List<string>();
+        public static List<string> nomUniteJ1
+        {
+            get
+            {
+                return _nomUniteJ1;
+            }
+            set
+            {
+                _nomUniteJ1 = value;
+            }
+        }
+
+        private static List<string> _nomUniteJ2 = new List<string>();
+        public static List<string> nomUniteJ2
+        {
+            get
+            {
+                return _nomUniteJ2;
+            }
+            set
+            {
+                _nomUniteJ2 = value;
+            }
+        }
     }
 }

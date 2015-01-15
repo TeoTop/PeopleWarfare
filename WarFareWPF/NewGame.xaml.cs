@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PeopleWar;
+
 namespace WarFareWPF
 {
     /// <summary>
@@ -74,6 +75,21 @@ namespace WarFareWPF
             }
         }
 
+        public EnumPeuple orc
+        {
+            get { return EnumPeuple.ORC; }
+        }
+
+        public EnumPeuple elf
+        {
+            get { return EnumPeuple.ELF; }
+        }
+
+        public EnumPeuple nain
+        {
+            get { return EnumPeuple.NAIN; }
+        }
+
 
         public NewGame()
         {
@@ -125,14 +141,14 @@ namespace WarFareWPF
             }
         }
 
-        private void CreateGame(object sender, RoutedEventArgs e)
+        private void Suivant(object sender, RoutedEventArgs e)
         {
+            //ajouter le choix des skins
             DirecteurPartie dp = new DirecteurPartie();
             dp.definirMonteur(new MonteurNvllePartie());
             PartieImp partie = dp.creerPartie(this.j1.Text, this.j2.Text, this.carte, (EnumPeuple)this.p1.SelectedIndex, (EnumPeuple)this.p2.SelectedIndex);
-            GameWindow gw = new GameWindow(partie);
-            gw.Show();
-            Dictionary.gw = gw;    //trnasférer dans le contructeur de GameWindows;
+            NewGame2 ng2 = new NewGame2(partie);
+            ng2.Show();
             this.Close();
         }
 
@@ -164,13 +180,14 @@ namespace WarFareWPF
         
         private bool notAllowedName(string name)
         {
-            Regex r = new Regex(@"^[a-zA-Z]+[A-Za-z|\d]*$");
+            Regex r = new Regex(@"^[a-zA-Z]+[A-Za-z\d\s]*$");
             Match m = r.Match(name);
             return !m.Success;
         }
 
         private void p1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             if (this.p1 == null || this.p2 == null)
             {
                 this.errorPeuple = false;
@@ -190,7 +207,7 @@ namespace WarFareWPF
         private void Prec(object sender, RoutedEventArgs e)
         {
             MainWindow m = new MainWindow();
-            m.Show();
+			m.Show();
             this.Close();
         }
 

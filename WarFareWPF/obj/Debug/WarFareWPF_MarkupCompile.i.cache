@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\
+D:\INSA\PeopleWarfare\PeopleWarfare\WarFareWPF\obj\Debug\
 WarFareWPF
 none
 false
 DEBUG;TRACE
-C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\App.xaml
-11-1129617362
+D:\INSA\PeopleWarfare\PeopleWarfare\WarFareWPF\App.xaml
+131690268594
 
-37724562359
-171213544811
-BattleWindow.xaml;GameWindow.xaml;LeaveWindows.xaml;MainWindow.xaml;Dictionary.xaml;NewGame.xaml;SelectUnit.xaml;UserControls\InfoPeuple.xaml;UserControls\NewRoundAnim.xaml;UserControls\TextBlockAnim.xaml;VictoryWindows.xaml;
+39-2082853816
+17109607054
+BattleWindow.xaml;GameWindow.xaml;LeaveWindows.xaml;MainWindow.xaml;Dictionary.xaml;NewGame.xaml;NewGame2.xaml;Sauvegarde.xaml;SelectUnit.xaml;UserControls\InfoPeuple.xaml;UserControls\NewRoundAnim.xaml;UserControls\TextBlockAnim.xaml;VictoryWindows.xaml;
 
 False
 

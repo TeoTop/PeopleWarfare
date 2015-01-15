@@ -12,6 +12,8 @@ namespace PeopleWar
 
         public List<UniteImp> unites { get; set; }
 
+        public int skin { get; set; }
+
         public Unite getUniteActuel()
         {
             return unites[uniteActuel];
@@ -46,7 +48,7 @@ namespace PeopleWar
             return unites.Count;
         }
 
-        public void creerUnites(int nbUnite, int posu)
+        public void creerUnites(int nbUnite, int posu, String[] noms)
         {
             //on instancie la liste d'unités
             unites = new List<UniteImp>();
@@ -54,7 +56,7 @@ namespace PeopleWar
             //on boucle dur le nombre d'unité pour les instancier et les ajouter à la liste
             for (int i = 0; i < nbUnite; i++)
             {
-                unites.Add(new UniteImp(posu));
+                unites.Add(new UniteImp(posu, noms[i]));
             }
         }
         public void destroy(Unite unite)

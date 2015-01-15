@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PeopleWar
 {
+    [Serializable]
     public enum EnumBattleAnim
     {
         DP1,

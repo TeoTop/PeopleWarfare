@@ -3,18 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="PeopleWarfare" Height="350" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,0">
+        <Grid.Background>
+            <ImageBrush ImageSource="res/menuBack.png" TileMode="FlipX"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3.5*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Label Content="PeopleWarFare" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" FontFamily="SketchFlow Print" FontWeight="Bold" FontStyle="Italic" Width="213"/>
+        <Label Content="PeopleWarFare" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0" FontSize="34" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontStyle="Italic" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Nouvelle partie" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="100" Height="50" Click="NewGame" Grid.Row="1"/>
-            <Button Content="Charger partie" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="100" Height="50" Click="ChGame" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="Nouvelle partie" Name="nv" HorizontalAlignment="Right" Width="160" Height="70" VerticalAlignment="Center"  Click="NewGame" Grid.Column="0" FontFamily="Lucida Calligraphy" FontSize="14"
+                    Template="{StaticResource ResourceKey=buttonGeneral}" />
+            <Image Grid.Column="1" Source="/res/logo.png" VerticalAlignment="Center" HorizontalAlignment="Center" Height="150"/>
+            <Button Content="Charger partie" HorizontalAlignment="Left" Width="160" Height="70" VerticalAlignment="Center" Click="ChGame" Grid.Column="2" FontFamily="Lucida Calligraphy" FontSize="14"
+                    Template="{StaticResource ResourceKey=buttonGeneral}" />
         </Grid>
     </Grid>
 </Window>

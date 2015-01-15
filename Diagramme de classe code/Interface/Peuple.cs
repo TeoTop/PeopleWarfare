@@ -44,9 +44,11 @@ namespace PeopleWar
         /**
          * People's units are created depending on unit number.
          * @param int nbUnite
+         * @param int posu
+         * @param List<String> noms
          * @return void
          */
-        void creerUnites(int nbUnite, int posu);
+        void creerUnites(int nbUnite, int posu, String[] noms);
 
         /**
          * Return the type of the people

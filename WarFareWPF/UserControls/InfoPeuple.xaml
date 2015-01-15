@@ -6,20 +6,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Height="16">
-            <Grid.Background>
-                <ImageBrush ImageSource="../res/ombre.png" TileMode="FlipX"/>
-            </Grid.Background>
-        </Grid>
-        <Image Grid.Row="1" Width="80" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left">
+    <Grid Height="130">
+        <Grid.Background>
+            <ImageBrush ImageSource="../res/parchemin.png" TileMode="FlipX"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding nom}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
+        <Image Grid.Column="0" Source="../res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 30 20 0" Width="22" Height="22"/>
+        <Image Grid.Column="0" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
             <Image.Source>
                 <MultiBinding Converter="{StaticResource PlayerToSrc}">
                     <Binding ElementName="info" Path="Player"/>
@@ -28,53 +25,37 @@
                 </MultiBinding>
             </Image.Source>
         </Image>
-        <Grid Grid.Row="2" Height="16"/>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="../res/health.png" Width="32" Height="32" HorizontalAlignment="Right"/>
-                <Label Grid.Column="1" Content="{Binding vie}" HorizontalAlignment="Left"/>
+                <Image Grid.Column="0" Source="../res/healthL.png" Width="32" Height="32" Margin="0 20 0 0"/>
+                <Label Grid.Column="1" Content="{Binding vie}" VerticalAlignment="Center" Margin="-5 20 0 0"/>
+                <Image Grid.Column="2" Source="../res/bootL.png" Width="32" Height="32" Margin="-5 20 0 0"/>
+                <Label Grid.Column="3" Content="{Binding pm}" VerticalAlignment="Center" Margin="-5 20 0 0"/>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="../res/sword.png" Width="32" Height="32"/>
-                <Label Grid.Column="1" Content="{Binding attaque}" />
-            </Grid>
-            <Grid Grid.Column="2">
-                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="../res/shield.png" Width="32" Height="32"/>
-                <Label Grid.Column="1" Content="{Binding defense}" />
+                <Image Grid.Column="0" Source="../res/swordL.png" Width="32" Height="32" Margin="0 -20 0 0"/>
+                <Label Grid.Column="1" Content="{Binding attaque}" VerticalAlignment="Center" Margin="-5 -20 0 0"/>
+                <Image Grid.Column="2" Source="../res/shieldL.png" Width="32" Height="32" Margin="-5 -20 0 0"/>
+                <Label Grid.Column="3" Content="{Binding defense}" VerticalAlignment="Center" Margin="-5 -20 0 0"/>
             </Grid>
-            <Grid Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="../res/boot.png" Width="32" Height="32"/>
-                <Label Grid.Column="1" Content="{Binding pm}" />
-            </Grid>
-            <Image Grid.Column="5" Source="../res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" Width="32" Height="32"/>
-        </Grid>
-        <Grid Grid.Row="4" Height="16">
-            <Grid.Background>
-                <ImageBrush ImageSource="../res/ombre.png" TileMode="FlipX"/>
-            </Grid.Background>
         </Grid>
     </Grid>
 </UserControl>

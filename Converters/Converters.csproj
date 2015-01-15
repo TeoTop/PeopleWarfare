@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\helomari\Desktop\</OutputPath>
+    <OutputPath>..\..\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -60,6 +60,7 @@
     <Compile Include="ConvertZoom.cs" />
     <Compile Include="EnumCarteToIsCheckedConverter.cs" />
     <Compile Include="ListToVis.cs" />
+    <Compile Include="PeopleTypeToOpacityConverter.cs" />
     <Compile Include="PlayerToItemsSourceConverter.cs" />
     <Compile Include="PlayerToSrc.cs" />
     <Compile Include="PositionToVisibilityConverter.cs" />

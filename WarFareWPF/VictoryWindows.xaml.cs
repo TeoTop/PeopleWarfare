@@ -44,19 +44,19 @@ namespace WarFareWPF
             switch (winner.peuple.getType())
             {
                 case EnumPeuple.ORC :
-                    urlImages.Add(new MyString("res/elf.png"));
-                    urlImages.Add(new MyString("res/orc.png"));
-                    urlImages.Add(new MyString("res/nain.png"));
+                    urlImages.Add(new MyString("res/orc1.png"));
+                    urlImages.Add(new MyString("res/orc3.png"));
+                    urlImages.Add(new MyString("res/orc2.png"));
                     break;
                 case EnumPeuple.ELF:
-                    urlImages.Add(new MyString("res/orc.png"));
-                    urlImages.Add(new MyString("res/elf.png"));
-                    urlImages.Add(new MyString("res/nain.png"));
+                    urlImages.Add(new MyString("res/elf1.png"));
+                    urlImages.Add(new MyString("res/elf3.png"));
+                    urlImages.Add(new MyString("res/elf2.png"));
                     break;
                 case EnumPeuple.NAIN:
-                    urlImages.Add(new MyString("res/orc.png"));
-                    urlImages.Add(new MyString("res/nain.png"));
-                    urlImages.Add(new MyString("res/elf.png"));
+                    urlImages.Add(new MyString("res/nain1.png"));
+                    urlImages.Add(new MyString("res/nain3.png"));
+                    urlImages.Add(new MyString("res/nain2.png"));
                     break;
             }
 
@@ -69,8 +69,8 @@ namespace WarFareWPF
          */
         private void backToMenu(object sender, RoutedEventArgs e)
         {
-            /*MainWindow mw = new MainWindow();
-            mw.Show();*/
+            MainWindow mw = new MainWindow();
+            mw.Show();
             this.Close();
             Window w = Application.Current.Windows.OfType<GameWindow>().First();
             if (w != null)
@@ -87,7 +87,6 @@ namespace WarFareWPF
         {
             this.Close();
         }
-
 
     }
 }

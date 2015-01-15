@@ -8,10 +8,13 @@ namespace PeopleWar
     [Serializable]
     public class Orc : PeupleA
     {
+        public readonly string[] noms = { "Orc1", "Orc2", "Orc3", "Orc4", "Orc5", "Orc6", "Orc7", "Orc8" };
+               
         public Orc(int nbUnite, int posu)
         {
             // on crée les unités du peuple en fonction de nbUnite (méthode dans PeupleA)
-            creerUnites(nbUnite, posu);
+            skin = 0;
+            creerUnites(nbUnite, posu, noms);
         }
 
         public override string getInformation()

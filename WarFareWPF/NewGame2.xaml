@@ -1,0 +1,131 @@
+﻿<Window x:Class="WarFareWPF.NewGame2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NewGame2" Height="550" Width="900" WindowStartupLocation="CenterScreen" Name="_this" Closing="_this_Closing">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="res/menuBack.png" TileMode="FlipX"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="61*"/>
+        </Grid.RowDefinitions>
+        <Button VerticalAlignment="Top" Width="32" Height="32" Margin="5 10 0 0" HorizontalAlignment="Left" Click="Prec" IsTabStop="False" Template="{StaticResource ResourceKey=buttonPrecTemplate}" Grid.Row="0"/>
+        <Label Content="Nom des unités" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{Binding partie.j1.nom, ElementName=_this}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
+            <Label Content="{Binding partie.j2.nom, ElementName=_this}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer.Style>
+                    <Style TargetType="{x:Type ScrollViewer}">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <ScrollContentPresenter Grid.Column="1"/>
+
+                                        <ScrollBar Name="PART_VerticalScrollBar"
+                                            Value="{TemplateBinding VerticalOffset}"
+                                            Maximum="{TemplateBinding ScrollableHeight}"
+                                            ViewportSize="{TemplateBinding ViewportHeight}"
+                                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                        <ScrollBar Name="PART_HorizontalScrollBar"
+                                            Orientation="Horizontal"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Value="{TemplateBinding HorizontalOffset}"
+                                            Maximum="{TemplateBinding ScrollableWidth}"
+                                            ViewportSize="{TemplateBinding ViewportWidth}"
+                                            Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ScrollViewer.Style>
+                <StackPanel>
+                    <ListBox Name="items1" ItemsSource="{Binding partie.j1.peuple.unites, ElementName=_this}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0"
+                             Background="Transparent" BorderBrush="Transparent">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="{Binding nName, ElementName=_this}"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding nom}" KeyUp="p1_KeyUp" TabIndex="0" TextWrapping="Wrap" Width="300" FontSize="15" Height="25" Margin="0 10 0 10"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <ListBox Name="items2" ItemsSource="{Binding partie.j2.peuple.unites, ElementName=_this}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0"
+                             Background="Transparent" BorderBrush="Transparent">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="{Binding nName, ElementName=_this}"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding nom}" KeyUp="p1_KeyUp" TabIndex="0" TextWrapping="Wrap" Width="300" FontSize="15" Height="25" Margin="0 10 0 10"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="32" Height="32" Margin="-250 0 0 0" Click="precSkin1" IsTabStop="False" Template="{StaticResource ResourceKey=buttonPrecTemplate}"/>
+            <Image Grid.Column="0" Height="150" Width="150" Source="{Binding ElementName=_this, Path=skinSrc1}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-50 -20 0 0"/>
+            <Button Grid.Column="0" VerticalAlignment="Center" Width="32" Height="32" Margin="150 0 0 0" HorizontalAlignment="Center" Click="suivSkin1" IsTabStop="False" Template="{StaticResource ResourceKey=buttonPrecTemplate}">
+                <Button.RenderTransform>
+                    <RotateTransform CenterX="15" CenterY="15" Angle="180"/>
+                </Button.RenderTransform>
+            </Button>
+
+            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="32" Height="32" Margin="-150 0 0 0" Click="precSkin2" IsTabStop="False" Template="{StaticResource ResourceKey=buttonPrecTemplate}"/>
+            <Image Grid.Column="1" Height="150" Width="150" Source="{Binding ElementName=_this, Path=skinSrc2}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="50 -20 0 0"/>
+            <Button Grid.Column="1" VerticalAlignment="Center" Width="32" Height="32" Margin="250 0 0 0" HorizontalAlignment="Center" Click="suivSkin2" IsTabStop="False" Template="{StaticResource ResourceKey=buttonPrecTemplate}">
+                <Button.RenderTransform>
+                    <RotateTransform CenterX="15" CenterY="15" Angle="180"/>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+        <Button Grid.Row="3" Content="Commencer" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="160" Height="70" FontFamily="Lucida Calligraphy" FontSize="15" Margin="0 0 0 50"
+                Click="CreateGame" Template="{StaticResource ResourceKey=buttonGeneral}" IsEnabled="{Binding ElementName=_this,Path=reverseError}"/>
+        <Label Content="Veuillez vérifier vos informations" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Bottom" Margin="0,0,0,15" Foreground="Red" FontWeight="Bold" Grid.Row="3" Visibility="{Binding ElementName=_this,Path=errorName, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+    </Grid>
+</Window>

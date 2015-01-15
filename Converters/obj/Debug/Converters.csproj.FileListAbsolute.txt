@@ -11,20 +11,6 @@ C:\Users\théo\Desktop\PeopleWarfare-master\Converters\obj\Debug\Converters.pdb
 D:\INSA\gen\Converters.exe.config
 D:\INSA\gen\Converters.exe
 D:\INSA\gen\Converters.pdb
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Converters.exe.config
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Converters.exe
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Converters.pdb
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Diagramme de classe code.dll
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Wrapper.dll
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Diagramme de classe code.pdb
-D:\INSA\PeopleWarfare\Converters\bin\Debug\Wrapper.pdb
-D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.csprojResolveAssemblyReference.cache
-D:\INSA\PeopleWarfare\Converters\obj\Debug\App.g.cs
-D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters_MarkupCompile.cache
-D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.Properties.Resources.resources
-D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.csproj.GenerateResource.Cache
-D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.exe
-D:\INSA\PeopleWarfare\Converters\obj\Debug\Converters.pdb
 H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters.csprojResolveAssemblyReference.cache
 H:\4INFO\PeopleWarfare\Converters\obj\Debug\App.g.cs
 H:\4INFO\PeopleWarfare\Converters\obj\Debug\Converters_MarkupCompile.cache
