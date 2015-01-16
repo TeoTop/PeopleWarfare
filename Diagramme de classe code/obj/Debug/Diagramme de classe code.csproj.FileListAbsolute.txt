@@ -6,3 +6,5 @@ C:\Users\théo\Desktop\PeopleWarfare-master\Diagramme de classe code\obj\Debug\D
 D:\INSA\gen\Diagramme de classe code.dll
 D:\INSA\gen\Diagramme de classe code.pdb
 D:\INSA\PeopleWarfare\Diagramme de classe code.dll
+C:\Users\helomari\Desktop\Diagramme de classe code.dll
+C:\Users\helomari\Desktop\Diagramme de classe code.pdb

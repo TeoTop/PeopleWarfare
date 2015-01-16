@@ -14,6 +14,13 @@ namespace WarFareWPF
 
         public PeupleA peuple { get; set; }
         public string Src { get; set; }
+
+        public string Info {
+            get
+            {
+                return peuple.getInformation();
+            }
+        }
         public string Type { get; set; }
         public string Color { get; set; }
         public int nbUnite

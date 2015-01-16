@@ -144,6 +144,7 @@
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListBoxItem}">
                                             <Setter Property="Padding" Value="0,0,0,0"/>
+                                            <Setter Property="Height" Value="130"/>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
@@ -266,6 +267,7 @@
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,68,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding peuple.nbUnite}"/>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre de points : "/>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="265,98,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding nbPoints}"/>
+                        <Label HorizontalAlignment="Right" VerticalAlignment="Top" Width="650" Margin="0,45,0,0" FontFamily="Lucida Calligraphy" FontSize="13" Content="{Binding peuple.Info}"/>
                     </Grid>
                     <Grid Grid.Column="1" DataContext="{Binding game.J2, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,30,0,0" FontFamily="Lucida Calligraphy" FontSize="20" Content="{Binding joueur.nom}"/>
@@ -273,6 +275,7 @@
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,68,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding peuple.nbUnite}"/>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre de points : "/>
                         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="265,98,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding nbPoints}"/>
+                        <Label HorizontalAlignment="Right" VerticalAlignment="Top" Width="650" Margin="0,45,0,0" FontFamily="Lucida Calligraphy" FontSize="13" Content="{Binding peuple.Info}"/>
                     </Grid>
                 </Grid>
             </Grid>

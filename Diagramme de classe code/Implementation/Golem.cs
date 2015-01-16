@@ -28,12 +28,12 @@ namespace PeopleWar
 
         public override string getInformation()
         {
-            return "Peuple : \n\t- Race : " + this.GetType().Name + "\n\t- Bonus :" +
-                "\n\t\t- Un Golem gagne un point de plus lorsqu'il est sur une case marais." +
-                "\n\t\t- Les golems sont grands donc ils peuvent parcourir plus de distance. Ainsi, un Golem divise son coup de" +
-                " déplacement par deux sur chaque case. Mais comme ils sont vieux, il ne pourront pas se déplacer au prochain " +
-                " tour si ils se déplacent deux fois." +
-                "\n\t- Malus :\n\t\t- Un Golem ne peut pas se déplacer sur une case mer.";
+            return "Race : " + this.GetType().Name + 
+                "\nBonus :" +
+                " - Un Golem gagne un point de plus lorsqu'il est sur une case Marais." +
+                "\n\t  - Les golems peuvent se déplacer deux foix par tour. Mais ils ne" +
+                "\n\t\t pourront pas se déplacer au prochain tour s'ils le font." +
+                "\n\t- Malus : Un Golem ne peut pas se déplacer sur une case Mer.";
         }
 
         public override EnumPeuple getType()

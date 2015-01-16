@@ -2,3 +2,8 @@ H:\4INFO\WarFareWPF.exe.config
 H:\4INFO\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.exe
 H:\4INFO\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.pdb
 D:\INSA\PeopleWarfare\WarFareWPF.exe
+C:\Users\helomari\Desktop\WarFareWPF.exe.config
+C:\Users\helomari\Desktop\WarFareWPF.exe
+C:\Users\helomari\Desktop\WarFareWPF.pdb
+C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\bin\Debug\WarFareWPF.exe
+C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\bin\Debug\Wrapper.pdb

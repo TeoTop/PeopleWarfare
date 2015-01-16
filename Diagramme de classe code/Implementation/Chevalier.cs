@@ -28,11 +28,13 @@ namespace PeopleWar
 
         public override string getInformation()
         {
-            return "Peuple : \n\t- Race : " + this.GetType().Name + "\n\t- Bonus :" +
-                "\n\t\t- Le coût de déplacement sur une case Mer est divisé par deux." +
-                "\n\t\t- L'unité Chevalier rapporte 1 point de bonus supplémentaire si elle se trouve sur la même case qu'un." +
-                " autre Chevalier" +
-                "\n\t- Malus :\n\t\t- Une unité Chevalier perd un point sur les cases desert, montagne et marais.";
+            return "Race : " + this.GetType().Name + 
+                "\n- Bonus :" +
+                " - Le coût de déplacement sur une case Mer est divisé par deux." +
+                "\n\t  - L'unité Chevalier rapporte 1 point de bonus supplémentaire si elle" +
+                "\n\t\t se trouve sur la même case qu'un autre Chevalier." +
+                "\n- Malus : Une unité Chevalier perd un point sur les cases Desert, Montagne" +
+                "\n\t\t ou Marais.";
         }
 
         public override EnumPeuple getType()

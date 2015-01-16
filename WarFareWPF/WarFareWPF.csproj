@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>../../</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -76,9 +76,6 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Command\KeyClass.cs" />
-    <Compile Include="LeaveWindows.xaml.cs">
-      <DependentUpon>LeaveWindows.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MapView.cs" />
     <Compile Include="MyString.cs" />
     <Compile Include="MyTask.cs" />
@@ -91,9 +88,6 @@
     <Compile Include="PeopleView.cs" />
     <Compile Include="PlayerView.cs" />
     <Compile Include="RoundView.cs" />
-    <Compile Include="Sauvegarde.xaml.cs">
-      <DependentUpon>Sauvegarde.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SelectUnit.xaml.cs">
       <DependentUpon>SelectUnit.xaml</DependentUpon>
     </Compile>
@@ -119,10 +113,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LeaveWindows.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,10 +135,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewGame2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Sauvegarde.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

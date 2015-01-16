@@ -40,7 +40,7 @@ namespace PeopleWar
         /**
          * Constructor
          */
-        public TourImp(int tour, int joueur)
+        public TourImp(int tour = 0, int joueur = 0)
         {
             mouvements = new List<MoveImp>();
             this.tour = tour;

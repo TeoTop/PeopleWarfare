@@ -164,7 +164,7 @@ namespace WarFareWPF
 
         private bool allowedName(string name)
         {
-            Regex r = new Regex(@"^[a-zA-Z]+[A-Za-z|\d]*$");
+            Regex r = new Regex(@"^[a-zA-Z]+[A-Za-z|\d\s]*$");
             Match m = r.Match(name);
             return !m.Success;
         }

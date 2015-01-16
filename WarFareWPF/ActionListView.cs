@@ -91,16 +91,12 @@ namespace WarFareWPF
          */
         public void addTurn(PartieImp partie)
         {
-            tours.Add(new TourImp(partie.getNbTour(), partie.joueurCourant));
+            TourImp t = new TourImp();
+            partie.incTr();
+            tours.Add(new TourImp(partie.nbTour, partie.joueurCourant));
 
-            JoueurImp j;
-            if(partie.joueurCourant == 0){
-                j = partie.j1;
-            } else {
-                j = partie.j2;
-            }
-            
-            String header = "Tour "+ partie.getNbTour() +" de " + j.nom;
+            JoueurImp j = (JoueurImp)partie.getJoueur(partie.joueurCourant);
+            String header = "Tour " + partie.nbTour + " de " + j.nom;
             actions.Add(new ExpanderView(header));
         }
 
@@ -154,16 +150,8 @@ namespace WarFareWPF
          */
         public void loadTurn(TourImp tour, PartieImp partie)
         {
-            JoueurImp j;
-            if (tour.joueur == 0)
-            {
-                j = partie.j1;
-            }
-            else
-            {
-                j = partie.j2;
-            }
-            String header = "Tour " + (tour.tour+1) + " de " + j.nom;
+            JoueurImp j = (JoueurImp)partie.getJoueur(partie.joueurCourant);
+            String header = "Tour " + tour.tour + " de " + j.nom;
             actions.Add(new ExpanderView(header));
             tour.mouvements.ForEach(m => loadAction(m));
         }

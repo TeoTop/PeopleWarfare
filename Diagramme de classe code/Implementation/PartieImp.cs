@@ -28,6 +28,8 @@ namespace PeopleWar
             this.joueurCourant = 0;
             tours = new List<TourImp>();
             this.nbTourMax = nbTourMax;
+            inc = true;
+            nbTour = 0;
         }
 
         /**
@@ -47,6 +49,18 @@ namespace PeopleWar
          * @var int nbTourMax
          */
         public int nbTourMax { get; set; }
+
+        /**
+         * Number of rounds
+         * @var int nbTourMax
+         */
+        public int nbTour { get; set; }
+
+        /**
+         * Increment or not number of rounds
+         * @var bool inc
+         */
+        public bool inc { get; set; }
 
         /**
          * Current box selected
@@ -85,18 +99,6 @@ namespace PeopleWar
         }
 
         /**
-         * Return the number of rounds
-         * @return int
-         */
-        public int getNbTour()
-        {
-            double n = this.tours.Count() + 1;
-            n /= 2.0;
-            n = Math.Floor(n);
-            return (int)n;
-        }
-
-        /**
          * Set number of the selected box
          * @param int key
          * @return void
@@ -121,7 +123,7 @@ namespace PeopleWar
             {
                 return this.j1;
             }
-            else if (this.getNbTour() > nbTourMax)
+            else if (nbTour >= nbTourMax && j1 == getJoueur(joueurCourant))
             {
                 return (this.j1.calculerNbPoint(carte) > this.j2.calculerNbPoint(carte)) ? this.j1 : this.j2;
             }
@@ -159,12 +161,22 @@ namespace PeopleWar
          */
         public Boolean isValidTour(int key)
         {
-            return (key >= 0 && key < getNbTour());
+            return (key >= 0 && key < nbTour);
         }
 
         public override string ToString()
         {
             return carte.ToString() + "\n" + j1.ToString() + "\nvs\n" + j2.ToString();
+        }
+
+        /**
+         * Increment nbTour 
+         * @return void
+         */
+        public void incTr()
+        {
+            if (inc) nbTour++;
+            inc = !inc;
         }
     }
 }

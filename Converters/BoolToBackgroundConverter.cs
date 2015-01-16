@@ -15,9 +15,10 @@ namespace Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string root = System.AppDomain.CurrentDomain.BaseDirectory + "PeopleWarFare/WarfareWPF/";
-            ImageBrush i1 = new ImageBrush(new BitmapImage(new Uri(root + "res/parcheminLargeTampon.png", UriKind.Relative)));
-            ImageBrush i2 = new ImageBrush(new BitmapImage(new Uri(root + "res/parcheminLargeFin.png", UriKind.Relative)));
+
+            //string root = System.AppDomain.CurrentDomain.BaseDirectory + "PeopleWarFare/WarfareWPF/";
+            ImageBrush i1 = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/res/parcheminLargeTampon.png", UriKind.Absolute)));
+            ImageBrush i2 = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/res/parcheminLargeFin.png", UriKind.Absolute)));
             return (bool)value ? i1 : i2;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

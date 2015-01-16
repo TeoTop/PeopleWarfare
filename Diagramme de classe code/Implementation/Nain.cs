@@ -28,11 +28,12 @@ namespace PeopleWar
 
         public override string getInformation()
         {
-            return "Peuple : \n\t- Race : " + this.GetType().Name + "\n\t- Bonus :" +
-                "\n\t\t- Le coût de déplacement sur une case Plaine est divisé par deux." +
-                "\n\t\t- Si l'unité Nain est sur une case Montagne, elle peut se déplacer sur n'importe quelle autre" +
-                " case Montagne à condition qu'il n'y ai pas d'unité adverse." +
-                "\n\t- Malus :\n\t\t- Une unité Nain n'acquière aucun point sur la case Plaine.";
+            return "Race : " + this.GetType().Name + 
+                "\n- Bonus :" +
+                " - Le coût de déplacement sur une case Plaine est divisé par deux." +
+                "\n\t  - Si l'unité Nain est sur une case Montagne, elle peut se déplacer sur" +
+                "\n\t\t n'importe quelle autre case Montagne s'il n'y a pas d'unité adverse." +
+                "\n- Malus : Une unité Nain n'acquière aucun point sur la case Plaine.";
         }
 
         public override EnumPeuple getType()
