@@ -85,19 +85,16 @@ namespace WarFareWPF
             keyCommand.addAction(new KeyClass(Key.Space, false), () => this.NextUnit(null, null));
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad3, false), (x, y, z) =>
-
             {
-
-                return this.game.map.SelectedBoxForUnit.RowPair ? (x + y) : x + y + 1;
-
+                if (x % y == y - 1 && !this.game.map.SelectedBox.RowPair) return -1;
+                return this.game.map.SelectedBox.RowPair ? (x + y) : x + y + 1;
+                 
             });
 
 
 
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad6, false), (x, _, z) =>
-
             {
-
                 return (x + 1);
 
             });
@@ -107,8 +104,9 @@ namespace WarFareWPF
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad9, false), (x, y, z) =>
 
             {
-
-                return this.game.map.SelectedBoxForUnit.RowPair ? x - y : (x - y + 1);
+                if (x % y == y - 1 && !this.game.map.SelectedBox.RowPair) return -1;
+                return this.game.map.SelectedBox.RowPair ? x - y : (x - y + 1);
+                
 
             });
 
@@ -117,8 +115,8 @@ namespace WarFareWPF
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad7, false), (x, y, z) =>
 
             {
-
-                return this.game.map.SelectedBoxForUnit.RowPair ? x - y - 1 : (x - y);
+                if (x % y == 0 && this.game.map.SelectedBox.RowPair) return -1;
+                return this.game.map.SelectedBox.RowPair ? x - y - 1 : (x - y);
 
             });
 
@@ -127,9 +125,7 @@ namespace WarFareWPF
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad4, false), (x, _, z) =>
 
             {
-
                 return (x - 1);
-
             });
 
 
@@ -137,9 +133,8 @@ namespace WarFareWPF
             keyCommand.addNumPadAction(this.game, new KeyClass(Key.NumPad1, false), (x, y, z) =>
 
             {
-
-                return this.game.map.SelectedBoxForUnit.RowPair ? x + y - 1 : (x + y);
-
+                if (x % y == 0 && this.game.map.SelectedBox.RowPair) return -1;
+                return this.game.map.SelectedBox.RowPair ? x + y - 1 : (x + y);
             });
 
 
@@ -281,63 +276,63 @@ namespace WarFareWPF
         private void Exit(object sender, RoutedEventArgs e, bool openMW = true, CancelEventArgs ev = null, Action callback = null)
 
         {
-
-            if (MessageBox.Show("Vous êtes sûr de vouloir quitter la partie ?", "Quitter", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-
+            if (!game.alreadyFinished)
             {
-
-                if (!game.alreadySaved && (MessageBox.Show("Voulez vous sauvegarder la partie ?", "Sauvegarder", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes))
-
+                if (MessageBox.Show("Vous êtes sûr de vouloir quitter la partie ?", "Quitter", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
 
-                    game.save();
+                    if (!game.alreadySaved && (MessageBox.Show("Voulez vous sauvegarder la partie ?", "Sauvegarder", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes))
+                    {
+
+                        game.save();
+
+                    }
+
+
+
+                    if (openMW)
+                    {
+
+                        MainWindow mw = new MainWindow();
+
+                        mw.Show();
+
+                    }
+
+
+
+                    this.Closing -= _this_Closing;
+
+                    if (callback != null)
+                    {
+
+                        callback();
+
+                    }
+
+                    try
+                    {
+
+                        this.Close();
+
+                    }
+
+                    catch (Exception) { }
 
                 }
 
-
-
-                if (openMW)
-
+                else if (ev != null)
                 {
 
-                    MainWindow mw = new MainWindow();
-
-                    mw.Show();
+                    ev.Cancel = true;
 
                 }
-
-
-
-                this.Closing -= _this_Closing;
-
-                if (callback != null)
-
-                {
-
-                    callback();
-
-                }
-
-                try
-
-                {
-
-                    this.Close();
-
-                }
-
-                catch (Exception) { }
-
             }
-
-            else if (ev != null)
-
+            else
             {
-
-                ev.Cancel = true;
-
+                MainWindow mw = new MainWindow();
+                mw.Show();
             }
-
         }
 
 

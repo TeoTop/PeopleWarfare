@@ -34,9 +34,9 @@ namespace UnitTestWarfare
             Assert.IsTrue(unite.pos == 1);
         }
         [TestMethod]
-        public void ResetTest()
+        public void ResetTest(EnumPeuple peuple)
         {
-            unite.reset();
+            unite.reset(peuple);
             Assert.IsTrue(unite.pm == 1);
         }
         [TestMethod]

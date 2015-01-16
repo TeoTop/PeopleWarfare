@@ -1,0 +1,133 @@
+﻿<Window x:Class="WarFareWPF.NewGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Converters;assembly=Converters"
+        Title="Nouvelle Partie" Height="350" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FocusManager.FocusedElement="{Binding ElementName=j1}" Name="_this" Closing="_this_Closing">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:EnumCarteToIsCheckedConverter x:Key="EnumCarteToIsCheckedConverter"/>
+        <converters:PeopleTypeToOpacityConverter x:Key="PeopleTypeToOpacityConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="res/menuBack.png" TileMode="FlipX"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300*"/>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="300*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="74*"/>
+                <RowDefinition Height="155*"/>
+            </Grid.RowDefinitions>
+            <Button VerticalAlignment="Top" Width="32" Height="32" HorizontalAlignment="Left" Margin="5 5 0 0"  Click="Prec" IsTabStop="False" Template="{StaticResource ResourceKey=buttonPrecTemplate}" Grid.Column="0" Grid.Row="0"/>
+
+            <Label Content="{Binding ElementName=j1,Path=Text}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" FontFamily="Lucida Calligraphy" Grid.Column="0" Grid.Row="0" Margin="40 0 0 0"/>
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Label Content="Nom" FontSize="16" FontWeight="Bold" FontFamily="Lucida Calligraphy" Margin="30 0 0 0"/>
+                <TextBox KeyUp="p1_KeyUp" TabIndex="0" Name="j1" Text="Joueur1" Margin="80,-120,0,0" TextWrapping="Wrap" Width="140" Height="25"/>
+                <Label Content="Peuple" FontSize="16" FontWeight="Bold" FontFamily="Lucida Calligraphy" Margin="17 55 0 0"/>
+                <ComboBox Name="p1" TabIndex="1" Margin="80,-15,0,0" Width="140" Height="25" SelectedIndex="0" SelectionChanged="p1_SelectionChanged">
+                    <ComboBoxItem>Orc</ComboBoxItem>
+                    <ComboBoxItem>Elf</ComboBoxItem>
+                    <ComboBoxItem>Nain</ComboBoxItem>
+                </ComboBox>
+                <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-90 50 0 0">
+                    <Image Height="90" Width="90" Source="res/orc1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p1"/>
+                                <Binding Path="orc" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Image Height="90" Width="90" Source="res/elf1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p1"/>
+                                <Binding Path="elf" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Image Height="90" Width="90" Source="res/nain1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p1"/>
+                                <Binding Path="nain" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Grid Canvas.Top="100">
+                        <Label Content="Ordinateur" Margin="10 -6 0 0"/>
+                        <CheckBox IsChecked="{Binding checkJ1, ElementName=_this}"/>
+                    </Grid>
+                </Canvas>
+            </Grid>
+
+            <Label Content="{Binding Carte, ElementName=_this}" HorizontalAlignment="Center" FontSize="16" Foreground="#ccc" FontWeight="Bold" Grid.Column="1" Grid.Row="0" Margin="64.4,0,64,154.8" Width="10" Grid.RowSpan="2"/>
+            <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="90" Width="90">
+                <RadioButton Name="demo" FontFamily="Lucida Calligraphy" FontSize="14" VerticalAlignment="Top" Content="Démo" GroupName="carte" IsChecked="{Binding carte, ElementName=_this, Mode=TwoWay, Converter={StaticResource EnumCarteToIsCheckedConverter}, ConverterParameter=DEMO}" Checked="RadioButton_Checked"/>
+                <RadioButton Name="petite" FontFamily="Lucida Calligraphy" FontSize="14" VerticalAlignment="Center" Content="Petite" GroupName="carte" Margin="0" IsChecked="{Binding carte, ElementName=_this, Mode=TwoWay, Converter={StaticResource EnumCarteToIsCheckedConverter}, ConverterParameter=PETITE}" Checked="RadioButton_Checked"/>
+                <RadioButton Name="normale" FontFamily="Lucida Calligraphy" FontSize="14" VerticalAlignment="Bottom" Content="Normale" GroupName="carte" Margin="0,50,0,0" IsChecked="{Binding carte, ElementName=_this, Mode=TwoWay, Converter={StaticResource EnumCarteToIsCheckedConverter}, ConverterParameter=NORMALE}" Checked="RadioButton_Checked"/>
+            </Grid>
+
+
+            <!--<GridSplitter Grid.Row="1" IsTabStop="False" HorizontalAlignment="Stretch" Background="#ccc" FontWeight="Bold" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="5" Grid.Column="1"/>-->
+
+            <Label Content="{Binding ElementName=j2,Path=Text}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" FontFamily="Lucida Calligraphy" Grid.Column="2" Grid.Row="0" Margin="-40 0 0 0"/>
+            <Grid Grid.Column="2" Grid.Row="1">
+                <Label Content="Nom" FontSize="16" FontWeight="Bold" FontFamily="Lucida Calligraphy" Margin="20 0 0 0"/>
+                <TextBox KeyUp="p2_KeyUp" TabIndex="0" Name="j2" Text="Joueur2" Margin="80,-120,0,0" TextWrapping="Wrap" Width="140" Height="25"/>
+                <Label Content="Peuple" FontSize="16" FontWeight="Bold" FontFamily="Lucida Calligraphy" Margin="7 55 0 0"/>
+                <ComboBox Name="p2" TabIndex="1" Margin="80,-15,0,0" Width="140" Height="25" SelectedIndex="1" SelectionChanged="p1_SelectionChanged">
+                    <ComboBoxItem>Orc</ComboBoxItem>
+                    <ComboBoxItem>Elf</ComboBoxItem>
+                    <ComboBoxItem>Nain</ComboBoxItem>
+                </ComboBox>
+                <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-90 50 0 0">
+                    <Image Height="90" Width="90" Source="res/orc1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p2"/>
+                                <Binding Path="orc" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Image Height="90" Width="90" Source="res/elf1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p2"/>
+                                <Binding Path="elf" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Image Height="90" Width="90" Source="res/nain1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p2"/>
+                                <Binding Path="nain" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Grid Canvas.Top="100">
+                        <Label Content="Ordinateur" Margin="10 -6 0 0"/>
+                        <CheckBox IsChecked="{Binding checkJ2, ElementName=_this}"/>
+                    </Grid>
+                </Canvas>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Button IsTabStop="False" Content="Suivant" FontFamily="Lucida Calligraphy" FontSize="15" HorizontalAlignment="Center" Width="110" Height="55" VerticalAlignment="Top" 
+                    Click="Suivant" Panel.ZIndex="1" IsEnabled="{Binding ElementName=_this,Path=reverseError}" IsDefault="True" Template="{StaticResource ResourceKey=buttonGeneral}" />
+            <Label Content="Veuillez vérifier vos informations" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Bottom" Margin="0,0,0,10" Foreground="Red" FontWeight="Bold" Grid.Column="0" Visibility="{Binding ElementName=_this,Path=error, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        </Grid>
+
+    </Grid>
+</Window>

@@ -11,7 +11,7 @@ namespace PeopleWar
         public Demo()
         {
             cases = new List<CaseA>();
-            nbCase = 36;
+            nbCase = 16;
             type = EnumCarte.DEMO;
         }
 

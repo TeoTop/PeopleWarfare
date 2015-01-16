@@ -27,9 +27,11 @@ namespace WarFareWPF
             units = new List<UnitView>();
             switch (peuple.getType())
             {
-                case EnumPeuple.ELF: this.Type = "Elf"; this.Color = "#ff0000"; this.Src = "res/elf"+ (peuple.skin+1) +".png"; break;
-                case EnumPeuple.NAIN: this.Type = "Nain"; this.Color = "#00ff00"; this.Src = "res/nain" + (peuple.skin+1) + ".png"; break;
-                case EnumPeuple.ORC: this.Type = "Orc"; this.Color = "#0000ff"; this.Src = "res/orc" + (peuple.skin+1) + ".png"; break;
+                case EnumPeuple.ELF: this.Type = "Elf"; this.Color = "#ff0000"; this.Src = "../res/elf"+ (peuple.skin+1) +".png"; break;
+                case EnumPeuple.NAIN: this.Type = "Nain"; this.Color = "#00ff00"; this.Src = "../res/nain" + (peuple.skin+1) + ".png"; break;
+                case EnumPeuple.ORC: this.Type = "Orc"; this.Color = "#0000ff"; this.Src = "../res/orc" + (peuple.skin+1) + ".png"; break;
+                case EnumPeuple.CHEVALIER: this.Type = "Chevalier"; this.Color = "#0000ff"; this.Src = "../res/chevalier" + (peuple.skin + 1) + ".png"; break;
+                case EnumPeuple.GOLEM: this.Type = "Golem"; this.Color = "#00ff00"; this.Src = "../res/golem" + (peuple.skin + 1) + ".png"; break;
             }
             for (int i = 0; i < peuple.getNbUnite(); i++)
             {
@@ -44,7 +46,7 @@ namespace WarFareWPF
         {
             // reset units / pm and HasAlreadyPlayed
             units.ForEach(unit => unit.HasAlreadyPlayed = false);
-            units.ForEach(unit => unit.unit.reset());
+            units.ForEach(unit => unit.unit.reset(peuple.getType()));
         }
 
         internal void destroy(UniteImp uniteImp)

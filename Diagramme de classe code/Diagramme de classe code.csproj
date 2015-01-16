@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Chevalier.cs" />
     <Compile Include="Implementation\EnumBattle.cs" />
     <Compile Include="Implementation\EnumBattleAnim.cs" />
     <Compile Include="Implementation\EnumCarte.cs" />
     <Compile Include="Implementation\EnumMove.cs" />
     <Compile Include="Implementation\EnumPeuple.cs" />
     <Compile Include="Implementation\EnumCase.cs" />
+    <Compile Include="Implementation\Golem.cs" />
     <Compile Include="Implementation\Marais.cs" />
     <Compile Include="Implementation\Mer.cs" />
     <Compile Include="Implementation\MoveImp.cs" />

@@ -17,12 +17,26 @@ namespace PeopleWar
             set;
         }
 
+        public int tour
+        {
+            get;
+            set;
+        }
+
+        public int joueur
+        {
+            get;
+            set;
+        }
+
         /**
          * Constructor
          */
-        public TourImp()
+        public TourImp(int tour, int joueur)
         {
             mouvements = new List<MoveImp>();
+            this.tour = tour;
+            this.joueur = joueur;
         }
 
        

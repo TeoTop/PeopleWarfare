@@ -30,8 +30,8 @@
             </ListBox>
         </Grid>
 
-        <Button Grid.Row="4" Content="Rester" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="350 0 0 0" FontFamily="Lucida Calligraphy" FontSize="15" Width="90" Height="50" Click="stayOnGame"
-                     IsEnabled="{Binding ElementName=_this,Path=reverseError}" IsDefault="True" Template="{StaticResource ResourceKey=buttonGeneral}" />
+        <!--Button Grid.Row="4" Content="Rester" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="350 0 0 0" FontFamily="Lucida Calligraphy" FontSize="15" Width="90" Height="50" Click="stayOnGame"
+                     IsEnabled="{Binding ElementName=_this,Path=reverseError}" IsDefault="True" Template="{StaticResource ResourceKey=buttonGeneral}" /-->
         <Button Grid.Row="4" Content="Menu" FontFamily="Lucida Calligraphy" FontSize="15" Margin="0 0 30 0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="90" Height="50" Click="backToMenu"
                     IsEnabled="{Binding ElementName=_this,Path=reverseError}" IsDefault="True" Template="{StaticResource ResourceKey=buttonGeneral}" />
 

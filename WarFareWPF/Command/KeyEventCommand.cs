@@ -30,14 +30,18 @@ namespace WarFareWPF.Command
             {
                 int nbCase = game.map.carte.nbCase;
                 int nbRow = (int)Math.Sqrt(nbCase);
-                Func <int,int,int,int> action = (x, y, z) => Math.Abs(calcul(x, y, z));
+                Func <int,int,int,int> action = (x, y, z) => calcul(x, y, z);
                 if (game.map.SelectedBoxForUnit != null && game.map.SelectedBoxForUnit.SelectedUnit != null)
                 {
+                    int c = action(game.map.SelectedBox.Uid, nbRow, nbCase);
+                    if (c < 0 || c >= nbCase) return;
                     // move unit
-                    game.MoveUnit(null, null, game.map.SelectedBoxForUnit, action(game.map.SelectedBoxForUnit.Uid, nbRow, nbCase));
+                    game.MoveUnit(null, null, game.map.SelectedBoxForUnit, c);
                 }
                 else if (game.map.SelectedBox != null)
                 {
+                    int c = action(game.map.SelectedBox.Uid, nbRow, nbCase);
+                    if (c < 0 || c >= nbCase) return;
                     // move selectedBox
                     game.map.MoveSelectedBox(action(game.map.SelectedBox.Uid, nbRow, nbCase));
                 }

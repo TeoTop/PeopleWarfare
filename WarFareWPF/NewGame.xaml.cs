@@ -90,6 +90,15 @@ namespace WarFareWPF
             get { return EnumPeuple.NAIN; }
         }
 
+        public EnumPeuple chevalier
+        {
+            get { return EnumPeuple.CHEVALIER; }
+        }
+
+        public EnumPeuple golem
+        {
+            get { return EnumPeuple.GOLEM; }
+        }
 
         public NewGame()
         {

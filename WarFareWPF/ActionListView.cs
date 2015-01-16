@@ -57,7 +57,7 @@ namespace WarFareWPF
             actions = new ObservableCollection<ExpanderView>();
             if (tours.Count != 0)
             {
-                tours.ForEach(t => loadTurn(t.mouvements, partie));
+                tours.ForEach(t => loadTurn(t, partie));
             }
             else
             {
@@ -73,13 +73,15 @@ namespace WarFareWPF
 
         public void addTurn(PartieImp partie)
         {
-            tours.Add(new TourImp());
+            tours.Add(new TourImp(partie.getNbTour(), partie.joueurCourant));
+
             JoueurImp j;
             if(partie.joueurCourant == 0){
                 j = partie.j1;
             } else {
                 j = partie.j2;
             }
+            
             String header = "Tour "+ partie.getNbTour() +" de " + j.nom;
             actions.Add(new ExpanderView(header));
         }
@@ -87,7 +89,7 @@ namespace WarFareWPF
         public void loadAction(MoveImp move)
         {
             String label = "null";
-            if (move.combat != null)
+            if (move.mv == EnumMove.CBT)
             {
                 String att = move.combat.uniteAtt.nom;
                 String def = move.combat.uniteDef.nom;
@@ -111,16 +113,19 @@ namespace WarFareWPF
             }
             else
             {
-                String dep = move.uniteDep.nom;
-                label = "Déplacement de " + dep;
-                actions.Last().Labels.Add(label);
+                if (move.mv == EnumMove.MOVE)
+                {
+                    String dep = move.uniteDep.nom;
+                    label = "Déplacement de " + dep;
+                    actions.Last().Labels.Add(label);
+                }
             }
         }
 
-        public void loadTurn(List<MoveImp> moves, PartieImp partie)
+        public void loadTurn(TourImp tour, PartieImp partie)
         {
             JoueurImp j;
-            if (partie.joueurCourant == 0)
+            if (tour.joueur == 0)
             {
                 j = partie.j1;
             }
@@ -128,9 +133,9 @@ namespace WarFareWPF
             {
                 j = partie.j2;
             }
-            String header = "Tour " + partie.getNbTour() + " de " + j.nom;
+            String header = "Tour " + (tour.tour+1) + " de " + j.nom;
             actions.Add(new ExpanderView(header));
-            moves.ForEach(m => loadAction(m));
+            tour.mouvements.ForEach(m => loadAction(m));
         }
     }
 }

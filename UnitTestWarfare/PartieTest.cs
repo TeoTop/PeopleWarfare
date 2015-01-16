@@ -20,12 +20,13 @@ namespace UnitTestWarfare
         [TestMethod]
         public void ValidTourTest_Valid()
         {
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
+
+            game.tours.Add(new TourImp(0,0));
+            game.tours.Add(new TourImp(0,1));
+            game.tours.Add(new TourImp(1,0));
+            game.tours.Add(new TourImp(1,1));
+            game.tours.Add(new TourImp(2,0));
+            game.tours.Add(new TourImp(2,1));
             Assert.IsTrue(game.isValidTour(2));
         }
         [TestMethod]
@@ -52,20 +53,20 @@ namespace UnitTestWarfare
             game.j2.peuple.unites.Remove(game.j2.peuple.unites[0]);
             game.j2.peuple.unites.Remove(game.j2.peuple.unites[0]);
             game.j2.peuple.unites.Remove(game.j2.peuple.unites[0]);
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
+            game.tours.Add(new TourImp(0, 0));
+            game.tours.Add(new TourImp(0, 1));
+            game.tours.Add(new TourImp(1, 0));
+            game.tours.Add(new TourImp(1, 1));
+            game.tours.Add(new TourImp(2, 0));
+            game.tours.Add(new TourImp(2, 1));
+            game.tours.Add(new TourImp(3, 0));
+            game.tours.Add(new TourImp(3, 1));
+            game.tours.Add(new TourImp(4, 0));
+            game.tours.Add(new TourImp(4, 1));
+            game.tours.Add(new TourImp(5, 0));
+            game.tours.Add(new TourImp(5, 1));
+            game.tours.Add(new TourImp(6, 0));
+            game.tours.Add(new TourImp(6, 1));
             Assert.AreEqual<JoueurImp>(game.j1, (JoueurImp)game.verifierFinPartie());
         }
         [TestMethod]
@@ -75,18 +76,18 @@ namespace UnitTestWarfare
             game.j1.peuple.unites.Remove(game.j1.peuple.unites[0]);
             game.j1.peuple.unites.Remove(game.j1.peuple.unites[0]);
             game.j1.peuple.unites.Remove(game.j1.peuple.unites[0]);
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
+            game.tours.Add(new TourImp(0, 0));
+            game.tours.Add(new TourImp(0, 1));
+            game.tours.Add(new TourImp(1, 0));
+            game.tours.Add(new TourImp(1, 1));
+            game.tours.Add(new TourImp(2, 0));
+            game.tours.Add(new TourImp(2, 1));
+            game.tours.Add(new TourImp(3, 0));
+            game.tours.Add(new TourImp(3, 1));
+            game.tours.Add(new TourImp(4, 0));
+            game.tours.Add(new TourImp(4, 1));
+            game.tours.Add(new TourImp(5, 0));
+            game.tours.Add(new TourImp(5, 1));
             Assert.AreEqual<JoueurImp>(game.j2, (JoueurImp)game.verifierFinPartie());
         }
     }

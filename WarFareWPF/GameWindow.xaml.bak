@@ -1,0 +1,283 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Converters;assembly=Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WarFareWPF.GameWindow"
+        xmlns:controls="clr-namespace:WarFareWPF.UserControls" Closing="_this_Closing"
+        Title="GameWindow" x:Name="_this" x:Uid="GameWindow" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" KeyUp="_this_KeyUp" ContentRendered="_this_ContentRendered">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="res/fondPrincipal.png" TileMode="FlipXY"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+    <Menu Grid.Row="0">
+        <MenuItem Header="_Fichier">
+            <MenuItem Header="_Nouveau..." Click="NewGame"/>
+            <Separator/>
+            <MenuItem Header="_Charger..." Click="ChGame"/>
+            <Separator/>
+            <MenuItem Header="_Enregistrer" Click="Save"/>
+            <MenuItem Header="_Enregistrer sous..." Click="SaveAs"/>
+            <Separator/>
+            <MenuItem Header="_Quitter" Click="Quit"/>
+        </MenuItem>
+    </Menu>
+        <Border BorderThickness="2" BorderBrush="Black" Margin="5" Grid.Row="1">
+            <Grid Name="SB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="13*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.4*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="res/parchemin.png"/>
+                        </Grid.Background>
+                        <!--controls:InfoPeuple DataContext="{Binding SelectedItem.SelectedUnit, ElementName=listCase}" Player="{Binding game.CurrentPlayer,ElementName=_this}"/-->
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="res/parcheminLarge.png"/>
+                        </Grid.Background>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Grid.Column="0" Content="Nombre de tours : " FontFamily="Lucida Calligraphy" FontSize="20" FontWeight="Bold"/>
+                            <Label Grid.Column="0" Content="{Binding game.nbTour}" FontFamily="Lucida Calligraphy" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="res/parcheminLarge.png"/>
+                        </Grid.Background>
+                        <Button Grid.Column="0" Content="Unité suivante" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="160" Height="70" FontFamily="Lucida Calligraphy" FontSize="15"
+                        Click="NextUnit" Template="{StaticResource ResourceKey=buttonGeneral}"/>
+
+                        <Button Grid.Column="1" Content="Fin tour" HorizontalAlignment="Center"  Width="160" Height="70" FontFamily="Lucida Calligraphy" FontSize="15"
+                        Click="NextTurn" Template="{StaticResource ResourceKey=buttonGeneral}"/>
+                    </Grid>
+                </Grid>
+                <Separator Grid.Row="1" HorizontalAlignment="Stretch" />
+                <Grid Grid.Row="2" Margin="0,0,0.4,0" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0 0 0 20">
+                        <StackPanel>
+                            <Grid>
+                                <ListBox Name="items" DataContext="{Binding SelectedItem, ElementName=listCase}" SelectedItem="{Binding SelectedUnit}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ItemsPresenter />
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                    <ListBox.ItemsSource>
+                                        <MultiBinding Converter="{StaticResource PlayerToItemsSourceConverter}">
+                                            <Binding ElementName="_this" Path="game.CurrentPlayer"/>
+                                            <Binding Path="unitsJ1"/>
+                                            <Binding Path="unitsJ2"/>
+                                        </MultiBinding>
+                                    </ListBox.ItemsSource>
+                                    <ListBox.Visibility>
+                                        <MultiBinding Converter="{StaticResource ListToVis}">
+                                            <Binding ElementName="_this" Path="game.CurrentPlayer"/>
+                                            <Binding Path="NbUniteJ1"/>
+                                            <Binding Path="NbUniteJ2"/>
+                                        </MultiBinding>
+                                    </ListBox.Visibility>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="1"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="Padding" Value="0,0,0,0"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:InfoPeuple Player="{Binding game.CurrentPlayer,ElementName=_this}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <ListBox DataContext="{Binding SelectedItem, ElementName=listCase}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="0">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ItemsPresenter />
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                    <ListBox.ItemsSource>
+                                        <MultiBinding Converter="{StaticResource PlayerToItemsSourceConverter}">
+                                            <Binding ElementName="_this" Path="game.OtherPlayer"/>
+                                            <Binding Path="unitsJ1"/>
+                                            <Binding Path="unitsJ2"/>
+                                        </MultiBinding>
+                                    </ListBox.ItemsSource>
+                                    <ListBox.Visibility>
+                                        <MultiBinding Converter="{StaticResource ListToVis}">
+                                            <Binding ElementName="_this" Path="game.OtherPlayer"/>
+                                            <Binding Path="NbUniteJ1"/>
+                                            <Binding Path="NbUniteJ2"/>
+                                        </MultiBinding>
+                                    </ListBox.Visibility>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="1"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="Padding" Value="0,0,0,0"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:InfoPeuple Player="{Binding game.OtherPlayer,ElementName=_this}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Separator Grid.Column="1" HorizontalAlignment="Stretch" />
+                    <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0 0 0 20">
+                        <ScrollViewer.Background>
+                            <ImageBrush ImageSource="res/back.png" TileMode="FlipXY"/>
+                        </ScrollViewer.Background>
+                        <Grid IsEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ListBox Name="listCase" Background="Transparent" BorderBrush="Transparent" DataContext="{Binding game.map, ElementName=_this}" SelectedItem="{Binding SelectedBox, Mode=TwoWay}" ItemsSource="{Binding cases}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                <ListBox.Template>
+                                    <ControlTemplate>
+                                        <ItemsPresenter />
+                                    </ControlTemplate>
+                                </ListBox.Template>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="{Binding Columns}" Margin="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToMarginConverter}, ConverterParameter=5 15 45 15}" VerticalAlignment="Center"  MouseWheel="Grid_MouseWheel"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                    <ContentPresenter Margin="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToMarginConverter}, ConverterParameter=0 -10 0 -10}"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid VerticalAlignment="Center">
+                                            <!--ROW_PAIR-->
+                                            <ContentControl Visibility="{Binding RowPair, Converter={StaticResource BoolToVis}}" Template="{DynamicResource ResourceKey=templateCase}"/>
+                                            <!--ROW_IMPAIR-->
+                                            <ContentControl Visibility="{Binding RowPairReverse, Converter={StaticResource BoolToVis}}" Template="{DynamicResource ResourceKey=templateCase}">
+                                                <ContentControl.RenderTransform>
+                                                    <TranslateTransform X="{Binding game.map.Zoom, ElementName=_this, Converter={StaticResource RatioToCoordConverter}, ConverterParameter=40}"/>
+                                                </ContentControl.RenderTransform>
+                                            </ContentControl>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </ScrollViewer>
+                    <Separator Grid.Column="3" HorizontalAlignment="Stretch" />
+                    <Grid Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="res/parcheminLarge.png"/>
+                            </Grid.Background>
+                            <Slider DataContext="{Binding game.map, ElementName=_this}" Value="{Binding Zoom,Converter={StaticResource ConvertZoom}}" Minimum="0" Maximum="80" TickFrequency="5" TickPlacement="BottomRight" LargeChange="2" SmallChange="1" Width="230" Margin="-5 40 0 0"/>
+                            <!--Label DataContext="{Binding game.map, ElementName=_this}" Content="{Binding Zoom}"/-->
+                            <!--Test-->
+                            <!--<Polygon HorizontalAlignment="Center" DataContext="{Binding map, ElementName=_this}" Points="{Binding Zoom, Mode=TwoWay, Converter={StaticResource RatioToPointsConverter}}" Stroke="Black" Fill="#FF1515E8">
+                        <Polygon.RenderTransform>
+                            <TranslateTransform Y="60"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>-->
+                            <!--FinTest-->
+                        </Grid>
+                        <Separator Grid.Row="1" HorizontalAlignment="Stretch"/>
+                        <!--<ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <StackPanel Name="ActionList" DataContext="{Binding al, ElementName=_this}" >
+                            <Label Content="Liste des actions :" Padding="10,0" FontSize="13" Height="20"/>
+                        </StackPanel>
+                    </ScrollViewer>-->
+                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0 10 0 10" Padding="30 20 30 30">
+                            <ScrollViewer.Background>
+                                <ImageBrush ImageSource="res/parcheminLong.png"/>
+                            </ScrollViewer.Background>
+                            <StackPanel >
+                                <Label HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Lucida Calligraphy" FontSize="16" Margin="30,0,0,0" Content="Tours et actions : "/>
+                                <ItemsControl ItemsSource="{Binding actions}" DataContext="{Binding game.al, ElementName=_this}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Expander Header="{Binding Header}" FontFamily="Lucida Calligraphy" FontSize="15">
+                                                <StackPanel>
+                                                    <ItemsControl ItemsSource="{Binding Labels}" Margin="40 0 0 0" FontFamily="Lucida Calligraphy" FontSize="15"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+                <Separator Grid.Row="3" HorizontalAlignment="Stretch" />
+                <Grid Grid.Row="4" Margin="0,0.4,0.4,0.4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" DataContext="{Binding game.J1, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,30,0,0" FontFamily="Lucida Calligraphy" FontSize="20" Content="{Binding joueur.nom}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,70,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre d'unités : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,68,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding peuple.nbUnite}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre de points : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="265,98,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding nbPoints}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" DataContext="{Binding game.J2, ElementName=_this}" Background="{Binding IsMyTurn, Converter={StaticResource BoolToBackgroundConverter}}">
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,30,0,0" FontFamily="Lucida Calligraphy" FontSize="20" Content="{Binding joueur.nom}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,70,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre d'unités : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,68,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding peuple.nbUnite}"/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="Nombre de points : "/>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="265,98,0,0" FontFamily="Lucida Calligraphy" FontSize="15" Content="{Binding nbPoints}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
