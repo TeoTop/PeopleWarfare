@@ -10,11 +10,22 @@ namespace PeopleWar
     [Serializable]
     public abstract class StrategieCarte : Carte
     {
-
+        /**
+         * Map's boxes
+         * @var List<CaseA> cases
+         */
         public List<CaseA> cases { get; set; }
 
+        /**
+         * Map's type
+         * @var EnumCarte type
+         */
         public abstract EnumCarte type { get; set; }
 
+        /**
+         * Number of boxes of the map
+         * @var int nbCase
+         */
         public abstract int nbCase { get; set; }
 
         /**

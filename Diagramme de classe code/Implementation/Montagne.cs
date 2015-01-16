@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Montagne : CaseA
     {
+        /**
+         * Montagne Constructor
+         */
         public Montagne()
         {
         }

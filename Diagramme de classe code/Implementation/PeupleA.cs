@@ -8,11 +8,24 @@ namespace PeopleWar
     [Serializable]
     public abstract class PeupleA : Peuple
     {
+        /**
+         * Current unit
+         * @var int uniteActuel
+         */
         public int uniteActuel { get; set; }
 
+        /**
+         * People's units
+         * @var List<Unite> unites
+         */
         public List<UniteImp> unites { get; set; }
 
+        /**
+         * People skin
+         * @var int skin
+         */
         public int skin { get; set; }
+
 
         public Unite getUniteActuel()
         {

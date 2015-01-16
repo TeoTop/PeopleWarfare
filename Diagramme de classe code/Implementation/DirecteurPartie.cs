@@ -10,7 +10,15 @@ namespace PeopleWar
 {
     public class DirecteurPartie
     {
+        /**
+         * DirecteurPartie Constructor 
+         */
         public DirecteurPartie() { }
+
+        /**
+         * Game's builder
+         * @var MonteurPartie MonteurPartie
+         */
         public MonteurPartie MonteurPartie { get; set; }
         /**
          * Create a game

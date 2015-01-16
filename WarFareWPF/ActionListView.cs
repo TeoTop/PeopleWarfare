@@ -13,6 +13,10 @@ namespace WarFareWPF
 {
     public class ActionListView : Notifier
     {
+        /*
+         * @var List<TourImp> tours
+         * List of rounds : the rounds are saved
+         */
         public List<TourImp> tours { get; set; }
         public class ExpanderView : Notifier
         {
@@ -51,6 +55,10 @@ namespace WarFareWPF
             }
         }
 
+        /**
+         * ActionListView Constructor
+         * @param PartieImp partie
+         */
         public ActionListView(PartieImp partie)
         {
             this.tours = partie.tours;
@@ -65,12 +73,22 @@ namespace WarFareWPF
             }
         }
 
+        /**
+         * Add an action for the current round
+         * @param MoveImp move
+         * @return void
+         */
         public void addAction(MoveImp move)
         {
             tours.Last().mouvements.Add(move);
             loadAction(move);
         }
 
+        /**
+         * Add a new turn
+         * @param PartieImp partie
+         * @return void
+         */
         public void addTurn(PartieImp partie)
         {
             tours.Add(new TourImp(partie.getNbTour(), partie.joueurCourant));
@@ -86,6 +104,12 @@ namespace WarFareWPF
             actions.Add(new ExpanderView(header));
         }
 
+
+        /**
+         * Load an action for the current round if we load the game
+         * @param MoveImp move
+         * @return void
+         */
         public void loadAction(MoveImp move)
         {
             String label = "null";
@@ -122,6 +146,12 @@ namespace WarFareWPF
             }
         }
 
+        /**
+         * Load a round if we load the game
+         * @param TourImp tour
+         * @param PartieImp partie
+         * @return void
+         */
         public void loadTurn(TourImp tour, PartieImp partie)
         {
             JoueurImp j;

@@ -9,6 +9,9 @@ namespace PeopleWar
     [Serializable]
     public class Mer : CaseA
     {
+        /**
+         * Mer Constructor
+         */
         public Mer()
         {
         }

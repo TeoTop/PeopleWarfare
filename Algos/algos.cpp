@@ -30,7 +30,6 @@ int* Algos::generer_carte(int nbCase, int nbTypeCase) {
 }
 
 // nbCase correspond à la taille du tableau
-// nbCase correspond à la taille du tableau
 int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnemi, int nbEnnemi, int posActuelle, int typeUnite) {
 	int** distanceInit;
 	int nbCaseDispoCourante = nbCase;
@@ -68,6 +67,7 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 		}
 	}
 
+	// code à améliorer
 	/*switch (typeUnite)
 	{
 	case 0:
@@ -324,6 +324,3 @@ EXTERNC DLL Algos* Algos_New() {
 EXTERNC DLL void Algos_Delete(Algos* algos) {
 	delete algos;
 }
-/*EXTERNC DLL int* Gen_GenCarte(Algos* gen, int nbCase, int nbTypeCase) {
-	return gen->generer_carte(nbCase, nbTypeCase);
-}*/

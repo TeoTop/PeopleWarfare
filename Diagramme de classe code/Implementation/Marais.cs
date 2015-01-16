@@ -9,6 +9,9 @@ namespace PeopleWar
     [Serializable]
     public class Marais : CaseA
     {
+        /**
+         * Marais Constructor
+         */
         public Marais()
         {
         }

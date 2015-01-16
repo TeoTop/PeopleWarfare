@@ -7,16 +7,14 @@ namespace PeopleWar
 {
     public class MonteurNvllePartie : PeopleWar.MonteurPartie
     {
+        /**
+         * MonteurNvllePartie Constructor
+         */
         public MonteurNvllePartie()
         {
         }
 
 
-        /**
-         * Create a map from a type 'carte'
-         * @param EnumCarte carte
-         * @return Carte
-         */
         public override StrategieCarte creerCarte(EnumCarte carte)
         {
             StrategieCarte c = null;
@@ -37,13 +35,6 @@ namespace PeopleWar
             return c;
         }
 
-        /**
-         * Create a player with his people.
-         * @param string nom
-         * @param EnumPeuple p
-         * @param int nbUnite
-         * @return Carte
-         */
         public override JoueurImp creerJoueur(string nom, EnumPeuple p, int nbUnite, int posu)
         {
             //On crée le peuple qui sera ensuite associé au joueur. La race est définie par l'énumération p.

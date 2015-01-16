@@ -8,9 +8,24 @@ namespace WarFareWPF
 {
     public class AbstractWindow
     {
+
+        /*
+         * @var String j1
+         * Player's 1 name
+         */
         public static String j1 { get; set; }
+
+        /*
+         * @var String j2
+         * Player's 2 name
+         */
         public static String j2 { get; set; }
         private static EnumPeuple _p1 = EnumPeuple.NULL;
+
+        /*
+         * @var EnumPeuple p1
+         * Type of player's 1 people
+         */
         public static EnumPeuple p1 {
             get
             {
@@ -22,6 +37,11 @@ namespace WarFareWPF
             }
         }
         private static EnumPeuple _p2 = EnumPeuple.NULL;
+
+        /*
+         * @var EnumPeuple p2
+         * Type of player's 2 people
+         */
         public static EnumPeuple p2
         {
             get
@@ -34,6 +54,11 @@ namespace WarFareWPF
             }
         }
         private static EnumCarte _carte = EnumCarte.DEMO;
+
+        /*
+         * @var EnumCarte carte
+         * Type of map
+         */
         public static EnumCarte carte
         {
             get
@@ -47,6 +72,11 @@ namespace WarFareWPF
         }
 
         private static int _skinJ1 = -1;
+
+        /*
+         * @var int skinJ1
+         * Player's 1 skin
+         */
         public static int skinJ1
         {
             get
@@ -60,6 +90,11 @@ namespace WarFareWPF
         }
 
         private static int _skinJ2 = -1;
+
+        /*
+         * @var int skinJ2
+         * Player's 2 skin
+         */
         public static int skinJ2
         {
             get
@@ -73,6 +108,11 @@ namespace WarFareWPF
         }
 
         private static List<string> _nomUniteJ1 = new List<string>();
+
+        /*
+         * @var List<string> nomUniteJ2
+         * Name of player's 1 units
+         */
         public static List<string> nomUniteJ1
         {
             get
@@ -86,6 +126,11 @@ namespace WarFareWPF
         }
 
         private static List<string> _nomUniteJ2 = new List<string>();
+
+        /*
+         * @var List<string> nomUniteJ2
+         * Name of player's 2 units
+         */
         public static List<string> nomUniteJ2
         {
             get
@@ -98,10 +143,23 @@ namespace WarFareWPF
             }
         }
 
+        /*
+         * @var bool checkJ1
+         * IA1 is checked
+         */
         public static bool checkJ1 { get; set; }
 
+
+        /*
+         * @var bool checkJ2
+         * IA2 is checked
+         */
         public static bool checkJ2 { get; set; }
 
+        /**
+         * Reset New game window
+         * 
+         */
         public static void clearWindows()
         {
             j1 = "Joueur1";

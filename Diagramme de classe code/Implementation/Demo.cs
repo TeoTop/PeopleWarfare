@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Demo : StrategieCarte
     {
+        /**
+         * Demo Constructor
+         */
         public Demo()
         {
             cases = new List<CaseA>();

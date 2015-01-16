@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    	<Grid Height="124" Background="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToBrushConverter}}">
+    	<Grid Height="Auto" Background="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToBrushConverter}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>

@@ -8,7 +8,17 @@ namespace PeopleWar
     [Serializable]
     public class Elf : PeupleA
     {
+        /**
+         * Default names of unit
+         * @var string[] noms
+         */
         public readonly string[] noms = { "Elf1", "Elf2", "Elf3", "Elf4", "Elf5", "Elf6", "Elf7", "Elf8" };
+
+        /**
+         * Elf Constructor
+         * @param int nbUnite
+         * @param int posu
+         */
         public Elf(int nbUnite, int posu)
         {
             // on crée les unités du peuple en fonction de nbUnite (méthode dans PeupleA)

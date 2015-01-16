@@ -30,18 +30,46 @@ namespace PeopleWar
             this.nbTourMax = nbTourMax;
         }
 
+        /**
+         * List of rounds
+         * @var List<TourImp> tours
+         */
         public List<TourImp> tours { get; set; }
 
+        /**
+         * Map of the game
+         * @var StrategieCarte carte
+         */
         public StrategieCarte carte { get; set; }
 
+        /**
+         * Maximun number of rounds
+         * @var int nbTourMax
+         */
         public int nbTourMax { get; set; }
 
-        public int caseCourant { get; set; }
+        /**
+         * Current box selected
+         * @var int caseCourant
+         */
+        public int caseCourant { get; set; } // a implémenter
 
+        /**
+         * Current player
+         * @var int joueurCourant
+         */
         public int joueurCourant { get; set; }
 
+        /**
+         * Player 1
+         * @var JoueurImp j1
+         */
         public JoueurImp j1 { get; set; }
 
+        /**
+         * Player 2
+         * @var JoueurImp j2
+         */
         public JoueurImp j2 { get; set; }
 
         /**

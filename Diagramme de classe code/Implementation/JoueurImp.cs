@@ -8,12 +8,27 @@ namespace PeopleWar
     [Serializable]
     public class JoueurImp : Joueur
     {
+        /**
+         * @var PeupleA peuple
+         */
         public PeupleA peuple { get; set; }
 
+        /**
+         * Number of point of the player
+         * @var int nbPoints
+         */
         public int nbPoints { get; set; }
-
+        /**
+         * Name of the player
+         * @var String nom
+         */
         public String nom { get; set; }
 
+        /**
+         * JoueurImp constructor
+         * @param String n
+         * @param PeupleA p
+         */
         public JoueurImp(String n, PeupleA p)
         {
             nom = n;

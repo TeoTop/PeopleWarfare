@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Foret : CaseA
     {
+        /**
+         * Foret Constructor
+         */
         public Foret()
         {
         }

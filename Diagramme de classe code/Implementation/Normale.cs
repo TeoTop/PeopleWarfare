@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Normale : StrategieCarte
     {
+        /**
+         * Normale Constructor
+         */
         public Normale()
         {
             cases = new List<CaseA>();

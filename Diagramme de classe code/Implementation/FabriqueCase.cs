@@ -6,9 +6,16 @@ using System.Text;
 namespace PeopleWar
 {
     public class FabriqueCase
-    { 
+    {
+        /**
+         * Singleton
+         * @var FabriqueCase INSTANCE
+         */
         public static FabriqueCase INSTANCE = new FabriqueCase();
 
+        /**
+         * FabriqueCase Constructor
+         */
         private FabriqueCase()
         {
             Desert = null;
@@ -17,16 +24,39 @@ namespace PeopleWar
             Plaine = null;
         }
 
+        /**
+         * @var Desert Desert
+         */
         public Desert Desert { get; set; }
 
+
+        /**
+         * @var Foret Foret
+         */
         public Foret Foret { get; set; }
 
+
+        /**
+         * @var Montagne Montagne
+         */
         public Montagne Montagne { get; set; }
 
+
+        /**
+         * @var Plaine Plaine
+         */
         public Plaine Plaine { get; set; }
 
+
+        /**
+         * @var Mer Mer
+         */
         public Mer Mer { get; set; }
 
+
+        /**
+         * @var Marais Marais
+         */
         public Marais Marais { get; set; }
 
         /**

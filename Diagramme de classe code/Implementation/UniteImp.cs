@@ -8,17 +8,53 @@ namespace PeopleWar
     [Serializable]
     public class UniteImp : Unite
     {
+        /**
+         * Unit's position
+         * @var int pos
+         */
         public int pos { get; set; }
 
+        /**
+         * Unit's attack
+         * @var int attaque
+         */
         public int attaque { get; set; }
 
+        /**
+         * Unit's defense
+         * @var int defense
+         */
         public int defense { get; set; }
 
+        /**
+         * Unit's life
+         * @var int vie
+         */
         public int vie { get; set; }
+
+        /**
+         * Unit's movement point
+         * @var int pm
+         */
         public Double pm { get; set; }
+
+        /**
+         * Unit's point
+         * @var int point
+         */
         public int point { get; set; }
+
+        /**
+         * Unit's name
+         * @var String nom
+         */
         public String nom { get; set; }
 
+        /**
+         * UniteImp Constructor
+         * @param int posu
+         * @param String nom
+         */
         public UniteImp(int posu, String nom)
         {
             //les statistiques de base sont définies par le jeu
@@ -31,8 +67,10 @@ namespace PeopleWar
             this.nom = nom;
         }
 
-
-
+        
+        /**
+         * UniteImp Constructor
+         */
         public UniteImp() { }
 
         public string afficherCaracteristique()

@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Desert : CaseA
     {
+        /**
+         * Desert Constructor
+         */
         public Desert() { }
 
         public override String ToString()

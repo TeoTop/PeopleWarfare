@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Plaine : CaseA
     {
+        /**
+         * Plaine Constructor
+         */
         public Plaine()
         {
         }

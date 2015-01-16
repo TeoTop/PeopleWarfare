@@ -8,6 +8,9 @@ namespace PeopleWar
     [Serializable]
     public class Petite : StrategieCarte
     {
+        /**
+         * Petite Constructor
+         */
         public Petite()
         {
             cases = new List<CaseA>();

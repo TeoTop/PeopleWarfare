@@ -8,8 +8,17 @@ namespace PeopleWar
     [Serializable]
     public class Orc : PeupleA
     {
+        /**
+         * Default names of unit
+         * @var string[] noms
+         */
         public readonly string[] noms = { "Orc1", "Orc2", "Orc3", "Orc4", "Orc5", "Orc6", "Orc7", "Orc8" };
-               
+
+        /**
+         * Orc Constructor
+         * @param int nbUnite
+         * @param int posu
+         */
         public Orc(int nbUnite, int posu)
         {
             // on crée les unités du peuple en fonction de nbUnite (méthode dans PeupleA)

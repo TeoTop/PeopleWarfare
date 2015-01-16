@@ -8,8 +8,17 @@ namespace PeopleWar
     [Serializable]
     public class Golem : PeupleA
     {
+        /**
+         * Default names of unit
+         * @var string[] noms
+         */
         public readonly string[] noms = { "Golem1", "Golem2", "Golem3", "Golem4", "Golem5", "Golem6", "Golem7", "Golem8" };
 
+        /**
+         * Golem Constructor
+         * @param int nbUnite
+         * @param int posu
+         */
         public Golem(int nbUnite, int posu)
         {
             // on crée les unités du peuple en fonction de nbUnite (méthode dans PeupleA)

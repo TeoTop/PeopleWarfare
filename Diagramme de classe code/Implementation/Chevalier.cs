@@ -8,8 +8,17 @@ namespace PeopleWar
     [Serializable]
     public class Chevalier : PeupleA
     {
+        /**
+         * Default names of unit
+         * @var string[] noms
+         */
         public readonly string[] noms = { "Chevalier1", "Chevalier2", "Chevalier3", "Chevalier4", "Chevalier5", "Chevalier6", "Chevalier7", "Chevalier8" };
 
+        /**
+         * Chevalier Constructor
+         * @param int nbUnite
+         * @param int posu
+         */
         public Chevalier(int nbUnite, int posu)
         {
             // on crée les unités du peuple en fonction de nbUnite (méthode dans PeupleA)

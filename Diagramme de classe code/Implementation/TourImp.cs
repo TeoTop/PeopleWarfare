@@ -17,12 +17,20 @@ namespace PeopleWar
             set;
         }
 
+        /**
+         * Current round
+         * @var int tour
+         */
         public int tour
         {
             get;
             set;
         }
 
+        /**
+         * Player during the round
+         * @var int joueur
+         */
         public int joueur
         {
             get;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PeopleWar
 {
-    public class MonteurChPartie : PeopleWar.MonteurPartie
+    public class MonteurChPartie : MonteurPartie
     {
         public MonteurChPartie()
         {

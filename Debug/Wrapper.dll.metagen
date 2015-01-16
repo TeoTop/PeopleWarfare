@@ -12,6 +12,6 @@ Class Wrapper.WrapperAlgos: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
   Methods:
     generer_carte(Int32, Int32): PrivateScope, Public, HideBySig
     placer_joueurs(Int32): PrivateScope, Public, HideBySig
-    suggestion_cases(Int32[,], Int32, Int32, Int32[], Int32, Int32, Int32): PrivateScope, Public, HideBySig
     cases_atteignable(Int32[], Int32, Int32[], Int32, Int32, Int32, Double): PrivateScope, Public, HideBySig
+    suggestion_cases(Int32[,], Int32, Int32, Int32[], Int32, Int32, Int32): PrivateScope, Public, HideBySig
     Dispose(): PrivateScope, Public, Final, Virtual, HideBySig

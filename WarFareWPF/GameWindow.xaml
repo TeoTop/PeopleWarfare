@@ -41,9 +41,6 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Visibility="{Binding game.map.IsUnitSelected, ElementName=_this, Converter={StaticResource BoolToVis}}">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="res/parchemin.png"/>
-                        </Grid.Background>
                         <controls:InfoPeuple DataContext="{Binding game.map.SelectedBoxForUnit.SelectedUnit,ElementName=_this}" Player="{Binding game.CurrentPlayer,ElementName=_this}"/>
                     </Grid>
                     <Grid Grid.Column="1">
@@ -110,6 +107,7 @@
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="{x:Type ListBoxItem}">
                                             <Setter Property="Padding" Value="0,0,0,0"/>
+                                            <Setter Property="Height" Value="130"/>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
