@@ -18,7 +18,7 @@ int* Algos::generer_carte(int nbCase, int nbTypeCase) {
 		while (!drap)
 		{
 			typeCase = rand() % nbTypeCase;
-			if (nb[typeCase] < nbCase / nbTypeCase)
+			if (nb[typeCase] < ceil((double)nbCase / nbTypeCase))
 			{
 				nb[typeCase] += 1;
 				drap = true;
@@ -68,7 +68,7 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 		}
 	}
 
-	switch (typeUnite)
+	/*switch (typeUnite)
 	{
 	case 0:
 		pertePoint = 1;
@@ -96,17 +96,17 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 				}
 			}
 		}
-	}
+	}*/
 
 
-	for (int i = 0; i < nbCase && nbCaseDispoCourante > 3; i++){
+	/*for (int i = 0; i < nbCase && nbCaseDispoCourante > 3; i++){
 		if (cases[i][2] == 0) {
 			if (cases[i][1] != typeCaseBon && cases[i][0] != -1){
 				cases[i][0] = -1;
 				--nbCaseDispoCourante;
 			}
 		}
-	}
+	}*/
 
 	int** cases_sucg = new int*[nbCaseDispoCourante + 1];
 	cases_sucg[0] = new int[1];
@@ -141,8 +141,23 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 	
 	cases_possible[0] = posActuelle - taille;
 	cases_possible[1] = posActuelle + taille;
+
+
 	cases_possible[2] = posActuelle + 1;
 	cases_possible[3] = posActuelle - 1;
+
+	if ((posActuelle%taille) == 0) {
+		cases_possible[3] = -1;
+	}
+	else {
+		cases_possible[3] = posActuelle - 1;
+	}
+	if ((posActuelle%taille) == taille - 1) {
+		cases_possible[2] = -1;
+	}
+	else {
+		cases_possible[2] = posActuelle + 1;
+	}
 
 	if ((posActuelle / taille) % 2 == 1)
 	{
@@ -166,14 +181,10 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 			cases_possible[5] = posActuelle - (taille + 1);
 		}
 	}
-	if ((posActuelle%taille) == 0) {
-		cases_possible[3] = -1;
-	}
-	if ((posActuelle%taille) == taille - 1) {
-		cases_possible[2] = -1;
-	}
+
 
 	int c;
+	int flag = true;
 	switch (typeUnite)
 	{
 	case 0:
@@ -181,8 +192,10 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 		{
 			for (int i = 0; i < 6; i++){
 				c = cases_possible[i];
-				if (cases[c] != 2){
-					cases_possible[i] = -1;
+				if (c >= 0 && c < nbCase){
+					if (cases[c] != 2){
+						cases_possible[i] = -1;
+					}
 				}
 			}
 		}
@@ -190,8 +203,10 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 	case 1:
 		for (int i = 0; i < 6; i++){
 			c = cases_possible[i];
-			if ((pm != 1 && cases[c] != 1) || cases[c] == 0){
-				cases_possible[i] = -1;
+			if (c >= 0 && c < nbCase){
+				if ((pm != 1 && cases[c] != 1) || cases[c] == 0){
+					cases_possible[i] = -1;
+				}
 			}
 		}
 		break;
@@ -200,8 +215,10 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 		{
 			for (int i = 0; i < 6; i++){
 				c = cases_possible[i];
-				if (cases[c] != 2){
-					cases_possible[i] = -1;
+				if (c >= 0 && c < nbCase){
+					if (cases[c] != 2){
+						cases_possible[i] = -1;
+					}
 				}
 			}
 		}
@@ -210,11 +227,43 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 			for (int i = 0; i < nbCase; ++i){
 				if (cases[i] == 3){
 					for (int j = 0; j < nbEnn; j++){
-						if (i != posEnnemi[j]){
-							// on augmmente rajoute une case et on augmente 'lindice de taille
-							cases_possible = (int*)realloc(cases_possible, (taille_dispo + 1)*sizeof(int));
-							cases_possible[taille_dispo++] = i;
+						if (i == posEnnemi[j]){
+							flag = false;
 						}
+					}
+					if (flag){
+						// on augmmente rajoute une case et on augmente 'lindice de taille
+						cases_possible = (int*)realloc(cases_possible, (taille_dispo + 1)*sizeof(int));
+						cases_possible[taille_dispo++] = i;
+					}
+					flag = true;
+				}
+			}
+		}
+		break;
+	case 3:
+		if (pm != 1)
+		{
+			for (int i = 0; i < 6; i++){
+				c = cases_possible[i];
+				if (c >= 0 && c < nbCase){
+					if (cases[c] != 4){
+						cases_possible[i] = -1;
+					}
+				}
+			}
+		}
+		break;
+	case 4:
+		for (int i = 0; i < 6; i++){
+			if (pm <= 0){
+				cases_possible[i] = -1;
+			}
+			else {
+				c = cases_possible[i];
+				if (c >= 0 && c < nbCase){
+					if (cases[c] == 4){
+						cases_possible[i] = -1;
 					}
 				}
 			}
@@ -228,23 +277,25 @@ int** Algos::cases_atteignable(int* cases, int nbCase, int* posEnnemi, int nbEnn
 	//on recree un tableau composer que de case valide
 	for (int i = 0; i < taille_dispo; i++){
 		if (cases_possible[i] >= 0 && cases_possible[i] < nbCase){           // case ou l'on peut aller
-			cases_selec = (int*)realloc(cases_selec, (++taille_selec)*sizeof(int));
+			cases_selec = (int*)realloc(cases_selec, (taille_selec)*sizeof(int));
 			cases_selec[taille_selec - 1] = cases_possible[i];
+			taille_selec++;
 		}
 	}
+
 
 	//on retourne un tableau[taille_selec][3] + une ligne en zero pour connaitre la taille.
 	int** case_dispo = new int*[taille_selec];
 	case_dispo[0] = new int[1];
 	case_dispo[0][0] = taille_selec-1;
-	for (int i = 1; i < taille_selec; i++){
-		case_dispo[i] = new int[3];
-		case_dispo[i][0] = cases_selec[i];			//n° de case
-		case_dispo[i][1] = cases[cases_selec[i]];	//type de case
-		case_dispo[i][2] = 0;						//deplacement ou attaque
+	for (int i = 0; i < taille_selec-1; i++){
+		case_dispo[i+1] = new int[3];
+		case_dispo[i+1][0] = cases_selec[i];			//n° de case
+		case_dispo[i+1][1] = cases[cases_selec[i]];	//type de case
+		case_dispo[i+1][2] = 0;						//deplacement ou attaque
 		for (int j = 0; j < nbEnn; j++){
-			if (cases_selec[i] == posEnnemi[j]){
-				case_dispo[i][2] = 1;
+			if (cases_selec[i+1] == posEnnemi[j]){
+				case_dispo[i+1][2] = 1;
 			}
 		}
 	}
@@ -260,7 +311,7 @@ int* Algos::placer_joueurs(int nbCase) {
 		placement[1] = nbCase - 1;
 	}
 	else {
-		placement[0] = (int)sqrt((double)nbCase);
+		placement[0] = (int)sqrt((double)nbCase) - 1;
 		placement[1] = nbCase - (placement[0] + 1);
 	}
 	return placement;

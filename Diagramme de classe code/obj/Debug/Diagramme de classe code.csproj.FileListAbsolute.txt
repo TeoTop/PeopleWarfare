@@ -10,3 +10,4 @@ C:\Users\helomari\Desktop\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagr
 C:\Users\helomari\Desktop\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.pdb
 C:\Users\helomari\Desktop\Diagramme de classe code.dll
 C:\Users\helomari\Desktop\Diagramme de classe code.pdb
+D:\INSA\PeopleWarfare\Diagramme de classe code.dll

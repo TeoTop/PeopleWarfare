@@ -18,8 +18,6 @@ namespace PeopleWar
 
         int getNbTour();
 
-        bool verifierSelUnite();
-
         void selectionnerCase(int key);
 
         Joueur verifierFinPartie();

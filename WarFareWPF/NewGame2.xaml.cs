@@ -36,6 +36,10 @@ namespace WarFareWPF
 
         private string[] _nainSkin = { "res/nain1.png", "res/nain2.png", "res/nain3.png" };
 
+        private string[] _chevalierSkin = { "res/chevalier1.png", "res/chevalier2.png", "res/chevalier3.png" };
+
+        private string[] _golemSkin = { "res/golem1.png", "res/golem2.png", "res/golem3.png" };
+
         private string _skinJ1;
 
         private string _skinJ2;
@@ -201,6 +205,12 @@ namespace WarFareWPF
                         break;
                     case EnumPeuple.NAIN:
                         ret = _nainSkin[peuple.skin];
+                        break;
+                    case EnumPeuple.CHEVALIER:
+                        ret = _chevalierSkin[peuple.skin];
+                        break;
+                    case EnumPeuple.GOLEM:
+                        ret = _golemSkin[peuple.skin];
                         break;
                     default:
                         break;

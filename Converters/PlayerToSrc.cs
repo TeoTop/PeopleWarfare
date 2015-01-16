@@ -16,6 +16,8 @@ namespace Converters
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             int player = (int)values[0];
+            if (values[1] == DependencyProperty.UnsetValue || values[2] == DependencyProperty.UnsetValue)
+                return Binding.DoNothing;
             String src = "../" + (String)values[player + 1];
             Uri imageUri = new Uri(src, UriKind.Relative);
             BitmapImage imageBitmap = new BitmapImage(imageUri);

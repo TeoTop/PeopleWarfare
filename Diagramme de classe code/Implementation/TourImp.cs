@@ -17,16 +17,27 @@ namespace PeopleWar
             set;
         }
 
+        public int tour
+        {
+            get;
+            set;
+        }
+
+        public int joueur
+        {
+            get;
+            set;
+        }
+
         /**
          * Constructor
          */
-        public TourImp()
+        public TourImp(int tour, int joueur)
         {
             mouvements = new List<MoveImp>();
+            this.tour = tour;
+            this.joueur = joueur;
         }
-
-       
-
 
         /**
          * Return a battle using a key
@@ -42,7 +53,6 @@ namespace PeopleWar
             }
             return null;
         }
-
 
         /**
          * Return the number of battles

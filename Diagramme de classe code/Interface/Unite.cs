@@ -51,9 +51,10 @@ namespace PeopleWar
 
         /**
          * Reset caracteristics of an unit
+         * @param EnumPeuple type
          * @return void
          */
-        void reset();
+        void reset(EnumPeuple type);
         /*
          * Return true if the unit survive, false otherwise
          * @param EnumPeuple type

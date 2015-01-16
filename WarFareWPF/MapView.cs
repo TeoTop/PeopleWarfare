@@ -42,7 +42,28 @@ namespace WarFareWPF
 
         }
 
-        public BoxView SelectedBoxForUnit { get; set; }
+        public bool IsUnitSelected
+        {
+            get
+            {
+                return SelectedBoxForUnit != null && SelectedBoxForUnit.SelectedUnit != null;
+            }
+        }
+
+        private BoxView selectedBoxForUnit;
+        public BoxView SelectedBoxForUnit
+        {
+            get
+            {
+                return selectedBoxForUnit;
+            }
+            set
+            {
+                selectedBoxForUnit = value;
+                RaisePropertyChanged("SelectedBoxForUnit");
+                RaisePropertyChanged("IsUnitSelected");
+            }
+        }
 
         private BoxView selectedBox;
 
@@ -212,7 +233,7 @@ namespace WarFareWPF
 
         {
 
-            SelectedBox = cases.Where(b => b.box == carte.getCase(p)).First();
+            SelectedBox = cases.ElementAt(p);
 
         }
 

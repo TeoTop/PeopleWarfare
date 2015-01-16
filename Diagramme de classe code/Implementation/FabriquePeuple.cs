@@ -18,7 +18,6 @@ namespace PeopleWar
          * @param int nbUnite
          * @return Peuple
          */
-
         public PeupleA creerPeuple(EnumPeuple p, int nbUnite, int posu)
         {
             // on instancie le peuple à null pour le return.
@@ -35,6 +34,12 @@ namespace PeopleWar
                     break;
                 case EnumPeuple.NAIN:
                     peuple = new Nain(nbUnite, posu);
+                    break;
+                case EnumPeuple.CHEVALIER:
+                    peuple = new Chevalier(nbUnite, posu);
+                    break;
+                case EnumPeuple.GOLEM:
+                    peuple = new Golem(nbUnite, posu);
                     break;
                 default:
                     Console.WriteLine("Erreur : impossible de créer le peuple, erreur dans le peuple associé");

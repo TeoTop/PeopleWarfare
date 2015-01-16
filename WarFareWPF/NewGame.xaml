@@ -37,6 +37,8 @@
                     <ComboBoxItem>Orc</ComboBoxItem>
                     <ComboBoxItem>Elf</ComboBoxItem>
                     <ComboBoxItem>Nain</ComboBoxItem>
+                    <ComboBoxItem>Chevalier</ComboBoxItem>
+                    <ComboBoxItem>Golem</ComboBoxItem>
                 </ComboBox>
                 <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-90 50 0 0">
                     <Image Height="90" Width="90" Source="res/orc1.png">
@@ -63,10 +65,26 @@
                             </MultiBinding>
                         </Image.Opacity>
                     </Image>
-                    <Grid Canvas.Top="100">
+                    <Image Height="90" Width="90" Source="res/chevalier1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p1"/>
+                                <Binding Path="chevalier" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Image Height="90" Width="90" Source="res/golem1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p1"/>
+                                <Binding Path="golem" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <!--Grid Canvas.Top="100">
                         <Label Content="Ordinateur" Margin="10 -6 0 0"/>
                         <CheckBox IsChecked="{Binding checkJ1, ElementName=_this}"/>
-                    </Grid>
+                    </-->
                 </Canvas>
             </Grid>
 
@@ -89,6 +107,8 @@
                     <ComboBoxItem>Orc</ComboBoxItem>
                     <ComboBoxItem>Elf</ComboBoxItem>
                     <ComboBoxItem>Nain</ComboBoxItem>
+                    <ComboBoxItem>Chevalier</ComboBoxItem>
+                    <ComboBoxItem>Golem</ComboBoxItem>
                 </ComboBox>
                 <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-90 50 0 0">
                     <Image Height="90" Width="90" Source="res/orc1.png">
@@ -115,10 +135,26 @@
                             </MultiBinding>
                         </Image.Opacity>
                     </Image>
-                    <Grid Canvas.Top="100">
+                    <Image Height="90" Width="90" Source="res/chevalier1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p2"/>
+                                <Binding Path="chevalier" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <Image Height="90" Width="90" Source="res/golem1.png">
+                        <Image.Opacity>
+                            <MultiBinding Converter="{StaticResource PeopleTypeToOpacityConverter}">
+                                <Binding Path="SelectedIndex" ElementName="p2"/>
+                                <Binding Path="golem" ElementName="_this"/>
+                            </MultiBinding>
+                        </Image.Opacity>
+                    </Image>
+                    <!--Grid Canvas.Top="100">
                         <Label Content="Ordinateur" Margin="10 -6 0 0"/>
                         <CheckBox IsChecked="{Binding checkJ2, ElementName=_this}"/>
-                    </Grid>
+                    </-->
                 </Canvas>
             </Grid>
         </Grid>

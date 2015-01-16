@@ -17,27 +17,48 @@ namespace UnitTestWarfare
             dp.definirMonteur(new MonteurNvllePartie());
             game = dp.creerPartie("j1", "j2", EnumCarte.DEMO, EnumPeuple.ELF, EnumPeuple.NAIN);
         }
+
+        /*
+         * 2 is a valid round
+         */
         [TestMethod]
         public void ValidTourTest_Valid()
         {
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
+
+            game.tours.Add(new TourImp(0,0));
+            game.tours.Add(new TourImp(0,1));
+            game.tours.Add(new TourImp(1,0));
+            game.tours.Add(new TourImp(1,1));
+            game.tours.Add(new TourImp(2,0));
+            game.tours.Add(new TourImp(2,1));
             Assert.IsTrue(game.isValidTour(2));
         }
+
+        /*
+         * 5 is not a valid round
+         * 5 > 1
+         */
         [TestMethod]
         public void ValidTourTest_NValidSup()
         {
             Assert.IsFalse(game.isValidTour(5));
         }
+
+        /*
+         * -1 is not a valid round
+         * -1 < 0
+         */
         [TestMethod]
         public void ValidTourTest_NValidInf()
         {
             Assert.IsFalse(game.isValidTour(-1));
         }
+
+        /*
+         * Switch players
+         * Before : joueurCourant = 0
+         * After : joueurCourant = 1
+         */
         [TestMethod]
         public void SwitcherJoueurTest()
         {
@@ -45,6 +66,11 @@ namespace UnitTestWarfare
             game.switcherJoueur();
             Assert.AreEqual((j + 1) % 2, game.joueurCourant);
         }
+
+        /*
+         * End of game
+         * Player1 wins
+         */
         [TestMethod]
         public void FinPartieTest_J1Win()
         {
@@ -52,22 +78,27 @@ namespace UnitTestWarfare
             game.j2.peuple.unites.Remove(game.j2.peuple.unites[0]);
             game.j2.peuple.unites.Remove(game.j2.peuple.unites[0]);
             game.j2.peuple.unites.Remove(game.j2.peuple.unites[0]);
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
+            game.tours.Add(new TourImp(0, 0));
+            game.tours.Add(new TourImp(0, 1));
+            game.tours.Add(new TourImp(1, 0));
+            game.tours.Add(new TourImp(1, 1));
+            game.tours.Add(new TourImp(2, 0));
+            game.tours.Add(new TourImp(2, 1));
+            game.tours.Add(new TourImp(3, 0));
+            game.tours.Add(new TourImp(3, 1));
+            game.tours.Add(new TourImp(4, 0));
+            game.tours.Add(new TourImp(4, 1));
+            game.tours.Add(new TourImp(5, 0));
+            game.tours.Add(new TourImp(5, 1));
+            game.tours.Add(new TourImp(6, 0));
+            game.tours.Add(new TourImp(6, 1));
             Assert.AreEqual<JoueurImp>(game.j1, (JoueurImp)game.verifierFinPartie());
         }
+
+        /*
+         * End of game
+         * Player2 wins
+         */
         [TestMethod]
         public void FinPartieTest_J2Win()
         {
@@ -75,18 +106,18 @@ namespace UnitTestWarfare
             game.j1.peuple.unites.Remove(game.j1.peuple.unites[0]);
             game.j1.peuple.unites.Remove(game.j1.peuple.unites[0]);
             game.j1.peuple.unites.Remove(game.j1.peuple.unites[0]);
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
-            game.tours.Add(new TourImp());
+            game.tours.Add(new TourImp(0, 0));
+            game.tours.Add(new TourImp(0, 1));
+            game.tours.Add(new TourImp(1, 0));
+            game.tours.Add(new TourImp(1, 1));
+            game.tours.Add(new TourImp(2, 0));
+            game.tours.Add(new TourImp(2, 1));
+            game.tours.Add(new TourImp(3, 0));
+            game.tours.Add(new TourImp(3, 1));
+            game.tours.Add(new TourImp(4, 0));
+            game.tours.Add(new TourImp(4, 1));
+            game.tours.Add(new TourImp(5, 0));
+            game.tours.Add(new TourImp(5, 1));
             Assert.AreEqual<JoueurImp>(game.j2, (JoueurImp)game.verifierFinPartie());
         }
     }

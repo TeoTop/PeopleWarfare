@@ -41,3 +41,4 @@ C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.csproj.G
 C:\Users\helomari\Desktop\PeopleWarfare\WarFareWPF\obj\Debug\WarFareWPF.exe
 C:\Users\helomari\Desktop\WarFareWPF.exe
 C:\Users\helomari\Desktop\WarFareWPF.pdb
+D:\INSA\PeopleWarfare\WarFareWPF.exe

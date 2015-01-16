@@ -9,10 +9,15 @@ namespace UnitTestWarfare
     public class UniteTest
     {
         public UniteImp unite { get; set; }
+
         public UniteTest()
         {
             unite = new UniteImp(0, "unit");
         }
+
+        /*
+         * Effective attack
+         */
         [TestMethod]
         public void AttEffTest()
         {
@@ -20,6 +25,10 @@ namespace UnitTestWarfare
             unite.vie = 4;
             Assert.IsTrue(unite.getAttEff() == (2*4)/5.0F);
         }
+
+        /*
+         * Effective defense
+         */
         [TestMethod]
         public void DefEffTest()
         {
@@ -27,18 +36,32 @@ namespace UnitTestWarfare
             unite.vie = 1;
             Assert.IsTrue(unite.getDefEff() == (1 * 1) / 5.0F);
         }
+
+        /*
+         * Move method
+         * Move to 1
+         */
         [TestMethod]
         public void MoveTest()
         {
             unite.move(1);
             Assert.IsTrue(unite.pos == 1);
         }
+
+        /*
+         * Reset peuple method
+         */
         [TestMethod]
-        public void ResetTest()
+        public void ResetTest(EnumPeuple peuple)
         {
-            unite.reset();
+            unite.reset(peuple);
             Assert.IsTrue(unite.pm == 1);
         }
+
+        /*
+         * Move a unit which is in box 0 to 1
+         * In the box 1, there's no ennemies
+         */
         [TestMethod]
         public void DeplacerTestV()
         {
@@ -50,6 +73,11 @@ namespace UnitTestWarfare
             game.j1.peuple.unites[0].seDeplacer(0, 1, EnumPeuple.ORC, game.carte, game.j2.peuple);
             Assert.IsTrue(game.j1.peuple.unites[0].pos == 1);
         }
+
+        /*
+         * Move a unit which is in box 0 to 3
+         * The move doesn't work
+         */
         [TestMethod]
         public void DeplacerTestF()
         {

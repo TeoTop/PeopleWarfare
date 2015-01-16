@@ -8,7 +8,6 @@ namespace PeopleWar
     [Serializable]
     public class CombatImp : Combat
     {
-
         /**
          * @var UniteImp uniteDef
          */ 
@@ -17,7 +16,6 @@ namespace PeopleWar
             get;
             set;
         }
-
         /**
          * @var UniteImp uniteAtt
          */
@@ -26,11 +24,25 @@ namespace PeopleWar
             get;
             set;
         }
-
+        /*
+         * @var bool move
+         */
         public bool move { get; set; }
+        /*
+         * @var int nbCbtMax
+         */
         public int nbCbtMax { get; set; }
+        /*
+         * @var int nbCbt
+         */
         public int nbCbt { get; set; }
-		public EnumBattle resultat { get; set; }
+        /*
+         * @var EnumBattle resultat
+         */
+        public EnumBattle resultat { get; set; }
+        /*
+         * @var List<Round> rounds
+         */
         public List<Round> rounds { get; set; }
 
         /**
@@ -70,12 +82,6 @@ namespace PeopleWar
             return rnd.Next(3, max + 2);
         }
 
-
-
-
-
-
-
         /**
          * Calculate the success' probability of the attack
          * Between 0 and 1
@@ -102,37 +108,32 @@ namespace PeopleWar
         public EnumBattle attaquer()
         {
             if (successAtt())
-        {
-            uniteDef.vie -= 1;
-            if (uniteDef.vie <= 0)
-        {
-                // check if there's no other unit in the box so as to move on
-                if (this.move)
+            {
+                uniteDef.vie -= 1;
+                if (uniteDef.vie <= 0)
                 {
-                resultat = EnumBattle.CBT_VICTORY_MOVE;
-                return EnumBattle.CBT_VICTORY_MOVE;
-            }
-                resultat = EnumBattle.CBT_VICTORY_NOMOVE;
-                return EnumBattle.CBT_VICTORY_NOMOVE;
-            }
+                    // check if there's no other unit in the box so as to move on
+                    if (this.move)
+                    {
+                        resultat = EnumBattle.CBT_VICTORY_MOVE;
+                        return EnumBattle.CBT_VICTORY_MOVE;
+                    }
+                    resultat = EnumBattle.CBT_VICTORY_NOMOVE;
+                    return EnumBattle.CBT_VICTORY_NOMOVE;
+                }
                 return EnumBattle.CBT_DRAW_VICTORY;
             }
             else
             {
                 uniteAtt.vie -= 1;
                 if (uniteAtt.vie <= 0)
-            {
-                resultat = EnumBattle.CBT_LOSS;
-                return EnumBattle.CBT_LOSS;
-            }
+                {
+                    resultat = EnumBattle.CBT_LOSS;
+                    return EnumBattle.CBT_LOSS;
+                }
                 return EnumBattle.CBT_DRAW_LOSS;
             }
         }
-
-
-
-
-
 
         /**
          * Increment the number of battles
@@ -142,6 +143,7 @@ namespace PeopleWar
         {
             this.nbCbt++;
         }
+
         /**
          * Return true wether an attack succeded, false otherwise
          * @return bool
@@ -156,22 +158,16 @@ namespace PeopleWar
             float cumul = 0;
             Boolean s = false;
             for (int i = 0; i < 2; i++)
-        {
-            cumul += probability[i];
-            if (rand < cumul)
-        {
-            s = success[i];
-            break;
-        }
-        }
+            {
+                cumul += probability[i];
+                if (rand < cumul)
+                {
+                    s = success[i];
+                    break;
+                }
+            }
             return s;
         }
-
-
-
-
-
-
 
         /**
          * Choose the item who will defend the box
@@ -183,16 +179,15 @@ namespace PeopleWar
             if (unitesDef.Count() == 0) throw new ArgumentNullException();
             Unite uniteDef = null;
             foreach (Unite unite in unitesDef)
-        {
-            if (uniteDef == null || uniteDef.getDefEff() < unite.getDefEff())
-        {
-            uniteDef = unite;
-        }
-        }
+            {
+                if (uniteDef == null || uniteDef.getDefEff() < unite.getDefEff())
+                {
+                    uniteDef = unite;
+                }
+            }
             return uniteDef;
         }
     }
+
 }
-
-
 

@@ -12,5 +12,7 @@ namespace PeopleWar
         ORC,
         ELF,
         NAIN,
+        CHEVALIER,
+        GOLEM,
     }
 }

@@ -47,6 +47,12 @@ namespace WarFareWPF
                 case EnumCase.PLAINE:
                     background = "res/landBack.png";
                     break;
+                case EnumCase.MER:
+                    background = "res/seaBack.png";
+                    break;
+                case EnumCase.MARAIS:
+                    background = "res/swampBack.png";
+                    break;
             }
             InitializeComponent();
         }

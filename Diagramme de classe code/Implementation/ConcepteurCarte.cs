@@ -7,8 +7,14 @@ namespace PeopleWar
 {
     public class ConcepteurCarte
     {
+        /*
+         * @var ConcepteurCarte INSTANCE
+         */
         public static ConcepteurCarte INSTANCE = new ConcepteurCarte();
 
+        /*
+         * @var StrategieCarte carte
+         */
         public StrategieCarte carte { get; set; }
 
         private ConcepteurCarte() { }

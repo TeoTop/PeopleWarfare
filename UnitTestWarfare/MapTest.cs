@@ -10,6 +10,11 @@ namespace UnitTestWarfare
     public class MapTest
     {
         public int[] cases { get; set; }
+
+        /*
+         * Create a map with 36 boxes
+         * Test whether the number of boxes from each type is equal
+         */
         [TestMethod]
         public void CreationMap()
         {
@@ -41,6 +46,13 @@ namespace UnitTestWarfare
             bool equal = nbDesert == nbForet && nbForet == nbPlaine && nbPlaine == nbMontagne;
             Assert.IsTrue(equal);
         }
+
+        /*
+         * Reachable boxes
+         * Pos : 0
+         * Pos Ennemies : 3 3 3 3
+         * Boxes to reach 1 2
+         */
         [TestMethod]
         public void AtteignableTest()
         {

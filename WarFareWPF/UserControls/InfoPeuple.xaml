@@ -1,58 +1,50 @@
-﻿<UserControl x:Class="WarFareWPF.UserControls.InfoPeuple"
-             x:Name="info"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-	    <Grid Height="124" Background="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToBrushConverter}}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="{Binding nom}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
-        <!--<Image Grid.Column="0" Source="../res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 30 20 0" Width="22" Height="22"/>-->
-        <Image Grid.Column="0" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image.Source>
-                <MultiBinding Converter="{StaticResource PlayerToSrc}">
-                    <Binding ElementName="info" Path="Player"/>
-                    <Binding ElementName="_this" Path="game.J1.peuple.Src"/>
-                    <Binding ElementName="_this" Path="game.J2.peuple.Src"/>
-                </MultiBinding>
-            </Image.Source>
-        </Image>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="../res/healthL.png" Width="32" Height="32" Margin="0 20 0 0"/>
-                <Label Grid.Column="1" Content="{Binding vie}" VerticalAlignment="Center" Margin="-5 20 0 0"/>
-                <Image Grid.Column="2" Source="../res/bootL.png" Width="32" Height="32" Margin="-5 20 0 0"/>
-                <Label Grid.Column="3" Content="{Binding pm}" VerticalAlignment="Center" Margin="-5 20 0 0"/>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="../res/swordL.png" Width="32" Height="32" Margin="0 -20 0 0"/>
-                <Label Grid.Column="1" Content="{Binding attaque}" VerticalAlignment="Center" Margin="-5 -20 0 0"/>
-                <Image Grid.Column="2" Source="../res/shieldL.png" Width="32" Height="32" Margin="-5 -20 0 0"/>
-                <Label Grid.Column="3" Content="{Binding defense}" VerticalAlignment="Center" Margin="-5 -20 0 0"/>
-            </Grid>
-        </Grid>
-    </Grid>
-</UserControl>
+﻿<UserControl x:Class="WarFareWPF.UserControls.InfoPeuple"
+             x:Name="info"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    	<Grid Height="124" Background="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToBrushConverter}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="{Binding nom}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold" FontFamily="Lucida Calligraphy"/>
+        <!--<Image Grid.Column="0" Source="../res/flag.png" Visibility="{Binding HasAlreadyPlayed, Converter={StaticResource BoolToVis}}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 30 20 0" Width="22" Height="22"/>-->
+        <Image Grid.Column="0" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Src}"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="../res/healthL.png" Width="32" Height="32" Margin="0 20 0 0"/>
+                <Label Grid.Column="1" Content="{Binding vie}" VerticalAlignment="Center" Margin="-5 20 0 0"/>
+                <Image Grid.Column="2" Source="../res/bootL.png" Width="32" Height="32" Margin="-5 20 0 0"/>
+                <Label Grid.Column="3" Content="{Binding pm}" VerticalAlignment="Center" Margin="-5 20 0 0"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="../res/swordL.png" Width="32" Height="32" Margin="0 -20 0 0"/>
+                <Label Grid.Column="1" Content="{Binding attaque}" VerticalAlignment="Center" Margin="-5 -20 0 0"/>
+                <Image Grid.Column="2" Source="../res/shieldL.png" Width="32" Height="32" Margin="-5 -20 0 0"/>
+                <Label Grid.Column="3" Content="{Binding defense}" VerticalAlignment="Center" Margin="-5 -20 0 0"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -24,6 +24,9 @@ namespace UnitTestWarfare
             cbt = new CombatImp(game.j1.peuple.unites[0], unitesDef);
         }
 
+        /*
+         * Choose a defensive unit
+         */
         [TestMethod]
         public void ChoixUnite()
         {
@@ -35,6 +38,9 @@ namespace UnitTestWarfare
             Assert.AreEqual<UniteImp>(unite, cbt.uniteDef);
         }
 
+        /*
+         * In this example, the success of the attack will be > 0.5
+         */
         [TestMethod]
         public void ReussiteAttSupDef()
         {
