@@ -141,7 +141,7 @@
                     </Grid.RowDefinitions>
                 </Grid>
                 <!--Unité Joueur 1-->
-                <Image Grid.Row="1" Source="{Binding game.J1.peuple.Src, ElementName=_this}" Width="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" Height="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Image Grid.Row="1" Source="{Binding game.J1.peuple.Src, ElementName=_this}" Width="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=68}" Height="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <!--NbUnité Joueur 1-->
                 <Label Grid.Row="0" Content="{Binding NbUniteJ1}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=18}" Margin="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToMarginConverter},ConverterParameter=-30 0 0 0}" FontWeight="Bold"/>
             </Grid>
@@ -153,7 +153,7 @@
                     </Grid.RowDefinitions>
                 </Grid>
                 <!--Unité Joueur 2-->
-                <Image Grid.Row="1" Source="{Binding game.J2.peuple.Src, ElementName=_this}" Width="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" Height="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Image Grid.Row="1" Source="{Binding game.J2.peuple.Src, ElementName=_this}" Width="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=68}" Height="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=78}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <!--NbUnité Joueur 2-->
                 <Label Grid.Row="0" Content="{Binding NbUniteJ2}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToCoordConverter},ConverterParameter=18}" Margin="{Binding game.map.Zoom,ElementName=_this,Converter={StaticResource RatioToMarginConverter},ConverterParameter=-30 0 0 0}" FontWeight="Bold"/>
             </Grid>

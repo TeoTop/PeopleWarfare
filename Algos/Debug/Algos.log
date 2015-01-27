@@ -1,5 +1,22 @@
-﻿La génération a démarré 16/01/2015 23:09:46.
+﻿La génération a démarré 25/01/2015 21:57:31.
+     1>Projet "D:\INSA\PeopleWarfare\PeopleWarfare\Algos\Algos.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt algos.cpp
+         algos.cpp
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(7): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(36): warning C4101: 'a' : variable locale non référencée
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(37): warning C4101: 'typeCaseMauvais' : variable locale non référencée
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(36): warning C4101: 'b' : variable locale non référencée
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(37): warning C4101: 'typeCaseBon' : variable locale non référencée
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(37): warning C4101: 'pertePoint' : variable locale non référencée
+     1>d:\insa\peoplewarfare\peoplewarfare\algos\algos.cpp(308): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Algos.lib" /NOLOGO Debug\algos.obj
+         Algos.vcxproj -> D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Algos.lib
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Algos.bsc" /n Debug\algos.sbr
+     1>Génération du projet "D:\INSA\PeopleWarfare\PeopleWarfare\Algos\Algos.vcxproj" terminée (Build cible(s)).
 
 La génération a réussi.
 
-Temps écoulé 00:00:00.01
+Temps écoulé 00:00:00.70

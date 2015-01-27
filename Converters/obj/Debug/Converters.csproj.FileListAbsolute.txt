@@ -15,3 +15,17 @@ D:\INSA\PeopleWarfare\Converters.exe
 C:\Users\helomari\Desktop\Converters.exe.config
 C:\Users\helomari\Desktop\Converters.exe
 C:\Users\helomari\Desktop\Converters.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Converters.exe.config
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Converters.exe
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Converters.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Diagramme de classe code.dll
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Wrapper.dll
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Diagramme de classe code.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\bin\Debug\Wrapper.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\Converters.csprojResolveAssemblyReference.cache
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\App.g.cs
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\Converters_MarkupCompile.cache
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\Converters.Properties.Resources.resources
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\Converters.csproj.GenerateResource.Cache
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\Converters.exe
+D:\INSA\PeopleWarfare\PeopleWarfare\Converters\obj\Debug\Converters.pdb

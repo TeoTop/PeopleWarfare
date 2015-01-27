@@ -45,7 +45,7 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 		distanceInit[i] = (int*)malloc(sizeof(int)* nbEnnemi);
 		distanceInit[i][0] = posEnnemi[i] / taille;
 		distanceInit[i][1] = posEnnemi[i] % taille;
-		distanceInit[i][2] = abs(distanceInit[i][0] - x + distanceInit[i][1] - y);
+		distanceInit[i][2] = abs(distanceInit[i][0] - x) + abs(distanceInit[i][1] - y);
 	}
 
 	int versEnn;
@@ -55,7 +55,7 @@ int** Algos::suggestion_cases(int** cases, int nbCase, int taille, int* posEnnem
 		versEnn = false;
 
 		for (int j = 0; j < nbEnnemi; j++){
-			dist = abs(distanceInit[j][0] - x + distanceInit[j][1] - y);
+			dist = abs(distanceInit[j][0] - x) + abs(distanceInit[j][1] - y);
 			int d = distanceInit[j][2];
 			if (d >= dist){
 				versEnn = true;

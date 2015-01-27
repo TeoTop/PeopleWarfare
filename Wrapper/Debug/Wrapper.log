@@ -1,5 +1,14 @@
-﻿La génération a démarré 16/01/2015 23:09:46.
+﻿La génération a démarré 25/01/2015 21:57:32.
+     1>Projet "D:\INSA\PeopleWarfare\PeopleWarfare\Wrapper\Wrapper.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Wrapper.dll" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Wrapper.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\Wrapper.obj
+         "Debug\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
+         D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Algos.lib
+            CrÚation de la bibliothÞque D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Wrapper.lib et de l'objet D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Wrapper.exp
+     1>Algos.lib(algos.obj) : warning LNK4075: ' /EDITANDCONTINUE' ignorÚ Ó cause de la spÚcification '/OPT:LBR'
+         Wrapper.vcxproj -> D:\INSA\PeopleWarfare\PeopleWarfare\Debug\Wrapper.dll
+     1>Génération du projet "D:\INSA\PeopleWarfare\PeopleWarfare\Wrapper\Wrapper.vcxproj" terminée (Build cible(s)).
 
 La génération a réussi.
 
-Temps écoulé 00:00:00.03
+Temps écoulé 00:00:00.42

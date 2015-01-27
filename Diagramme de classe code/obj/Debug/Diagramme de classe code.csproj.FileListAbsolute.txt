@@ -8,3 +8,10 @@ D:\INSA\gen\Diagramme de classe code.pdb
 D:\INSA\PeopleWarfare\Diagramme de classe code.dll
 C:\Users\helomari\Desktop\Diagramme de classe code.dll
 C:\Users\helomari\Desktop\Diagramme de classe code.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\bin\Debug\Diagramme de classe code.dll
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\bin\Debug\Diagramme de classe code.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\bin\Debug\Wrapper.dll
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\bin\Debug\Wrapper.pdb
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.csprojResolveAssemblyReference.cache
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.dll
+D:\INSA\PeopleWarfare\PeopleWarfare\Diagramme de classe code\obj\Debug\Diagramme de classe code.pdb
